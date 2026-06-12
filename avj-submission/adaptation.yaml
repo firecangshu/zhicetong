@@ -5,7 +5,8 @@
 
 adaptation_version: "1.0"
 generated_at: "2026-06-11"
-status: "partially_implemented"
+status: "protocol_defined"  # protocol_defined / partially_implemented / fully_implemented
+implementation_note: "项目中未找到 utils/keyword-mapping.js 文件（utils/ 目录下仅有 engine.js, trace.js, rules.js, mock-data.js 等）。以下功能描述基于设计协议，代码实现状态待验证。"
 
 # ======== 地块类型适配 ========
 land_type_adaptation:
@@ -55,8 +56,9 @@ land_type_adaptation:
 geo_level_adaptation:
   name: "地理层级自适应降级搜索"
   description: "区级数据不足时自动降级到市级/省级"
-  current_status: "已实现"
-  implementation: "utils/keyword-mapping.js → expandKeywords()"
+  current_status: "设计中"
+  implementation: "（协议中）utils/keyword-mapping.js → expandKeywords()（待创建）"
+  note: "项目中未找到 utils/keyword-mapping.js 文件，功能状态待验证"
 
   strategy:
     - level: "区级"
@@ -83,8 +85,9 @@ geo_level_adaptation:
 keyword_expansion:
   name: "关键词语义扩展"
   description: "核心关键词不足时自动扩展同义词/相关词"
-  current_status: "已实现"
-  implementation: "utils/keyword-mapping.js"
+  current_status: "设计中"
+  implementation: "（协议中）utils/keyword-mapping.js（待创建）"
+  note: "项目中未找到对应实现文件，功能状态待验证"
 
   examples:
     - input: "研学基地"
@@ -110,14 +113,14 @@ user_preference_memory:
 
 # ======== 适配机制总结 ========
 summary:
-  already_implemented:
-    - "地理层级降级搜索"
-    - "关键词语义扩展"
-
-  partially_implemented:
-    - "地块类型权重调整（硬编码，未动态化）"
+  protocol_defined:
+    - "地块类型权重调整（协议中，硬编码权重待动态化）"
+    - "地理层级降级搜索（协议中，文件待创建）"
+    - "关键词语义扩展（协议中，文件待创建）"
 
   planned:
     - "用户历史偏好记忆"
     - "动态权重调整引擎"
     - "基于trace的自学习权重优化"
+
+  note: "项目当前为演示/参赛阶段，适配机制已设计协议，代码实现待后续开发。地理层级降级搜索和关键词语义扩展的功能描述基于设计协议，待验证代码实现。"

@@ -48,7 +48,7 @@ team_increments:
     innovation: "首次将文旅选址决策抽象为4维度18条规则的量化引擎"
     source: "原创"
     evidence: "utils/engine.js"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: INC002
     name: "SOP十步选址流程"
@@ -56,7 +56,7 @@ team_increments:
     innovation: "将文旅项目选址经验固化为10步可执行协议"
     source: "原创"
     evidence: "pages/w1-auth/ → pages/w10-result/"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: INC003
     name: "三层数据溯源体系"
@@ -64,7 +64,7 @@ team_increments:
     innovation: "首创文旅领域数据可信度分级标注机制"
     source: "原创"
     evidence: "utils/mock-data.js 中 {value, sourceType, sourceName, manualNote} 结构"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: INC004
     name: "关键词映射体系"
@@ -80,7 +80,7 @@ team_increments:
     innovation: "将合规要求转化为可执行的引擎规则"
     source: "原创（基于法规要求）"
     evidence: "utils/engine.js → evaluateCompliance()"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: INC006
     name: "GB/T 18972-2017 可执行模板"
@@ -88,7 +88,7 @@ team_increments:
     innovation: "国家标准→前端可交互表单的转化"
     source: "原创（基于国标）"
     evidence: "pages/w3-resource/ + utils/mock-data.js"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
 # ======== 增量占比分析 ========
 increment_ratio:

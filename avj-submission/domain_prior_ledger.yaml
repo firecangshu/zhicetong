@@ -48,7 +48,7 @@ rules:
     action: "score -= 30"
     effect: "合规分上限70，冲突后直接降至40以下，触发NO-GO"
     domain_source: "《生态保护红线划定指南》+ 国土空间规划'三区三线'"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: R002
     category: compliance
@@ -58,7 +58,7 @@ rules:
     action: "score -= 20"
     effect: "合规分降至50以下，基本无法通过"
     domain_source: "《土地管理法》+ 永久基本农田保护条例"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: R003
     category: compliance
@@ -68,7 +68,7 @@ rules:
     action: "score -= 15"
     effect: "建议采用设施农用地或存量盘活方式"
     domain_source: "自然资源部关于保障农村一二三产业融合发展用地的通知"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: R004
     category: compliance
@@ -99,7 +99,7 @@ rules:
     action: "score += 10"
     effect: "林地/园地肌理适合低冲击开发"
     domain_source: "《林地保护利用规划》+ 低影响开发(LID)实践"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: R007
     category: spatial
@@ -109,7 +109,7 @@ rules:
     action: "score += 10"
     effect: "岗丘—林—田—塘复合肌理具备内容差异化优势"
     domain_source: "景观生态学'斑块-廊道-基质'理论"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: R008
     category: spatial
@@ -140,7 +140,7 @@ rules:
     action: "score += 15"
     effect: "近郊高频消费圈具备客流稳定性优势"
     domain_source: "城市旅游圈层理论（1-2小时车程圈）"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   # ======== 市场维度规则 ========
   - id: R011
@@ -151,7 +151,7 @@ rules:
     action: "score += 10"
     effect: "研学旅行需求旺盛，建议B2B渠道优先布局"
     domain_source: "教育部研学旅行政策 + OTA预订数据趋势"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   - id: R012
     category: market

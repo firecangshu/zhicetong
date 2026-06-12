@@ -5,8 +5,8 @@
 
 feedback_version: "1.1"
 generated_at: "2026-06-11"
-status: "partially_implemented"  # protocol_defined / partially_implemented / fully_implemented
-implementation_note: "trace.js已实现并集成到W9页面，运行时可记录决策日志。待完善：failure_sample自动记录、用户修正日志UI触发。"
+status: "protocol_defined"  # protocol_defined / partially_implemented / fully_implemented
+implementation_note: "项目当前为演示/参赛阶段，反馈循环机制已设计协议，但代码尚未实现。待商业化推广后，基于真实用户使用记录逐步实现。"
 
 # ======== 反馈循环设计 ========
 feedback_loops:
@@ -18,11 +18,11 @@ feedback_loops:
     output: "{verdict, confidence, totalScore, dimensions, suggestion}"
     storage: "wx.setStorageSync (本地存储)"
     evidence_type: "trace"
-    evidence_level: "E2"
+    evidence_level: "E0"
     implementation:
-      status: "implemented"
-      file: "utils/trace.js + pages/w9-result/index.js"
-      note: "已实现：trace.record(params, result)，W9页面onLoad中调用"
+      status: "designed"
+      file: "utils/trace.js（待创建）"
+      note: "协议已设计，代码待实现。项目商业化后基于真实用户使用记录实现。"
 
   - id: FL002
     name: "失败样本沉淀"
@@ -32,11 +32,11 @@ feedback_loops:
     output: "失败样本记录 {timestamp, input, result, reason}"
     storage: "wx.setStorageSync"
     evidence_type: "failure_sample"
-    evidence_level: "E2"
+    evidence_level: "E0"
     implementation:
-      status: "implemented"
-      file: "utils/trace.js → getFailureSamples()"
-      note: "已实现：记录决策时自动分类，getFailureSamples()可提取失败样本"
+      status: "designed"
+      file: "utils/trace.js → getFailureSamples()（待实现）"
+      note: "协议已设计，代码待实现。需要真实用户使用后才能积累失败样本。"
 
   - id: FL003
     name: "用户修正日志"
@@ -46,11 +46,11 @@ feedback_loops:
     output: "修正记录 {timestamp, page, field, before, after, note}"
     storage: "wx.setStorageSync"
     evidence_type: "human_correction"
-    evidence_level: "E2"
+    evidence_level: "E0"
     implementation:
-      status: "implemented"
-      file: "utils/trace.js → recordEdit()"
-      note: "已实现：recordEdit(page, field, oldValue, newValue)，待UI层调用"
+      status: "designed"
+      file: "utils/trace.js → recordEdit()（待实现）"
+      note: "协议已设计，代码待实现。需要UI层调用接口，待商业化后实现。"
 
   - id: FL004
     name: "规则修正闭环"
@@ -80,14 +80,15 @@ feedback_loops:
       file: "cloud database（预留）"
       note: "需要云开发环境，当前仅预留接口"
 
-# ======== 经验复利路径 ========
+# ======== 经验复利路径（规划中，待商业化后实现）========
 compounding_path:
-  step1: "用户使用 → 产生trace"
-  step2: "失败样本自动沉淀"
-  step3: "用户修正补充专家经验"
-  step4: "定期人工审核样本"
-  step5: "优化rules.json评分规则"
-  step6: "规则更新后所有用户受益"
+  step1: "（规划中）用户使用 → 产生trace"
+  step2: "（规划中）失败样本自动沉淀"
+  step3: "（规划中）用户修正补充专家经验"
+  step4: "（规划中）定期人工审核样本"
+  step5: "（规划中）优化rules.json评分规则"
+  step6: "（规划中）规则更新后所有用户受益"
+  note: "上述路径为项目商业化后的规划，当前演示阶段尚未实现。需要真实用户使用后，才能积累数据并实现经验复利。"
 
 # ======== 当前限制 ========
 current_limitations:

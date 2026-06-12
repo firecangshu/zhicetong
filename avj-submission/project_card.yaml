@@ -5,8 +5,12 @@
 
 project_name: "踏歌行智策通"
 project_type: "智能体矩阵"
-version: "V2.2"
+version: "V2.3"
 repository: "https://gitee.com/funnyhouse/zhicetong"
+
+# 项目阶段
+project_stage: "演示/参赛阶段"
+commercial_status: "未商业化推广，暂无真实用户使用记录"
 
 # 目标用户画像
 target_users:
@@ -35,28 +39,33 @@ high_risk_domains:
     level: "中"
     description: "投资回报预估仅供参考，不可作为投资决策唯一依据"
 
-# 当前已沉淀的核心资产
-current_assets:
-  - asset: "四维决策引擎"
-    description: "合规(35%) × 空间(25%) × 经济(20%) × 市场(20%) 加权评分体系"
-    evidence_level: "E2"
+# 当前核心能力（基于专家经验预设，非用户使用沉淀）
+current_capabilities:
+  - capability: "四维决策引擎"
+    description: "合规(35%) × 空间(25%) × 经济(20%) × 市场(20%) 加权评分体系，规则由文旅专家预设"
+    evidence_level: "E1"
     location: "utils/engine.js"
-  - asset: "SOP十步选址流程"
+    note: "演示数据验证，非真实用户使用沉淀"
+  - capability: "SOP十步选址流程"
     description: "从身份认证到三向成果的标准化操作流程"
-    evidence_level: "E2"
+    evidence_level: "E1"
     location: "pages/w1-auth/ → pages/w10-result/"
-  - asset: "三层数据架构"
+    note: "流程设计完成，待真实用户验证"
+  - capability: "三层数据架构"
     description: "official_api > ai_aggregation > manual 数据优先级与溯源体系"
-    evidence_level: "E2"
+    evidence_level: "E1"
     location: "utils/mock-data.js"
-  - asset: "GB/T 18972-2017 资源调查模板"
+    note: "架构设计完成，真实API接口待接入"
+  - capability: "GB/T 18972-2017 资源调查模板"
     description: "基于国标旅游资源分类标准的20项资源调查清单"
-    evidence_level: "E2"
+    evidence_level: "E1"
     location: "pages/w3-resource/"
-  - asset: "关键词映射体系"
+    note: "模板设计完成，待真实场景验证"
+  - capability: "关键词映射体系"
     description: "文旅领域关键词→搜索策略→数据源的映射规则"
     evidence_level: "E1"
     location: "utils/keyword-mapping.js"
+    note: "基于专家经验预设，待用户使用反馈优化"
 
 # 技术栈
 tech_stack:

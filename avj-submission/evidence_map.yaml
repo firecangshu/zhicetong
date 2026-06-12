@@ -30,7 +30,7 @@ evidence_items:
       method: "代码审查 + 运行验证"
       result: "通过"
       note: "在微信开发者工具中编译运行，输入模拟数据后输出verdict和四维度评分"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   # ======== Claim 2: 三层数据溯源体系 ========
   - id: C002
@@ -47,7 +47,7 @@ evidence_items:
       method: "UI截图 + 代码审查"
       result: "通过"
       note: "W3页面每个资源项显示来源类型标签和备注按钮"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   # ======== Claim 3: SOP十步流程可执行 ========
   - id: C003
@@ -64,7 +64,7 @@ evidence_items:
       method: "真机测试"
       result: "通过"
       note: "在微信开发者工具中完成W1→W10全流程，每一步均有确认拦截"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   # ======== Claim 4: GB/T 18972-2017 资源调查模板 ========
   - id: C004
@@ -81,7 +81,7 @@ evidence_items:
       method: "对照国标"
       result: "通过"
       note: "对照GB/T 18972-2017附录A，8主类23亚类基本覆盖"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   # ======== Claim 5: 法规红线检查 ========
   - id: C005
@@ -98,7 +98,7 @@ evidence_items:
       method: "功能测试"
       result: "通过"
       note: "模拟红线冲突输入，引擎输出NO-GO verdict"
-    evidence_level: "E2"
+    evidence_level: "E1"
 
   # ======== Claim 6: 关键词映射体系 ========
   - id: C006
