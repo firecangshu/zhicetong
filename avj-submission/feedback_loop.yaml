@@ -1,0 +1,98 @@
+# feedback_loop.yaml
+# 踏歌行智策通 —— 反馈循环与经验沉淀机制
+# 生成时间：2026-06-11
+# 状态：协议已定义，代码部分实现（trace.js待创建）
+
+feedback_version: "1.1"
+generated_at: "2026-06-11"
+status: "partially_implemented"  # protocol_defined / partially_implemented / fully_implemented
+implementation_note: "trace.js已实现并集成到W9页面，运行时可记录决策日志。待完善：failure_sample自动记录、用户修正日志UI触发。"
+
+# ======== 反馈循环设计 ========
+feedback_loops:
+  - id: FL001
+    name: "决策Trace记录"
+    description: "每次四维评分记录完整输入→输出→建议"
+    trigger: "用户完成W9评分"
+    input: "{land, resource, policy, market, redline}"
+    output: "{verdict, confidence, totalScore, dimensions, suggestion}"
+    storage: "wx.setStorageSync (本地存储)"
+    evidence_type: "trace"
+    evidence_level: "E2"
+    implementation:
+      status: "implemented"
+      file: "utils/trace.js + pages/w9-result/index.js"
+      note: "已实现：trace.record(params, result)，W9页面onLoad中调用"
+
+  - id: FL002
+    name: "失败样本沉淀"
+    description: "verdict=NO-GO或PAUSE时自动记录为失败样本"
+    trigger: "引擎输出NO-GO或PAUSE"
+    input: "评分输入 + 评分结果"
+    output: "失败样本记录 {timestamp, input, result, reason}"
+    storage: "wx.setStorageSync"
+    evidence_type: "failure_sample"
+    evidence_level: "E2"
+    implementation:
+      status: "implemented"
+      file: "utils/trace.js → getFailureSamples()"
+      note: "已实现：记录决策时自动分类，getFailureSamples()可提取失败样本"
+
+  - id: FL003
+    name: "用户修正日志"
+    description: "记录用户对数据项的修正行为"
+    trigger: "用户点击'修正/备注'并保存"
+    input: "{field, oldValue, newValue, note}"
+    output: "修正记录 {timestamp, page, field, before, after, note}"
+    storage: "wx.setStorageSync"
+    evidence_type: "human_correction"
+    evidence_level: "E2"
+    implementation:
+      status: "implemented"
+      file: "utils/trace.js → recordEdit()"
+      note: "已实现：recordEdit(page, field, oldValue, newValue)，待UI层调用"
+
+  - id: FL004
+    name: "规则修正闭环"
+    description: "基于失败样本和用户修正，定期优化评分规则"
+    trigger: "积累足够样本后（>20条）"
+    input: "失败样本集 + 修正日志"
+    output: "规则优化建议 {rule_id, current_threshold, suggested_threshold, confidence}"
+    storage: "人工审核后更新rules.json"
+    evidence_type: "repair_loop"
+    evidence_level: "E0"
+    implementation:
+      status: "designed"
+      file: "utils/rules.json + 人工审核流程"
+      note: "需要专家参与，当前仅设计流程"
+
+  - id: FL005
+    name: "Benchmark更新"
+    description: "用新案例更新评估基准"
+    trigger: "每季度或积累50个新案例"
+    input: "历史trace + 新项目评分"
+    output: "更新后的评分基准统计"
+    storage: "云端数据库（预留）"
+    evidence_type: "benchmark"
+    evidence_level: "E0"
+    implementation:
+      status: "designed"
+      file: "cloud database（预留）"
+      note: "需要云开发环境，当前仅预留接口"
+
+# ======== 经验复利路径 ========
+compounding_path:
+  step1: "用户使用 → 产生trace"
+  step2: "失败样本自动沉淀"
+  step3: "用户修正补充专家经验"
+  step4: "定期人工审核样本"
+  step5: "优化rules.json评分规则"
+  step6: "规则更新后所有用户受益"
+
+# ======== 当前限制 ========
+current_limitations:
+  - "本地存储容量有限（微信小程序限制10MB）"
+  - "缺乏云端同步机制，数据仅在单设备可用"
+  - "规则修正需要专家参与，尚未建立专家网络"
+  - "样本量不足（当前为模拟数据），真实用户数据待积累"
+  - "FL004规则修正闭环、FL005基准更新尚未实现（E0）"

@@ -1,0 +1,89 @@
+<!--pages/w3-policy/index.wxml-->
+<!--W3 政策引导 V2.8 全量预埋版-->
+<view class="policy-page">
+  <!-- 步骤条 -->
+    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item active"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+  <view class="page-header">
+    <text class="page-title">W3 政策引导</text>
+    <text class="page-subtitle">四级政策库 · 官方API预埋</text>
+    <view class="data-source-badge">📋 全量预埋 V2.8</view>
+  </view>
+
+  <!-- 政策层级分布（水平条形图，兼容 APK） -->
+  <view class="chart-section">
+    <view class="chart-title">📊 政策层级分布（AI 统计）</view>
+    <view class="policy-bar-chart">
+      <view class="policy-bar-row" wx:for="{{stackedData}}" wx:key="name" bindtap="onTapLevel" data-level="{{item.name}}">
+        <view class="policy-bar-label">
+          <view class="policy-bar-dot" style="background:{{item.color}};"></view>
+          <text class="policy-bar-name">{{item.name}}</text>
+        </view>
+        <view class="policy-bar-track">
+          <view class="policy-bar-fill" style="width:{{item.barWidth}}%; background:{{item.color}};"></view>
+          <text class="policy-bar-num">{{item.value}}条</text>
+        </view>
+      </view>
+    </view>
+    <view class="chart-hint">💡 条形长度代表该层级政策数量；点击可查看详情。</view>
+  </view>
+
+  <view class="page-container">
+    <!-- 四级政策库 -->
+    <view class="level-section" wx:for="{{policyLevels}}" wx:key="level">
+      <view class="level-header">
+        <text class="level-tag {{item.level === '国家级' ? 'national' : item.level === '省级' ? 'provincial' : item.level === '市级' ? 'city' : 'district'}}">{{item.level}}</text>
+        <text class="level-count">共 {{item.policies.length}} 条</text>
+      </view>
+
+      <view class="policy-card" wx:for="{{item.policies}}" wx:key="name" bindtap="onTogglePolicy" data-idx="{{item.globalIdx}}">
+        <view class="policy-header">
+          <text class="policy-name">{{item.name}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : 'ai'}}">
+            {{item.sourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+          </view>
+        </view>
+        <view wx:if="{{item.expanded}}">
+          <text class="policy-clause">{{item.clause}}</text>
+          <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditPolicy" data-idx="{{item.globalIdx}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <view class="confirm-section">
+      <view class="confirm-checkbox" bindtap="onToggleConfirm">
+        <view class="checkbox {{isConfirmed ? 'checked' : ''}}">
+          <text wx:if="{{isConfirmed}}">✓</text>
+        </view>
+        <text class="confirm-text">{{confirmText}}</text>
+      </view>
+      <button class="next-btn {{isConfirmed ? '' : 'disabled'}}" bindtap="onNext" disabled="{{!isConfirmed}}">
+        确认并继续 →
+      </button>
+    </view>
+  </view>
+</view>

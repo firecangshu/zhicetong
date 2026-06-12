@@ -1,0 +1,53 @@
+<!-- pages/s1-cover/index.wxml -->
+<!-- Final execution version - per task spec -->
+<view class="splash-container">
+
+  <!-- 1. CSS 渐变背景（替代 Canvas 粒子动画，兼容 APK） -->
+  <view class="bg-gradient"></view>
+  <view class="bg-dots">
+    <view class="dot" wx:for="{{decorDots}}" wx:key="idx"
+      style="left:{{item.x}}%; top:{{item.y}}%; opacity:{{item.o}}; width:{{item.s}}rpx; height:{{item.s}}rpx;">
+    </view>
+  </view>
+
+  <!-- 2. Gradient mask (protect text readability) -->
+  <view class="gradient-mask"></view>
+
+  <!-- 3. Content layer (DOM layout, ensure clarity) -->
+  <view class="content-wrapper">
+    
+    <!-- Center text block (vertical center) -->
+    <view class="center-text-block">
+      <!-- Main title: tight letter-spacing, professional -->
+      <text class="h1">踏歌行智策通</text>
+      
+      <!-- Subtitle: relaxed letter-spacing, calm -->
+      <text class="subtitle">文旅项目全周期 AI 决策顾问</text>
+      
+      <!-- Version tag: independent, decorative -->
+      <view class="version-tag">
+        <text>Model V2.0</text>
+      </view>
+
+      <!-- Feature tags: scientific spacing -->
+      <view class="feature-tags">
+        <text>四维引擎</text>
+        <text class="tag-dot">·</text>
+        <text>层级赋能</text>
+        <text class="tag-dot">·</text>
+        <text>Canvas</text>
+        <text class="tag-dot">·</text>
+        <text>报告</text>
+      </view>
+    </view>
+
+    <!-- Bottom action area (independent) -->
+    <view class="footer-action" style="bottom:{{safeAreaBottom + 120}}rpx">
+      <button class="btn-enter" bindtap="onEnterTap">
+        启动智能决策
+      </button>
+      <text class="disclaimer">AI生成内容仅供参考</text>
+    </view>
+
+  </view>
+</view>

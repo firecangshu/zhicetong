@@ -1,0 +1,93 @@
+# Git ignore file for 踏歌行智策通
+# Generated: 2026-06-11
+# Optimized: 2026-06-11
+
+# ============ 微信小程序 ============
+# 微信开发者工具本地配置（不含AppID，不应提交）
+project.private.config.json
+
+# 小程序npm构建产物
+miniprogram_npm/
+
+# 微信开发者工具编译缓存
+.miniprogram/
+
+# 小程序代码片段（如不需要共享）
+miniprogram/
+
+# ============ 依赖 ============
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ============ IDE ============
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-*
+
+# ============ 操作系统 ============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============ 日志 ============
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============ 构建产物 ============
+dist/
+build/
+out/
+.marp/
+
+# ============ 备份 ============
+*.bak
+*.backup
+backups/
+archive/
+
+# ============ 临时文件 ============
+*.tmp
+*.temp
+temp/
+tmp/
+*.cache
+
+# ============ 敏感信息 ============
+# 配置文件（可能含密钥）
+config.json
+config.local.json
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.local
+
+# ============ 其他 ============
+# 测试覆盖率
+coverage/
+*.lcov
+
+# 性能分析
+*.prof
+
+# 小程序预览二维码（自动生成）
+preview/
+
+# ============ AVJ提交材料（大文件） ============
+# 演示视频和封面（已上传百度网盘，不从Git管理）
+avj-submission/demo-video/
+
+# 产品介绍PDF（已上传百度网盘，不从Git管理）
+avj-submission/presentation/

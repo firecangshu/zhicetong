@@ -1,0 +1,211 @@
+<!-- pages/w7-swot/index.wxml -->
+  <!-- 步骤条 -->
+    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item active"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+<view class="page-container">
+
+  <!-- 页面顶部标题区 -->
+  <view class="page-header">
+    <view class="page-title">📊 SWOT 综合分析</view>
+    <view class="page-subtitle">内外部因素交叉评估，明确战略定位方向</view>
+  </view>
+
+  <!-- 顶部：2×2 四象限卡片网格 -->
+  <view class="grid-section">
+    <view class="section-title">四象限总览</view>
+    <view class="swot-grid">
+
+      <!-- S 优势卡片 -->
+      <view class="grid-card card-s">
+        <view class="grid-header">
+          <view class="grid-letter">S</view>
+          <view class="grid-title-group">
+            <view class="grid-title-cn">优势</view>
+          </view>
+          <view class="grid-icon">🏆</view>
+        </view>
+        <view class="grid-divider"></view>
+        <view class="grid-items">
+          <view class="grid-item" wx:for="{{S}}" wx:key="id" wx:if="{{index < 2}}">
+            <view class="grid-item-dot s-dot">●</view>
+            <view class="grid-item-text">{{item.title}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- W 劣势卡片 -->
+      <view class="grid-card card-w">
+        <view class="grid-header">
+          <view class="grid-letter">W</view>
+          <view class="grid-title-group">
+            <view class="grid-title-cn">劣势</view>
+          </view>
+          <view class="grid-icon">⚠️</view>
+        </view>
+        <view class="grid-divider"></view>
+        <view class="grid-items">
+          <view class="grid-item" wx:for="{{W}}" wx:key="id" wx:if="{{index < 2}}">
+            <view class="grid-item-dot w-dot">●</view>
+            <view class="grid-item-text">{{item.title}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- O 机会卡片 -->
+      <view class="grid-card card-o">
+        <view class="grid-header">
+          <view class="grid-letter">O</view>
+          <view class="grid-title-group">
+            <view class="grid-title-cn">机会</view>
+          </view>
+          <view class="grid-icon">📈</view>
+        </view>
+        <view class="grid-divider"></view>
+        <view class="grid-items">
+          <view class="grid-item" wx:for="{{O}}" wx:key="id" wx:if="{{index < 2}}">
+            <view class="grid-item-dot o-dot">●</view>
+            <view class="grid-item-text">{{item.title}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- T 威胁卡片 -->
+      <view class="grid-card card-t">
+        <view class="grid-header">
+          <view class="grid-letter">T</view>
+          <view class="grid-title-group">
+            <view class="grid-title-cn">威胁</view>
+          </view>
+          <view class="grid-icon">⚡</view>
+        </view>
+        <view class="grid-divider"></view>
+        <view class="grid-items">
+          <view class="grid-item" wx:for="{{T}}" wx:key="id" wx:if="{{index < 2}}">
+            <view class="grid-item-dot t-dot">●</view>
+            <view class="grid-item-text">{{item.title}}</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="section-hint">💡 点击下方卡片展开查看详细分析</view>
+  </view>
+
+  <!-- 可展开的详细解释卡片 -->
+  <view class="detail-section">
+
+    <!-- S 优势卡片 -->
+    <view class="detail-card s-card" bindtap="toggleS">
+      <view class="detail-header">
+        <view class="detail-tag s-tag">S 优势</view>
+        <view class="detail-count">{{S.length}} 条</view>
+        <view class="detail-arrow {{showS ? 'arrow-up' : ''}}">▼</view>
+      </view>
+      <view class="detail-body" wx:if="{{showS}}">
+        <view class="detail-item" wx:for="{{S}}" wx:key="id" bindtap="editItem" data-key="S" data-index="{{index}}">
+          <view class="item-dot s-dot">●</view>
+          <view class="item-text">{{item.point}}</view>
+          <view class="item-source {{item.sourceType === 'official_api' ? 'src-official' : item.sourceType === 'ai_aggregation' ? 'src-ai' : 'src-manual'}}">
+            {{item.sourceType === 'official_api' ? '官方' : item.sourceType === 'ai_aggregation' ? 'AI' : '人工'}}
+          </view>
+        </view>
+        <view class="add-btn" bindtap="addItem" data-key="S">＋ 新增</view>
+      </view>
+    </view>
+
+    <!-- W 劣势卡片 -->
+    <view class="detail-card w-card" bindtap="toggleW">
+      <view class="detail-header">
+        <view class="detail-tag w-tag">W 劣势</view>
+        <view class="detail-count">{{W.length}} 条</view>
+        <view class="detail-arrow {{showW ? 'arrow-up' : ''}}">▼</view>
+      </view>
+      <view class="detail-body" wx:if="{{showW}}">
+        <view class="detail-item" wx:for="{{W}}" wx:key="id" bindtap="editItem" data-key="W" data-index="{{index}}">
+          <view class="item-dot w-dot">●</view>
+          <view class="item-text">{{item.point}}</view>
+          <view class="item-source {{item.sourceType === 'official_api' ? 'src-official' : item.sourceType === 'ai_aggregation' ? 'src-ai' : 'src-manual'}}">
+            {{item.sourceType === 'official_api' ? '官方' : item.sourceType === 'ai_aggregation' ? 'AI' : '人工'}}
+          </view>
+        </view>
+        <view class="add-btn" bindtap="addItem" data-key="W">＋ 新增</view>
+      </view>
+    </view>
+
+    <!-- O 机会卡片 -->
+    <view class="detail-card o-card" bindtap="toggleO">
+      <view class="detail-header">
+        <view class="detail-tag o-tag">O 机会</view>
+        <view class="detail-count">{{O.length}} 条</view>
+        <view class="detail-arrow {{showO ? 'arrow-up' : ''}}">▼</view>
+      </view>
+      <view class="detail-body" wx:if="{{showO}}">
+        <view class="detail-item" wx:for="{{O}}" wx:key="id" bindtap="editItem" data-key="O" data-index="{{index}}">
+          <view class="item-dot o-dot">●</view>
+          <view class="item-text">{{item.point}}</view>
+          <view class="item-source {{item.sourceType === 'official_api' ? 'src-official' : item.sourceType === 'ai_aggregation' ? 'src-ai' : 'src-manual'}}">
+            {{item.sourceType === 'official_api' ? '官方' : item.sourceType === 'ai_aggregation' ? 'AI' : '人工'}}
+          </view>
+        </view>
+        <view class="add-btn" bindtap="addItem" data-key="O">＋ 新增</view>
+      </view>
+    </view>
+
+    <!-- T 威胁卡片 -->
+    <view class="detail-card t-card" bindtap="toggleT">
+      <view class="detail-header">
+        <view class="detail-tag t-tag">T 威胁</view>
+        <view class="detail-count">{{T.length}} 条</view>
+        <view class="detail-arrow {{showT ? 'arrow-up' : ''}}">▼</view>
+      </view>
+      <view class="detail-body" wx:if="{{showT}}">
+        <view class="detail-item" wx:for="{{T}}" wx:key="id" bindtap="editItem" data-key="T" data-index="{{index}}">
+          <view class="item-dot t-dot">●</view>
+          <view class="item-text">{{item.point}}</view>
+          <view class="item-source {{item.sourceType === 'official_api' ? 'src-official' : item.sourceType === 'ai_aggregation' ? 'src-ai' : 'src-manual'}}">
+            {{item.sourceType === 'official_api' ? '官方' : item.sourceType === 'ai_aggregation' ? 'AI' : '人工'}}
+          </view>
+        </view>
+        <view class="add-btn" bindtap="addItem" data-key="T">＋ 新增</view>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 确认区 -->
+  <view class="confirm-section">
+    <checkbox-group bindchange="onConfirmChange">
+      <label class="confirm-label">
+        <checkbox value="confirmed" checked="{{isConfirmed}}" color="#1A6DFF" />
+        <text class="confirm-text">{{confirmText}}</text>
+      </label>
+    </checkbox-group>
+    <button class="next-btn {{isConfirmed ? '' : 'disabled'}}" bindtap="onNext" disabled="{{!isConfirmed}}">
+      确认并继续 →
+    </button>
+  </view>
+
+  <!-- 底部间距 -->
+  <view style="height:140rpx;"></view>
+
+</view>

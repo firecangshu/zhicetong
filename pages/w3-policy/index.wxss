@@ -1,0 +1,385 @@
+/* pages/w4-policy/index.wxss */
+/* W4 政策引导页面样式 V2.8 四级政策库版 */
+
+.policy-page {
+  min-height: 100vh;
+  background: #F5F7FA;
+  padding-bottom: 180rpx;
+}
+
+/* ========= 步骤条 ========= */
+.step-bar {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: #FFFFFF;
+  border-bottom: 1rpx solid #E8ECF0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
+
+.step-item.active {
+  opacity: 1;
+}
+
+.step-num {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #C8C8CC;
+  color: #FFFFFF;
+  font-size: 22rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8rpx;
+}
+
+.step-item.active .step-num {
+  background: #1A6DFF;
+}
+
+.step-label {
+  font-size: 22rpx;
+  color: #8C8C8C;
+}
+
+.step-item.active .step-label {
+  color: #1A6DFF;
+  font-weight: 600;
+}
+
+.step-arrow {
+  margin: 0 8rpx;
+  color: #C8C8CC;
+  font-size: 24rpx;
+}
+
+/* ========= 页面头部 ========= */
+.page-header {
+  padding: 32rpx 32rpx 16rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1A1A2E;
+  margin-bottom: 8rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #8C8C8C;
+}
+
+.data-source-badge {
+  display: inline-block;
+  margin-top: 12rpx;
+  padding: 8rpx 18rpx;
+  background: #E8F4FD;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #1A6DFF;
+}
+
+/* ========= 内容容器 ========= */
+.page-container {
+  padding: 0 24rpx 40rpx;
+}
+
+/* ========= 政策层级堆叠图 ========= */
+.chart-section {
+  margin: 24rpx 24rpx 0;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.chart-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+  margin-bottom: 16rpx;
+}
+
+.stacked-canvas {
+  width: 100%;
+  height: 400rpx;
+}
+
+/* ========= 水平条形图（替代堆叠图，支持任意条数） ========= */
+.policy-bar-chart {
+  width: 100%;
+  padding: 16rpx 0;
+}
+
+.policy-bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.policy-bar-label {
+  display: flex;
+  align-items: center;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.policy-bar-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.policy-bar-name {
+  font-size: 28rpx;
+  color: #1A1A2E;
+  font-weight: 600;
+}
+
+.policy-bar-track {
+  flex: 1;
+  height: 44rpx;
+  background: #F0F0F0;
+  border-radius: 10rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.policy-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 10rpx;
+  transition: width 0.4s ease;
+  opacity: 0.85;
+}
+
+.policy-bar-num {
+  position: relative;
+  z-index: 2;
+  font-size: 26rpx;
+  color: #1A1A2E;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: 16rpx;
+}
+
+.chart-hint {
+  font-size: 24rpx;
+  color: #888888;
+  margin-top: 16rpx;
+  line-height: 1.5;
+}
+
+/* ========= 级别分区 ========= */
+.level-section {
+  margin-bottom: 32rpx;
+}
+
+.level-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 2rpx solid #D6E4FF;
+}
+
+.level-tag {
+  font-size: 30rpx;
+  font-weight: 700;
+  padding: 8rpx 18rpx;
+  border-radius: 8rpx;
+}
+
+.level-tag.national {
+  background: #FFE8E8;
+  color: #E53935;
+}
+
+.level-tag.provincial {
+  background: #FFF3E0;
+  color: #F5A623;
+}
+
+.level-tag.city {
+  background: #E8F4FD;
+  color: #1A6DFF;
+}
+
+.level-tag.district {
+  background: #E8F7ED;
+  color: #00B365;
+}
+
+.level-count {
+  font-size: 24rpx;
+  color: #8C8C8C;
+}
+
+/* ========= 政策卡片 ========= */
+.policy-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.policy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.policy-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A2E;
+  flex: 1;
+}
+
+.policy-clause {
+  font-size: 28rpx;
+  color: #555555;
+  line-height: 1.8;
+  margin-top: 8rpx;
+}
+
+/* ========= 来源标签 ========= */
+.source-tag {
+  font-size: 22rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 6rpx;
+  flex-shrink: 0;
+}
+
+.source-tag.official {
+  background: #E8F4FD;
+  color: #1A6DFF;
+}
+
+.source-tag.ai {
+  background: #E8F7ED;
+  color: #00B365;
+}
+
+/* ========= 人工备注 ========= */
+.manual-note {
+  display: block;
+  margin-top: 12rpx;
+  padding: 14rpx 18rpx;
+  background: #FFF8F0;
+  border-left: 6rpx solid #F5A623;
+  border-radius: 0 8rpx 8rpx 0;
+  font-size: 24rpx;
+  color: #8C6900;
+  line-height: 1.6;
+}
+
+/* ========= 编辑按钮 ========= */
+.edit-btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12rpx;
+}
+
+.edit-btn {
+  background: #F0F4FF;
+  color: #1A6DFF;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  border: none;
+  line-height: 1.6;
+}
+
+.edit-btn::after {
+  border: none;
+}
+
+/* ========= 确认区域 ========= */
+.confirm-section {
+  margin-top: 40rpx;
+  padding: 32rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.confirm-checkbox {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid #C8C8CC;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  transition: all 0.2s;
+}
+
+.checkbox.checked {
+  background: #1A6DFF;
+  border-color: #1A6DFF;
+}
+
+.confirm-text {
+  font-size: 28rpx;
+  color: #1A1A2E;
+  line-height: 1.6;
+}
+
+.next-btn {
+  width: 100%;
+  height: 88rpx;
+  background: #C8C8CC;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 700;
+  border-radius: 12rpx;
+  border: none;
+  line-height: 88rpx;
+}
+
+.next-btn:not(.disabled) {
+  background: #1A6DFF;
+}
+
+.next-btn.disabled {
+  background: #C8C8CC;
+}
+
+.next-btn::after {
+  border: none;
+}

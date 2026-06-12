@@ -1,0 +1,343 @@
+<!--pages/w4-market/index.wxml-->
+<!--W4 市场调研 V2.8 全量预埋版-->
+<view class="market-page">
+  <!-- 步骤条 -->
+    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item active"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+  <view class="page-header">
+    <text class="page-title">W4 市场调研</text>
+    <text class="page-subtitle">PEST+客源+商圈+竞合分析</text>
+    <view class="data-source-badge">📊 全量预埋 V2.8</view>
+  </view>
+
+  <view class="page-container">
+    <!-- PEST 分析 -->
+    <view class="section-title">📊 PEST 宏观环境分析</view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="pestPolitical">
+      <view class="card-header">
+        <text class="card-label">P 政治环境</text>
+        <view class="source-tag {{pestPoliticalSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{pestPoliticalSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{pestPoliticalValue}}</text>
+      <view class="manual-note" wx:if="{{pestPoliticalManualNote}}">📝 备注：{{pestPoliticalManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestPolitical" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestPolitical">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="pestEconomic">
+      <view class="card-header">
+        <text class="card-label">E 经济环境</text>
+        <view class="source-tag {{pestEconomicSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{pestEconomicSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{pestEconomicValue}}</text>
+      <view class="manual-note" wx:if="{{pestEconomicManualNote}}">📝 备注：{{pestEconomicManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestEconomic" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestEconomic">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="pestSocial">
+      <view class="card-header">
+        <text class="card-label">S 社会环境</text>
+        <view class="source-tag {{pestSocialSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{pestSocialSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{pestSocialValue}}</text>
+      <view class="manual-note" wx:if="{{pestSocialManualNote}}">📝 备注：{{pestSocialManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestSocial" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestSocial">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="pestTechnological">
+      <view class="card-header">
+        <text class="card-label">T 技术环境</text>
+        <view class="source-tag {{pestTechnologicalSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{pestTechnologicalSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{pestTechnologicalValue}}</text>
+      <view class="manual-note" wx:if="{{pestTechnologicalManualNote}}">📝 备注：{{pestTechnologicalManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestTechnological" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestTechnological">📝 补充</button>
+      </view>
+    </view>
+
+    <!-- 客源市场 -->
+    <view class="section-title">👥 客源市场分析</view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="touristSourceCore">
+      <view class="card-header">
+        <text class="card-label">核心客源（0-50km）</text>
+        <view class="source-tag {{touristSourceCoreSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{touristSourceCoreSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{touristSourceCoreValue}}</text>
+      <view class="manual-note" wx:if="{{touristSourceCoreManualNote}}">📝 备注：{{touristSourceCoreManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourceCore" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="touristSourceCore">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="touristSourceSecondary">
+      <view class="card-header">
+        <text class="card-label">次级客源（50-150km）</text>
+        <view class="source-tag {{touristSourceSecondarySourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{touristSourceSecondarySourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{touristSourceSecondaryValue}}</text>
+      <view class="manual-note" wx:if="{{touristSourceSecondaryManualNote}}">📝 备注：{{touristSourceSecondaryManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourceSecondary" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="touristSourceSecondary">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="touristSourcePotential">
+      <view class="card-header">
+        <text class="card-label">潜在客源（150km以上）</text>
+        <view class="source-tag {{touristSourcePotentialSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{touristSourcePotentialSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{touristSourcePotentialValue}}</text>
+      <view class="manual-note" wx:if="{{touristSourcePotentialManualNote}}">📝 备注：{{touristSourcePotentialManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourcePotential" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="touristSourcePotential">📝 补充</button>
+      </view>
+    </view>
+
+    <!-- 商圈分布 -->
+    <view class="section-title">🏪 商圈分布分析</view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="businessCore">
+      <view class="card-header">
+        <text class="card-label">{{businessCoreLabel}}</text>
+        <view class="source-tag {{businessCoreSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{businessCoreSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">人口：{{businessCorePopulation}}</text>
+      <text class="data-value">供给：{{businessCoreSupply}}</text>
+      <text class="data-value">缺口：{{businessCoreGap}}</text>
+      <view class="manual-note" wx:if="{{businessCoreNote}}">📝 补充：{{businessCoreNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessCore" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddBusinessNote" data-key="businessCore">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="businessSecondary">
+      <view class="card-header">
+        <text class="card-label">{{businessSecondaryLabel}}</text>
+        <view class="source-tag {{businessSecondarySourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{businessSecondarySourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">人口：{{businessSecondaryPopulation}}</text>
+      <text class="data-value">供给：{{businessSecondarySupply}}</text>
+      <text class="data-value">缺口：{{businessSecondaryGap}}</text>
+      <view class="manual-note" wx:if="{{businessSecondaryNote}}">📝 补充：{{businessSecondaryNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessSecondary" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddBusinessNote" data-key="businessSecondary">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="businessTertiary">
+      <view class="card-header">
+        <text class="card-label">{{businessTertiaryLabel}}</text>
+        <view class="source-tag {{businessTertiarySourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{businessTertiarySourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">人口：{{businessTertiaryPopulation}}</text>
+      <text class="data-value">供给：{{businessTertiarySupply}}</text>
+      <text class="data-value">缺口：{{businessTertiaryGap}}</text>
+      <view class="manual-note" wx:if="{{businessTertiaryNote}}">📝 补充：{{businessTertiaryNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessTertiary" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddBusinessNote" data-key="businessTertiary">📝 补充</button>
+      </view>
+    </view>
+
+    <!-- 商圈覆盖人口对比（横向条形图） -->
+    <view class="chart-section">
+      <view class="chart-title">📊 商圈覆盖人口对比</view>
+      <view class="bar-chart">
+        <!-- 核心商圈 -->
+        <view class="bar-row">
+          <view class="bar-label">
+            <text class="bar-dot" style="background:#1A6DFF;"></text>
+            <text class="bar-name">核心商圈</text>
+          </view>
+          <view class="bar-track">
+            <view class="bar-fill bar-blue" style="width:{{barCoreWidth}}%;"></view>
+            <text class="bar-num">{{barCoreValue}}</text>
+          </view>
+        </view>
+        <view class="bar-sub">
+          <text class="bar-sub-text">{{barCoreSub}} ｜ 距离项目地约 8km</text>
+        </view>
+
+        <!-- 次级商圈 -->
+        <view class="bar-row">
+          <view class="bar-label">
+            <text class="bar-dot" style="background:#00B365;"></text>
+            <text class="bar-name">次级商圈</text>
+          </view>
+          <view class="bar-track">
+            <view class="bar-fill bar-green" style="width:{{barSecondaryWidth}}%;"></view>
+            <text class="bar-num">{{barSecondaryValue}}</text>
+          </view>
+        </view>
+        <view class="bar-sub">
+          <text class="bar-sub-text">{{barSecondarySub}} ｜ 距离项目地约 28km</text>
+        </view>
+
+        <!-- 机会商圈 -->
+        <view class="bar-row">
+          <view class="bar-label">
+            <text class="bar-dot" style="background:#F5A623;"></text>
+            <text class="bar-name">机会商圈</text>
+          </view>
+          <view class="bar-track">
+            <view class="bar-fill bar-amber" style="width:{{barTertiaryWidth}}%;"></view>
+            <text class="bar-num">{{barTertiaryValue}}</text>
+          </view>
+        </view>
+        <view class="bar-sub">
+          <text class="bar-sub-text">{{barTertiarySub}} ｜ 距离项目地约 55km</text>
+        </view>
+      </view>
+      <view class="chart-hint">💡 条形越长，覆盖人口越多；距离越远，客源转化成本越高。</view>
+    </view>
+
+    <!-- 交通可达性 -->
+    <view class="section-title">🚗 交通可达性</view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="accessibilitySelf">
+      <view class="card-header">
+        <text class="card-label">自驾可达性</text>
+        <view class="source-tag {{accessibilitySelfSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{accessibilitySelfSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{accessibilitySelfValue}}</text>
+      <view class="manual-note" wx:if="{{accessibilitySelfManualNote}}">📝 备注：{{accessibilitySelfManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="accessibilitySelf" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="accessibilitySelf">📝 补充</button>
+      </view>
+    </view>
+
+    <view class="data-card" bindtap="onEditItem" data-key="accessibilityPublic">
+      <view class="card-header">
+        <text class="card-label">公交/轨道可达性</text>
+        <view class="source-tag {{accessibilityPublicSourceType === 'official_api' ? 'official' : 'ai'}}">
+          {{accessibilityPublicSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+        </view>
+      </view>
+      <text class="data-value">{{accessibilityPublicValue}}</text>
+      <view class="manual-note" wx:if="{{accessibilityPublicManualNote}}">📝 备注：{{accessibilityPublicManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="accessibilityPublic" data-action="modify">✏️ 修改</button>
+        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="accessibilityPublic">📝 补充</button>
+      </view>
+    </view>
+
+    <!-- 竞合分析 -->
+    <view class="section-title">🏆 竞合分析（三级）</view>
+
+    <view class="competitor-section" wx:for="{{competitorLevels}}" wx:key="level" wx:for-item="levelItem">
+      <view class="competitor-level-tag {{levelItem.level === '区级' ? 'district' : levelItem.level === '市级' ? 'city' : 'province'}}">
+        {{levelItem.level}}竞合（{{levelItem.competitors.length}}家）
+      </view>
+
+      <view class="competitor-card" wx:for="{{levelItem.competitors}}" wx:key="name" wx:for-item="compItem" bindtap="onEditItem" data-key="{{levelItem.level === '区级' ? 'competitorDistrict' : levelItem.level === '市级' ? 'competitorCity' : 'competitorProvince'}}" data-idx="{{index}}">
+        <view class="competitor-header">
+          <text class="competitor-name">{{compItem.name}}</text>
+          <view class="competitor-type-tag {{compItem.type === 'compete' ? 'compete' : compItem.type === 'overflow' ? 'overflow' : 'cooperate'}}">
+            {{compItem.type === 'compete' ? '竞争' : compItem.type === 'overflow' ? '溢出' : '合作'}}
+          </view>
+        </view>
+        <view class="competitor-role">角色：{{compItem.role}}</view>
+        <view class="competitor-advantage">
+          <view class="comp-tag advantage">✅ {{compItem.advantage}}</view>
+          <view class="comp-tag disadvantage">⚠️ {{compItem.disadvantage}}</view>
+        </view>
+        <view class="manual-note" wx:if="{{compItem.manualNote}}">📝 备注：{{compItem.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="{{levelItem.level === '区级' ? 'competitorDistrict' : levelItem.level === '市级' ? 'competitorCity' : 'competitorProvince'}}" data-idx="{{index}}" data-action="modify">✏️ 修改</button>
+          <button class="edit-btn note-btn" catchtap="onAddCompetitorNote" data-scope="{{levelItem.level === '区级' ? 'district' : levelItem.level === '市级' ? 'city' : 'province'}}" data-idx="{{index}}">📝 补充</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 竞合实力对比（CSS 条形图，兼容 APK） -->
+    <view class="chart-section">
+      <view class="chart-title">📊 竞合实力对比（AI 评估）</view>
+      <view class="bar-chart">
+        <view class="bar-row" wx:for="{{competitorBarData}}" wx:key="name">
+          <view class="bar-label">
+            <text class="bar-dot" style="background:{{item.color}};"></text>
+            <text class="bar-name">{{item.name}}</text>
+          </view>
+          <view class="bar-track">
+            <view class="bar-fill" style="width:{{item.value}}%; background: linear-gradient(90deg, {{item.color}}, {{item.color}}66);"></view>
+            <text class="bar-num">{{item.value}}分</text>
+          </view>
+        </view>
+      </view>
+      <view class="chart-hint">💡 分数越高，竞合实力越强；我方需发挥优势、补足短板。</view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <view class="confirm-section">
+      <view class="confirm-checkbox" bindtap="onToggleConfirm">
+        <view class="checkbox {{isConfirmed ? 'checked' : ''}}">
+          <text wx:if="{{isConfirmed}}">✓</text>
+        </view>
+        <text class="confirm-text">{{confirmText}}</text>
+      </view>
+      <button class="next-btn {{isConfirmed ? '' : 'disabled'}}" bindtap="onNext" disabled="{{!isConfirmed}}">
+        确认并继续 →
+      </button>
+    </view>
+  </view>
+</view>

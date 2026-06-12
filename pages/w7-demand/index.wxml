@@ -1,0 +1,176 @@
+<!--pages/w7-demand/index.wxml-->
+<!--W7 需求澄清 V2.8 全量预埋版-->
+<view class="demand-page">
+  <!-- 步骤条 -->
+    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item active"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+  <view class="page-header">
+    <text class="page-title">W7 需求澄清</text>
+    <text class="page-subtitle">主观咨询 · 明确甲方核心诉求与优势资源</text>
+    <view class="data-source-badge">📋 主观填报</view>
+  </view>
+
+  <view class="page-container">
+    <!-- 甲方诉求（Radio 表单） -->
+    <view class="section-card">
+      <view class="section-title">🎯 甲方核心诉求</view>
+      <view class="form-item" wx:for="{{clientDemands}}" wx:for-item="demand" wx:key="key">
+        <view class="form-question">{{demand.question}}</view>
+        <view class="radio-group">
+          <view
+            class="radio-option {{demand.answer === option ? 'selected' : ''}}"
+            wx:for="{{demand.options}}"
+            wx:for-item="option"
+            wx:key="*this"
+            bindtap="onRadioChange"
+            data-key="{{demand.key}}"
+            data-value="{{option}}"
+          >
+            <view class="radio-dot"></view>
+            <text>{{option}}</text>
+          </view>
+        </view>
+        <view class="manual-note" wx:if="{{demand.manualNote}}">📝 备注：{{demand.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" bindtap="onEditNote" data-key="{{demand.key}}">✏️ 添加备注</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 优势资源确认（Checkbox） -->
+    <view class="section-card">
+      <view class="section-title">🏆 优势资源确认</view>
+      <view class="check-item" wx:for="{{confirmedAdvantages}}" wx:key="key" bindtap="onToggleAdvantage" data-key="{{item.key}}">
+        <view class="check-box {{item.confirmed ? 'checked' : ''}}">
+          <text wx:if="{{item.confirmed}}">✓</text>
+        </view>
+        <view class="check-content">
+          <view class="check-label">{{item.label}}</view>
+          <view class="tag-row">
+            <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : item.sourceType === 'ai_aggregation' ? 'ai' : 'manual'}}">
+              {{item.sourceType === 'official_api' ? '官方API' : item.sourceType === 'ai_aggregation' ? 'AI聚合' : '人工'}}
+            </view>
+          </view>
+          <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 总投预算阶梯 -->
+    <view class="section-card">
+      <view class="section-title">💰 总投预算阶梯</view>
+      <view class="form-item">
+        <view class="form-question">请选择项目总投预算区间</view>
+        <view class="radio-group">
+          <view
+            class="radio-option {{budgetRange === '300万以下' ? 'selected' : ''}}"
+            bindtap="onBudgetChange"
+            data-value="300万以下"
+          ><view class="radio-dot"></view><text>300万以下</text></view>
+          <view
+            class="radio-option {{budgetRange === '300-1000万' ? 'selected' : ''}}"
+            bindtap="onBudgetChange"
+            data-value="300-1000万"
+          ><view class="radio-dot"></view><text>300-1000万</text></view>
+          <view
+            class="radio-option {{budgetRange === '1000万-5000万' ? 'selected' : ''}}"
+            bindtap="onBudgetChange"
+            data-value="1000万-5000万"
+          ><view class="radio-dot"></view><text>1000万-5000万</text></view>
+          <view
+            class="radio-option {{budgetRange === '1亿以上' ? 'selected' : ''}}"
+            bindtap="onBudgetChange"
+            data-value="1亿以上"
+          ><view class="radio-dot"></view><text>1亿以上</text></view>
+          <view
+            class="radio-option radio-other {{budgetRange === 'other' ? 'selected' : ''}}"
+          >
+            <view class="radio-dot"></view>
+            <text>其他</text>
+            <input
+              class="inline-input"
+              placeholder="请输入预算（万元）"
+              value="{{budgetOtherValue}}"
+              bindinput="onBudgetOtherInput"
+              bindtap="onBudgetOtherTap"
+            />
+          </view>
+        </view>
+        <view class="item-remark" wx:if="{{budgetRange}}">
+          <input
+            class="remark-input"
+            placeholder="备注（选填）"
+            value="{{budgetRemark}}"
+            bindinput="onBudgetRemarkInput"
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 其他优势条件补充 -->
+    <view class="section-card">
+      <view class="section-title">⭐ 其他优势条件补充</view>
+      <view class="form-item">
+        <view class="form-question">可补充除上述确认资源外的其他优势条件（最多5条）</view>
+        <view class="advantage-list">
+          <view class="advantage-item" wx:for="{{advantageItems}}" wx:key="idx" wx:for-index="idx">
+            <view class="advantage-index">{{idx + 1}}</view>
+            <view class="advantage-input-wrap">
+              <input
+                class="advantage-input"
+                placeholder="请输入优势条件 {{idx + 1}}"
+                value="{{item.content}}"
+                bindinput="onAdvantageInput"
+                data-idx="{{idx}}"
+              />
+              <input
+                class="remark-input"
+                placeholder="备注（选填）"
+                value="{{item.remark}}"
+                bindinput="onAdvantageRemarkInput"
+                data-idx="{{idx}}"
+              />
+            </view>
+            <view class="advantage-delete" bindtap="onDeleteAdvantage" data-idx="{{idx}}" wx:if="{{advantageItems.length > 1}}">✕</view>
+          </view>
+        </view>
+        <view class="add-btn-wrap" wx:if="{{advantageItems.length < 5}}">
+          <button class="add-btn" bindtap="onAddAdvantage">＋ 增加一条</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <view class="confirm-section">
+      <view class="confirm-checkbox" bindtap="onToggleConfirm">
+        <view class="checkbox {{isConfirmed ? 'checked' : ''}}">
+          <text wx:if="{{isConfirmed}}">✓</text>
+        </view>
+        <text class="confirm-text">{{confirmText}}</text>
+      </view>
+      <button class="next-btn {{isConfirmed ? '' : 'disabled'}}" bindtap="onNext" disabled="{{!isConfirmed}}">
+        确认并继续 →
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,77 @@
+<!--pages/s2-identity/index.wxml-->
+<!--S2 身份验证页-->
+<view class="identity-page">
+  <!-- 步骤条 -->
+  <view class="step-bar">
+    <view class="step-item active">
+      <view class="step-num">1</view>
+      <text class="step-label">登录</text>
+    </view>
+    <text class="step-arrow">→</text>
+    <view class="step-item">
+      <view class="step-num">2</view>
+      <text class="step-label">介绍</text>
+    </view>
+    <text class="step-arrow">→</text>
+    <view class="step-item">
+      <view class="step-num">3</view>
+      <text class="step-label">流程</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-container">
+    <!-- 标题区 -->
+    <view class="hero-card">
+      <view class="hero-icon">� herein</view>
+      <view class="hero-title">用户登录</view>
+      <view class="hero-subtitle">请确认您的操作身份，确保项目数据安全</view>
+    </view>
+
+    <!-- 身份选择 -->
+    <view class="card">
+      <view class="section-title">选择您的身份</view>
+      
+      <view class="identity-option {{selectedRole === 'investor' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="investor">
+        <view class="role-icon">💰</view>
+        <view class="role-info">
+          <view class="role-name">投资方</view>
+          <view class="role-desc">文旅项目投资人、投资机构代表</view>
+        </view>
+        <view class="role-check" wx:if="{{selectedRole === 'investor'}}">✓</view>
+      </view>
+
+      <view class="identity-option {{selectedRole === 'planner' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="planner">
+        <view class="role-icon">🏗️</view>
+        <view class="role-info">
+          <view class="role-name">规划方</view>
+          <view class="role-desc">规划设计院、建筑设计团队</view>
+        </view>
+        <view class="role-check" wx:if="{{selectedRole === 'planner'}}">✓</view>
+      </view>
+
+      <view class="identity-option {{selectedRole === 'promoter' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="promoter">
+        <view class="role-icon">🤝</view>
+        <view class="role-info">
+          <view class="role-name">招商方</view>
+          <view class="role-desc">文旅招商部门、运营机构</view>
+        </view>
+        <view class="role-check" wx:if="{{selectedRole === 'promoter'}}">✓</view>
+      </view>
+
+      <view class="identity-option {{selectedRole === 'other' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="other">
+        <view class="role-icon">📋</view>
+        <view class="role-info">
+          <view class="role-name">其他角色</view>
+          <view class="role-desc">政府人员、咨询顾问、其他</view>
+        </view>
+        <view class="role-check" wx:if="{{selectedRole === 'other'}}">✓</view>
+      </view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <button class="btn-next" bindtap="onConfirmAndNext" disabled="{{!selectedRole}}">
+      {{selectedRole ? '确认并继续' : '请先选择身份'}}
+    </button>
+
+  </scroll-view>
+</view>

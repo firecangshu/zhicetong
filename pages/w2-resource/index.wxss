@@ -1,0 +1,542 @@
+/* pages/w3-resource/index.wxss */
+/* W3 资源调查页面样式 V2.8 全量版 */
+
+.resource-page {
+  min-height: 100vh;
+  background: #F5F7FA;
+  padding-bottom: 180rpx;
+}
+
+/* ========= 步骤条（复用全局） ========= */
+
+/* ========= 雷达图区域 ========= */
+.chart-section {
+  margin: 24rpx 24rpx 8rpx;
+  padding: 28rpx 20rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(26, 109, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+  margin-bottom: 12rpx;
+}
+
+/* ========= 资源评分条形图（替代 Canvas 雷达图） ========= */
+.score-list {
+  width: 100%;
+  padding: 8rpx 0;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.score-name {
+  width: 140rpx;
+  font-size: 24rpx;
+  color: #1A1A2E;
+  text-align: right;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.score-bar-wrap {
+  flex: 1;
+  height: 32rpx;
+  background: #F0F0F0;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #1A6DFF, #5B9AFF);
+  border-radius: 16rpx;
+  transition: width 0.5s ease;
+}
+
+.score-value {
+  width: 60rpx;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+  text-align: right;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+.score-summary {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #F0F0F0;
+  text-align: center;
+}
+
+.score-total {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+}
+
+/* ========= 页面头部 ========= */
+.page-header {
+  padding: 32rpx 32rpx 16rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1A1A2E;
+  margin-bottom: 8rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #8C8C8C;
+}
+
+.data-source-badge {
+  display: inline-block;
+  margin-top: 12rpx;
+  padding: 8rpx 18rpx;
+  background: #E8F4FD;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #1A6DFF;
+}
+
+/* ========= 内容容器 ========= */
+.page-container {
+  padding: 0 24rpx 40rpx;
+}
+
+/* ========= 分类标题 ========= */
+.category-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+  margin: 32rpx 0 16rpx 8rpx;
+  padding-bottom: 8rpx;
+  border-bottom: 2rpx solid #D6E4FF;
+}
+
+/* ========= 数据卡片（通用） ========= */
+.data-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.data-card.highlight {
+  border-left: 8rpx solid #1A6DFF;
+  background: #F0F5FF;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.card-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A2E;
+  flex: 1;
+}
+
+.data-value {
+  display: block;
+  font-size: 30rpx;
+  color: #1A1A2E;
+  line-height: 1.8;
+  margin-top: 8rpx;
+}
+
+/* ========= 来源标签 ========= */
+.source-tag {
+  font-size: 22rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 6rpx;
+  flex-shrink: 0;
+}
+
+.source-tag.official {
+  background: #E8F4FD;
+  color: #1A6DFF;
+}
+
+.source-tag.ai {
+  background: #E8F7ED;
+  color: #00B365;
+}
+
+.source-tag.manual {
+  background: #FFF8F0;
+  color: #F5A623;
+}
+
+/* ========= 人工备注 ========= */
+.manual-note {
+  display: block;
+  margin-top: 12rpx;
+  padding: 14rpx 18rpx;
+  background: #FFF8F0;
+  border-left: 6rpx solid #F5A623;
+  border-radius: 0 8rpx 8rpx 0;
+  font-size: 24rpx;
+  color: #8C6900;
+  line-height: 1.6;
+}
+
+/* ========= 编辑按钮 ========= */
+.edit-btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12rpx;
+}
+
+.edit-btn {
+  background: #F0F4FF;
+  color: #1A6DFF;
+  font-size: 24rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 8rpx;
+  border: none;
+  line-height: 1.6;
+}
+
+.edit-btn::after {
+  border: none;
+}
+
+/* ========= 确认区域 ========= */
+.confirm-section {
+  margin-top: 40rpx;
+  padding: 32rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.confirm-checkbox {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid #C8C8CC;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  transition: all 0.2s;
+}
+
+.checkbox.checked {
+  background: #1A6DFF;
+  border-color: #1A6DFF;
+}
+
+.confirm-text {
+  font-size: 28rpx;
+  color: #1A1A2E;
+  line-height: 1.6;
+}
+
+.next-btn {
+  width: 100%;
+  height: 88rpx;
+  background: #C8C8CC;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 700;
+  border-radius: 12rpx;
+  border: none;
+  line-height: 88rpx;
+}
+
+.next-btn:not(.disabled) {
+  background: #1A6DFF;
+}
+
+.next-btn.disabled {
+  background: #C8C8CC;
+}
+
+.next-btn::after {
+  border: none;
+}
+
+/* ========= 地块信息卡片（从W1传入） ========= */
+.land-info-card {
+  margin: 0 24rpx 24rpx;
+  padding: 24rpx 28rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  border-left: 8rpx solid #1A6DFF;
+}
+
+.land-info-card.empty {
+  border-left-color: #F5A623;
+  background: #FFFBF5;
+}
+
+.land-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.land-info-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+}
+
+.land-info-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A2E;
+  text-align: right;
+  flex: 1;
+}
+
+.land-info-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.land-info-row:last-child {
+  border-bottom: none;
+}
+
+.land-info-label {
+  font-size: 26rpx;
+  color: #8C8C8C;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+/* ========= 地块信息卡片（从W1传入） ========= */
+.land-info-card {
+  margin: 0 24rpx 24rpx;
+  padding: 24rpx 28rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  border-left: 8rpx solid #1A6DFF;
+}
+
+.land-info-card.empty {
+  border-left-color: #F5A623;
+  background: #FFFBF5;
+}
+
+.land-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.land-info-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1A6DFF;
+}
+
+.land-info-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A2E;
+  text-align: right;
+  flex: 1;
+}
+
+.land-info-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.land-info-row:last-child {
+  border-bottom: none;
+}
+
+.land-info-label {
+  font-size: 26rpx;
+  color: #8C8C8C;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.land-info-value {
+  font-size: 26rpx;
+  color: #1A1A2E;
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* ========= 展开/折叠功能 ========= */
+.data-value.summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 28rpx;
+  color: #1A1A2E;
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+
+.expand-btn,
+.collapse-btn {
+  display: inline-block;
+  margin-top: 12rpx;
+  padding: 8rpx 20rpx;
+  background: #F0F4FF;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #1A6DFF;
+  text-align: center;
+}
+
+.expand-btn:active,
+.collapse-btn:active {
+  background: #E0E8FF;
+}
+
+/* ========= 溯源信息样式 ========= */
+.source-trace {
+  margin-top: 16rpx;
+  padding: 20rpx;
+  background: #F8FAFB;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #1A6DFF;
+}
+
+.trace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid #E8E8E8;
+  margin-bottom: 12rpx;
+}
+
+.trace-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #1A6DFF;
+}
+
+.trace-toggle {
+  font-size: 24rpx;
+  color: #8C8C8C;
+  padding: 4rpx 12rpx;
+  background: #FFFFFF;
+  border-radius: 6rpx;
+}
+
+.trace-content {
+  padding-top: 8rpx;
+}
+
+.trace-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.trace-item:last-child {
+  border-bottom: none;
+}
+
+.trace-type {
+  font-size: 22rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 6rpx;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+  font-weight: 600;
+}
+
+.trace-type.official {
+  background: #E8F4FD;
+  color: #1A6DFF;
+}
+
+.trace-type.ai {
+  background: #E8F7ED;
+  color: #00B365;
+}
+
+.trace-type.manual {
+  background: #FFF8F0;
+  color: #F5A623;
+}
+
+.trace-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.trace-name {
+  font-size: 26rpx;
+  color: #1A1A2E;
+  font-weight: 500;
+}
+
+.trace-confidence {
+  font-size: 22rpx;
+  color: #8C8C8C;
+}
+
+.trace-url {
+  font-size: 22rpx;
+  color: #1A6DFF;
+  margin-top: 4rpx;
+  word-break: break-all;
+}
+
+.trace-url:active {
+  color: #0052CC;
+  text-decoration: underline;
+}

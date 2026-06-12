@@ -1,0 +1,197 @@
+# domain_prior_ledger.yaml
+# 踏歌行智策通 —— 领域先验沉淀清单
+# 生成时间：2026-06-11
+# 来源：utils/engine.js + utils/mock-data.js 抽取
+# 说明：以下规则来自文旅规划、土地管理、生态保护的实践知识
+
+ledger_version: "1.0"
+generated_at: "2026-06-11"
+source_files:
+  - utils/engine.js
+  - utils/mock-data.js
+  - utils/keyword-mapping.js
+
+# 领域规则分类
+categories:
+  - id: compliance
+    name: 合规维度
+    color: "#1A6DFF"
+    weight: 0.35
+    description: 基于生态保护红线、耕地保护、城镇开发边界叠加分析
+
+  - id: spatial
+    name: 空间维度
+    color: "#00B365"
+    weight: 0.25
+    description: 基于地形地貌、土地利用类型、景观肌理综合评估
+
+  - id: economic
+    name: 经济维度
+    color: "#F5A623"
+    weight: 0.20
+    description: 基于投资回报周期、客流规模、收入结构综合评估
+
+  - id: market
+    name: 市场维度
+    color: "#8C6BFF"
+    weight: 0.20
+    description: 基于客群画像、市场份额预估、竞争格局综合评估
+
+# 领域规则清单（从engine.js抽取的18条规则）
+rules:
+  # ======== 合规维度规则 ========
+  - id: R001
+    category: compliance
+    name: 生态红线硬过滤
+    priority: P0
+    condition: "redline.eco 不含 '✅'（即存在冲突）"
+    action: "score -= 30"
+    effect: "合规分上限70，冲突后直接降至40以下，触发NO-GO"
+    domain_source: "《生态保护红线划定指南》+ 国土空间规划'三区三线'"
+    evidence_level: "E2"
+
+  - id: R002
+    category: compliance
+    name: 耕地保护硬过滤
+    priority: P0
+    condition: "redline.farm 不含 '✅'（即存在冲突）"
+    action: "score -= 20"
+    effect: "合规分降至50以下，基本无法通过"
+    domain_source: "《土地管理法》+ 永久基本农田保护条例"
+    evidence_level: "E2"
+
+  - id: R003
+    category: compliance
+    name: 建设用地限制
+    priority: P1
+    condition: "redline.build 含 '⚠️'"
+    action: "score -= 15"
+    effect: "建议采用设施农用地或存量盘活方式"
+    domain_source: "自然资源部关于保障农村一二三产业融合发展用地的通知"
+    evidence_level: "E2"
+
+  - id: R004
+    category: compliance
+    name: 政策利好加分
+    priority: P2
+    condition: "policy.policies 中存在 direction='利好' 的条目"
+    action: "每条 +5分"
+    effect: "政策红利可提升合规评分"
+    domain_source: "各地方文旅产业扶持政策"
+    evidence_level: "E1"
+
+  - id: R005
+    category: compliance
+    name: 政策约束减分
+    priority: P2
+    condition: "policy.policies 中存在 direction='约束' 的条目"
+    action: "每条 -10分"
+    effect: "政策约束显著降低评分权重"
+    domain_source: "各地方环保、限建等政策文件"
+    evidence_level: "E1"
+
+  # ======== 空间维度规则 ========
+  - id: R006
+    category: spatial
+    name: 林地适宜性加分
+    priority: P1
+    condition: "resource.landType 含 '林地'"
+    action: "score += 10"
+    effect: "林地/园地肌理适合低冲击开发"
+    domain_source: "《林地保护利用规划》+ 低影响开发(LID)实践"
+    evidence_level: "E2"
+
+  - id: R007
+    category: spatial
+    name: 复合景观加分
+    priority: P1
+    condition: "resource.landscape 含 '复合'"
+    action: "score += 10"
+    effect: "岗丘—林—田—塘复合肌理具备内容差异化优势"
+    domain_source: "景观生态学'斑块-廊道-基质'理论"
+    evidence_level: "E2"
+
+  - id: R008
+    category: spatial
+    name: 规模效应加分
+    priority: P2
+    condition: "land.area 含 '2000'（约2000亩）"
+    action: "score += 5"
+    effect: "2000亩尺度具备规模效应，可分摊基础设施成本"
+    domain_source: "文旅项目经济规模效应经验值"
+    evidence_level: "E1"
+
+  # ======== 经济维度规则 ========
+  - id: R009
+    category: economic
+    name: 回报周期惩罚
+    priority: P1
+    condition: "market.cycle 含 '5-6'（5-6年回报周期）"
+    action: "score -= 10"
+    effect: "基准回报周期较长，需优化收入结构"
+    domain_source: "文旅行业投资回报基准（行业标准4-5年）"
+    evidence_level: "E1"
+
+  - id: R010
+    category: economic
+    name: 近郊区位加分
+    priority: P1
+    condition: "market.position 含 '近郊'"
+    action: "score += 15"
+    effect: "近郊高频消费圈具备客流稳定性优势"
+    domain_source: "城市旅游圈层理论（1-2小时车程圈）"
+    evidence_level: "E2"
+
+  # ======== 市场维度规则 ========
+  - id: R011
+    category: market
+    name: 研学需求加分
+    priority: P1
+    condition: "market.demand 含 '研学'"
+    action: "score += 10"
+    effect: "研学旅行需求旺盛，建议B2B渠道优先布局"
+    domain_source: "教育部研学旅行政策 + OTA预订数据趋势"
+    evidence_level: "E2"
+
+  - id: R012
+    category: market
+    name: 市场份额加分
+    priority: P2
+    condition: "market.chartData.series[0].data 总和 >= 20"
+    action: "score += 5"
+    effect: "市场份额预估较高，具备区域竞争力"
+    domain_source: "市场集中度分析（CR4/CR8指标）"
+    evidence_level: "E1"
+
+# ======== 加权决策规则 ========
+decision_rules:
+  - id: D001
+    name: 合规硬过滤
+    condition: "compliance.score <= 30"
+    result: "NO-GO"
+    reason: "合规风险过高，一票否决"
+
+  - id: D002
+    name: 综合通过
+    condition: "totalScore >= 75 AND compliance.score >= 60"
+    result: "GO"
+    reason: "综合条件良好，建议推进"
+
+  - id: D003
+    name: 有条件通过
+    condition: "totalScore >= 55"
+    result: "CONDITIONAL"
+    reason: "有条件通过，需在前置条件满足后推进"
+
+  - id: D004
+    name: 暂停建议
+    condition: "totalScore < 55"
+    result: "PAUSE"
+    reason: "建议暂停，补充调研或调整定位"
+
+# 维度权重配置
+weights:
+  compliance: 0.35
+  spatial: 0.25
+  economic: 0.20
+  market: 0.20

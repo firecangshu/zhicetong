@@ -1,0 +1,92 @@
+# safety_boundary.yaml
+# 踏歌行智策通 —— 安全边界与责任声明
+# 生成时间：2026-06-11
+# 来源：W6法规红线页面 + engine.js硬过滤规则 + 项目常识
+
+boundary_version: "1.0"
+generated_at: "2026-06-11"
+last_reviewed: "2026-06-11"
+
+# ======== 核心原则 ========
+principles:
+  - "本系统为辅助决策工具，不替代专业法律、金融、工程意见"
+  - "所有输出结果需经专业人员复核后方可作为决策依据"
+  - "涉及生态红线、基本农田等敏感区域必须人工实地核查"
+
+# ======== 明确不做的事情（Negative Capabilities） ========
+negative_capabilities:
+  - capability: "不替代法律意见"
+    scope: "土地性质判定、合规手续办理、法律风险评估"
+    reason: "法律法规因地而异，且更新频繁，系统无法实时同步所有地方条例"
+    fallback: "输出风险提示后，必须咨询当地自然资源局/法律顾问"
+    evidence: "W6页面明确标注'虚拟地图·演示占位（真实地图需接入腾讯位置服务）'"
+
+  - capability: "不做金融投资决策"
+    scope: "投资回报预估、融资建议、财务风险评估"
+    reason: "经济模型基于模拟数据，未接入真实市场数据"
+    fallback: "输出参考性预估后，必须聘请专业财务顾问"
+    evidence: "mock-data.js中market数据均为模拟，标注sourceType='ai_aggregation'"
+
+  - capability: "不处理敏感个人信息"
+    scope: "用户身份认证、生物识别、位置追踪"
+    reason: "系统当前不涉及用户隐私数据收集"
+    fallback: "如需收集用户信息，必须单独获取明示同意"
+    evidence: "W1-auth仅使用项目ID，不收集个人身份信息"
+
+  - capability: "不替代工程勘察"
+    scope: "地质灾害评估、水文地质调查、工程可行性"
+    reason: "系统基于公开数据聚合，精度不足以支撑工程决策"
+    fallback: "输出初步筛查后，必须委托具备资质的勘察单位"
+    evidence: "mock-data.js中geology数据标注'official_api'但注明需实地验证"
+
+  - capability: "不自动触发行政审批"
+    scope: "用地审批、环评批复、施工许可"
+    reason: "行政审批需人工材料准备和多部门协调"
+    fallback: "系统仅输出材料清单和流程指引，人工执行"
+    evidence: "W10-result输出'三向成果文档'，不含自动申报功能"
+
+# ======== 高风险场景的人工复核触发条件 ========
+human_review_triggers:
+  - trigger: "生态保护红线冲突"
+    condition: "evaluateCompliance()返回score <= 30"
+    action: "立即暂停，必须人工联系当地自然资源局核实红线范围"
+    severity: "CRITICAL"
+
+  - trigger: "永久基本农田占用"
+    condition: "redline.farm不含'✅'"
+    action: "禁止开发，建议调整选址或申请土地性质变更（程序复杂）"
+    severity: "CRITICAL"
+
+  - trigger: "文保单位影响"
+    condition: "redline.culture含'⚠️'或'冲突'"
+    action: "必须联系当地文旅局/文物局，评估建设控制地带范围"
+    severity: "HIGH"
+
+  - trigger: "地质灾害风险"
+    condition: "redline.geo含'⚠️'"
+    action: "必须委托地质勘察单位出具专项评估报告"
+    severity: "HIGH"
+
+  - trigger: "投资回报周期>6年"
+    condition: "market.cycle含'5-6年'或更长"
+    action: "建议财务顾问介入，重新测算现金流和敏感性分析"
+    severity: "MEDIUM"
+
+# ======== 隐私与授权 ========
+privacy:
+  data_collected:
+    - "项目ID（用户输入）"
+    - "地块坐标（用户框选）"
+    - "用户修正备注（用户主动输入）"
+  data_not_collected:
+    - "个人身份信息"
+    - "精确位置轨迹"
+    - "通讯录/社交关系"
+  storage: "本地存储（wx.setStorageSync），不上传服务器"
+  third_party: "未来接入腾讯地图API时，坐标数据发送至腾讯位置服务"
+
+# ======== 责任边界 ========
+liability:
+  - "本系统输出仅供参考，不构成任何投资、开发、法律建议"
+  - "因使用本系统输出而产生的任何损失，开发者不承担责任"
+  - "用户必须独立验证所有关键信息，尤其是合规性和安全性相关结论"

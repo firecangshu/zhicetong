@@ -1,0 +1,75 @@
+# project_card.yaml
+# 踏歌行智策通 —— 项目信息卡
+# 生成时间：2026-06-11
+# 对应文件：PROJECT_STATUS.md, app.json, project.config.json
+
+project_name: "踏歌行智策通"
+project_type: "智能体矩阵"
+version: "V2.2"
+repository: "https://gitee.com/funnyhouse/zhicetong"
+
+# 目标用户画像
+target_users:
+  - role: "文旅项目开发者"
+    description: "计划投资或开发文旅、户外、研学类项目的个人或企业"
+    pain_point: "缺乏选址决策的系统方法论，依赖经验判断，易踩合规红线"
+  - role: "户外营地/研学基地运营者"
+    description: "已运营或计划建设营地、研学基地的机构"
+    pain_point: "需要快速评估地块可行性，避免违规投资"
+  - role: "地方政府文旅部门"
+    description: "负责区域文旅项目规划与招商的政府部门"
+    pain_point: "需要标准化工具辅助项目筛选与风险预判"
+
+# 高风险领域标记
+high_risk_domains:
+  - domain: "文旅安全"
+    level: "中"
+    description: "户外活动涉及人身安全，需人工复核安全预案"
+  - domain: "生态红线"
+    level: "高"
+    description: "项目选址可能涉及生态保护红线、基本农田等敏感区域"
+  - domain: "土地性质"
+    level: "高"
+    description: "农用地转建设用地需严格审批，不可由系统直接判定"
+  - domain: "金融投资"
+    level: "中"
+    description: "投资回报预估仅供参考，不可作为投资决策唯一依据"
+
+# 当前已沉淀的核心资产
+current_assets:
+  - asset: "四维决策引擎"
+    description: "合规(35%) × 空间(25%) × 经济(20%) × 市场(20%) 加权评分体系"
+    evidence_level: "E2"
+    location: "utils/engine.js"
+  - asset: "SOP十步选址流程"
+    description: "从身份认证到三向成果的标准化操作流程"
+    evidence_level: "E2"
+    location: "pages/w1-auth/ → pages/w10-result/"
+  - asset: "三层数据架构"
+    description: "official_api > ai_aggregation > manual 数据优先级与溯源体系"
+    evidence_level: "E2"
+    location: "utils/mock-data.js"
+  - asset: "GB/T 18972-2017 资源调查模板"
+    description: "基于国标旅游资源分类标准的20项资源调查清单"
+    evidence_level: "E2"
+    location: "pages/w3-resource/"
+  - asset: "关键词映射体系"
+    description: "文旅领域关键词→搜索策略→数据源的映射规则"
+    evidence_level: "E1"
+    location: "utils/keyword-mapping.js"
+
+# 技术栈
+tech_stack:
+  - "微信小程序原生框架"
+  - "微信云开发（预留）"
+  - "腾讯位置服务API（预留接口）"
+  - "腾讯混元大模型API（预留接口）"
+
+# 开源依赖
+upstream_dependencies:
+  - name: "微信小程序框架"
+    type: "平台SDK"
+    license: "微信开放平台协议"
+  - name: "腾讯位置服务"
+    type: "API服务"
+    license: "腾讯云服务协议"

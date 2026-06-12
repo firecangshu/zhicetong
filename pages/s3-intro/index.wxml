@@ -1,0 +1,55 @@
+<!--pages/s3-intro/index.wxml-->
+<!--S3 产品介绍页-->
+<view class="intro-page">
+  <!-- 步骤条 -->
+  <view class="step-bar">
+    <view class="step-item active">
+      <view class="step-num">1</view>
+      <text class="step-label">登录</text>
+    </view>
+    <text class="step-arrow">→</text>
+    <view class="step-item active">
+      <view class="step-num">2</view>
+      <text class="step-label">介绍</text>
+    </view>
+    <text class="step-arrow">→</text>
+    <view class="step-item">
+      <view class="step-num">3</view>
+      <text class="step-label">流程</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-container">
+    <!-- 标题区 -->
+    <view class="hero-card">
+      <view class="hero-icon">📊</view>
+      <view class="hero-title">产品介绍</view>
+      <view class="hero-subtitle">文旅投拓智能决策系统</view>
+    </view>
+
+    <!-- 产品核心介绍 -->
+    <view class="card">
+      <view class="intro-text">
+        针对文旅投拓长期存在的"经验主义决策"与"信息不对称"痛点，本系统将十年一线规划经验蒸馏为标准化的"资源-政策-市场-主体"四层数据SOP。
+      </view>
+      <view class="intro-text" style="margin-top:20rpx;">
+        独创"人机双层确权机制"：AI完成海量数据抓取与匹配后，自动生成《数据确认函》，必须经由人工校准与确认，系统方可输出最终建议。这不仅从技术上物理阻断了AI幻觉的出现几率，更确保了每一个决策都建立在"客观事实+主观确认"的双重基石之上。
+      </view>
+      <view class="intro-text" style="margin-top:20rpx;">
+        系统能在分钟级内，将复杂的地块禀赋、起伏的市场风向、更迭的行业政策及用户核心诉求进行智能耦合，输出基于理性的战略定位决策建议，为项目全生命周期提供前置辅助参考。
+      </view>
+    </view>
+
+    <!-- 法律声明 -->
+    <view class="card notice-box">
+      <view class="section-title">法律声明</view>
+      <view class="legal-text">
+        本系统所有输出结果仅为AI辅助决策参考，不构成任何投资要约、法律意见或行政审批依据。用户应结合自身专业判断与实地调研结果独立决策，由此产生的一切风险与责任由用户自行承担。系统运营方不承担因使用本系统输出结果而产生的任何直接、间接或连带损失。
+      </view>
+    </view>
+
+    <!-- 确认并继续按钮 -->
+    <button class="btn-next" bindtap="onConfirmAndNext">确认并继续</button>
+
+  </scroll-view>
+</view>

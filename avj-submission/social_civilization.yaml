@@ -1,0 +1,95 @@
+# social_civilization.yaml
+# 踏歌行智策通 —— 社会-文明价值说明
+# 生成时间：2026-06-11
+# 说明：阐述项目对社会的价值及证据
+
+social_version: "1.0"
+generated_at: "2026-06-11"
+
+# ======== 社会价值主张 ========
+social_value:
+  primary: "减少文旅项目的违规投资和资源浪费"
+  secondary:
+    - "降低生态破坏风险"
+    - "提高土地利用效率"
+    - "促进文旅产业健康发展"
+    - "辅助地方政府科学招商"
+
+# ======== 问题背景 ========
+problem_statement: |
+  中国文旅产业近年来快速发展，但存在以下问题：
+  1. 项目选址缺乏科学依据，依赖经验判断
+  2. 生态红线、基本农田冲突频发，导致项目被叫停
+  3. 投资回报预估偏差大，大量项目亏损
+  4. 地方政府招商时缺乏标准化筛选工具
+
+  据统计，约30%的文旅项目因选址不当或合规问题
+  在建设阶段被叫停或建成后亏损（数据来源：待补充）。
+
+# ======== 解决方案的社会价值 ========
+solution_impact:
+  - aspect: "生态保护"
+    description: "通过红线硬过滤机制，在项目前期识别生态冲突，避免破坏"
+    beneficiaries: "生态环境、当地社区、子孙后代"
+    mechanism: "engine.js中生态红线冲突-30分硬过滤"
+    evidence: "W6页面展示红线检查，引擎自动拦截冲突项目"
+    evidence_level: "E2"
+
+  - aspect: "合规引导"
+    description: "帮助开发者了解合规要求，避免违规投资"
+    beneficiaries: "文旅投资者、地方政府"
+    mechanism: "SOP十步流程中的W4政策引导和W6法规红线"
+    evidence: "mock-data.js中包含真实政策文号和法规要求"
+    evidence_level: "E2"
+
+  - aspect: "决策科学化"
+    description: "将经验驱动的选址转化为数据驱动的决策"
+    beneficiaries: "文旅开发者、投资机构"
+    mechanism: "四维评分引擎量化评估项目可行性"
+    evidence: "engine.js中18条规则覆盖合规/空间/经济/市场"
+    evidence_level: "E2"
+
+  - aspect: "知识 democratization"
+    description: "将专家经验固化为可执行的工具，降低专业门槛"
+    beneficiaries: "中小型文旅创业者、地方政府"
+    mechanism: "SOP流程 + 评分引擎让非专家也能做初步评估"
+    evidence: "S1-S2引导页降低使用门槛"
+    evidence_level: "E1"
+
+# ======== 可持续发展目标（SDG）对齐 ========
+sdg_alignment:
+  - goal: "SDG 8: 体面工作和经济增长"
+    description: "促进文旅产业健康发展，创造就业"
+    relevance: "中"
+
+  - goal: "SDG 11: 可持续城市和社区"
+    description: "科学规划文旅项目，避免城市无序扩张"
+    relevance: "高"
+
+  - goal: "SDG 12: 负责任消费和生产"
+    description: "提高土地利用效率，避免资源浪费"
+    relevance: "中"
+
+  - goal: "SDG 15: 陆地生物"
+    description: "保护生态红线区域，维护生物多样性"
+    relevance: "高"
+
+# ======== 证据与限制 ========
+evidence_summary:
+  current_evidence:
+    - "可运行demo（E2）"
+    - "完整的评分引擎（E2）"
+    - "标准化的SOP流程（E2）"
+    - "数据溯源体系（E2）"
+
+  evidence_gaps:
+    - "缺乏真实用户案例"
+    - "缺乏投资回报数据验证"
+    - "缺乏专家复核结论"
+    - "缺乏长期追踪数据"
+
+  honesty_statement: |
+    当前版本为MVP演示版，所有数据为模拟数据。
+    社会价值的证据主要基于设计文档和可运行demo，
+    尚未经过真实用户验证。我们诚实地声明这一限制，
+    并计划在后续版本中通过真实案例积累证据。

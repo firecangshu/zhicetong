@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/s1-cover/index",
+    "pages/s2-identity/index",
+    "pages/s3-intro/index",
+    "pages/s4-guide/index",
+    "pages/w1-land/index",
+    "pages/w2-resource/index",
+    "pages/w3-policy/index",
+    "pages/w4-market/index",
+    "pages/w5-redline/index",
+    "pages/w6-swot/index",
+    "pages/w7-demand/index",
+    "pages/w8-position/index",
+    "pages/w9-result/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1A6DFF",
+    "navigationBarTitleText": "踏歌行智策通",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F7FA",
+    "backgroundTextStyle": "dark"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要获取您的位置用于地块框选定位"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

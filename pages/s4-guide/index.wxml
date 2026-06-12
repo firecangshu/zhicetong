@@ -1,0 +1,104 @@
+<!--pages/s4-guide/index.wxml-->
+<!--S4 工作流程说明页-->
+<view class="guide-page">
+  <!-- 步骤条 -->
+  <view class="step-bar">
+    <view class="step-item active">
+      <view class="step-num">1</view>
+      <text class="step-label">登录</text>
+    </view>
+    <text class="step-arrow">→</text>
+    <view class="step-item active">
+      <view class="step-num">2</view>
+      <text class="step-label">介绍</text>
+    </view>
+    <text class="step-arrow">→</text>
+    <view class="step-item active">
+      <view class="step-num">3</view>
+      <text class="step-label">流程</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-container">
+    <!-- 标题区 -->
+    <view class="hero-card">
+      <view class="hero-icon">📋</view>
+      <view class="hero-title">工作流程</view>
+      <view class="hero-subtitle">了解标准SOP十步流程，开始文旅项目研判</view>
+    </view>
+
+    <!-- 时间轴：工作流程 -->
+    <view class="card">
+      <view class="section-title">工作流程</view>
+      <view class="timeline">
+        <view class="timeline-item" wx:for="{{timelineSteps}}" wx:key="step">
+          <view class="timeline-dot {{index === 0 ? 'dot-first' : index === timelineSteps.length - 1 ? 'dot-last' : ''}}">
+            <text class="dot-num">{{item.step}}</text>
+          </view>
+          <view class="timeline-line" wx:if="{{index < timelineSteps.length - 1}}"></view>
+          <view class="timeline-content">
+            <view class="timeline-header">
+              <text class="timeline-phase">{{item.phase}}</text>
+              <text class="timeline-tag tag-{{item.tagType}}">{{item.tag}}</text>
+            </view>
+            <view class="timeline-desc">{{item.desc}}</view>
+            <view class="timeline-pages" wx:if="{{item.pages}}">
+              <text class="page-chip" wx:for="{{item.pages}}" wx:for-item="pg" wx:key="*this">{{pg}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据规则 -->
+    <view class="card">
+      <view class="section-title">数据规则</view>
+      <view class="rule-box">
+        <view class="rule-item">
+          <view class="rule-dot blue"></view>
+          <text class="rule-text">1. 官方API（预留接口）</text>
+        </view>
+        <view class="rule-item">
+          <view class="rule-dot orange"></view>
+          <text class="rule-text">2. AI聚合爬虫（模拟）</text>
+        </view>
+        <view class="rule-item">
+          <view class="rule-dot green"></view>
+          <text class="rule-text">3. 人工补充录入</text>
+        </view>
+      </view>
+      <view class="rule-note">{{data.dataRule}}</view>
+    </view>
+
+    <!-- 确认机制说明 -->
+    <view class="card">
+      <view class="section-title">确认机制</view>
+      <view class="confirm-note-box">
+        <view class="confirm-note-item">
+          <text class="note-icon">✅</text>
+          <text class="note-text">W1～W7 每页底部有「我已核对」复选框</text>
+        </view>
+        <view class="confirm-note-item">
+          <text class="note-icon">📝</text>
+          <text class="note-text">可点击数据项手动修正或添加备注</text>
+        </view>
+        <view class="confirm-note-item">
+          <text class="note-icon">🔒</text>
+          <text class="note-text">未勾选确认无法进入下一步</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 法律声明 -->
+    <view class="card notice-box">
+      <view class="section-title">法律声明</view>
+      <text class="legal-text">{{data.legal}}</text>
+    </view>
+
+    <!-- 开始按钮 -->
+    <button class="btn-next" bindtap="onConfirmAndNext">确认并进入下一步</button>
+  </scroll-view>
+
+  <!-- 水印 -->
+  <view class="watermark">AI 生成 / 仅供演示</view>
+</view>

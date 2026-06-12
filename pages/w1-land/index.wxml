@@ -1,0 +1,192 @@
+<!--pages/w1-land/index.wxml-->
+<!--W1 地块框选 V3.2 信息汇总版-->
+<view class="land-page">
+  <!-- 步骤条 -->
+  <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item active"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+  <view class="page-header">
+    <text class="page-title">W1 地块框选</text>
+    <text class="page-subtitle">坐标锚点确立 · 地块基本信息</text>
+    <view class="data-source-badge">📍 {{dataSource}}</view>
+  </view>
+
+  <view class="page-container">
+    <!-- 腾讯地图组件 -->
+    <view class="map-section">
+      <map
+        id="landMap"
+        class="real-map"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        scale="{{mapScale}}"
+        markers="{{markers}}"
+        polygons="{{polygons}}"
+        show-location
+        enable-zoom
+        enable-scroll
+        enable-rotate
+        bindtap="onMapTap"
+        bindregionchange="onRegionChange"
+      ></map>
+      <view class="map-toolbar">
+        <button class="map-btn" bindtap="onRelocate">📍 定位</button>
+        <button class="map-btn" bindtap="onUndoPoint" disabled="{{polygonPoints.length === 0}}">↩️ 撤回</button>
+        <button class="map-btn" bindtap="onClearPolygon">🗑️ 清除</button>
+        <button class="map-btn primary" bindtap="onFinishPolygon">✅ 完成</button>
+      </view>
+      <view class="map-info" wx:if="{{polygonPoints.length > 0}}">
+        📐 已选 {{polygonPoints.length}} 个顶点
+        <text wx:if="{{areaValue}}"> · 面积 {{areaValue}}</text>
+      </view>
+    </view>
+
+    <!-- 折叠式坐标列表 -->
+    <view class="coord-section" wx:if="{{coordList.length > 0}}">
+      <view class="coord-section-header" bindtap="onToggleCoordList">
+        <view class="coord-section-title">
+          <text class="coord-icon">📍</text>
+          <text>框选坐标点</text>
+          <text class="coord-count">({{coordList.length}})</text>
+        </view>
+        <text class="coord-toggle">{{coordListExpanded ? '▲ 收起' : '▼ 展开'}}</text>
+      </view>
+      <view class="coord-list {{coordListExpanded ? 'expanded' : 'collapsed'}}">
+        <view class="coord-item-row" wx:for="{{coordList}}" wx:key="index">
+          <view class="coord-index">P{{index + 1}}</view>
+          <view class="coord-detail" bindtap="onAdjustCoord" data-index="{{index}}">
+            <text class="coord-lat">Lat: {{item.lat}}</text>
+            <text class="coord-lng">Lng: {{item.lng}}</text>
+          </view>
+          <view class="coord-delete" bindtap="onDeletePoint" data-index="{{index}}">✕</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 地块信息汇总卡片 -->
+    <view class="summary-card" wx:if="{{polygonPoints.length >= 3}}">
+      <view class="summary-header">
+        <text class="summary-icon">📋</text>
+        <text class="summary-title">地块信息汇总</text>
+        <view class="summary-badge">AI聚合</view>
+      </view>
+
+      <!-- 行政区域 -->
+      <view class="summary-row">
+        <view class="summary-label">
+          <text class="summary-label-icon">🏛️</text>
+          <text>行政区域</text>
+        </view>
+        <view class="summary-value">
+          <text class="summary-main">{{adminFullName || '框选后自动获取'}}</text>
+        </view>
+      </view>
+
+      <!-- 地块名称 -->
+      <view class="summary-row">
+        <view class="summary-label">
+          <text class="summary-label-icon">📍</text>
+          <text>地块名称</text>
+        </view>
+        <view class="summary-value">
+          <text class="summary-main">{{officialNameValue || '框选后自动获取'}}</text>
+        </view>
+      </view>
+
+      <!-- 地块面积 -->
+      <view class="summary-row">
+        <view class="summary-label">
+          <text class="summary-label-icon">📐</text>
+          <text>地块面积</text>
+        </view>
+        <view class="summary-value">
+          <text class="summary-main">{{areaKm2 || '--'}} km²</text>
+          <text class="summary-sub" wx:if="{{areaMu}}">({{areaMu}} 亩)</text>
+        </view>
+      </view>
+
+      <!-- 地形地貌 -->
+      <view class="summary-row">
+        <view class="summary-label">
+          <text class="summary-label-icon">🏔️</text>
+          <text>地形地貌</text>
+        </view>
+        <view class="summary-value">
+          <text class="summary-main">{{terrainValue || '框选后自动获取'}}</text>
+        </view>
+      </view>
+
+      <!-- 区划代码 -->
+      <view class="summary-row">
+        <view class="summary-label">
+          <text class="summary-label-icon">#️⃣</text>
+          <text>行政区划代码</text>
+        </view>
+        <view class="summary-value">
+          <text class="summary-main">{{adminCodeValue || '--'}}</text>
+          <text class="summary-sub" wx:if="{{adminCodeName}}">{{adminCodeName}}</text>
+        </view>
+      </view>
+
+      <!-- 地理坐标 -->
+      <view class="summary-row">
+        <view class="summary-label">
+          <text class="summary-label-icon">🗺️</text>
+          <text>中心坐标</text>
+        </view>
+        <view class="summary-value">
+          <text class="summary-main">Lat {{geoCoordValue.lat || '--'}}</text>
+          <text class="summary-sub" wx:if="{{geoCoordValue.lng}}">Lng {{geoCoordValue.lng}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据修正卡片（仅地块名称可人工修正） -->
+    <view class="detail-cards" wx:if="{{polygonPoints.length >= 3 && officialNameValue}}">
+      <view class="detail-card">
+        <view class="detail-header">
+          <text class="detail-title">📍 地块名称修正</text>
+          <view class="source-tag {{officialNameSourceType === 'official_api' ? 'official' : 'ai'}}">
+            {{officialNameSourceType === 'official_api' ? '官方API' : 'AI聚合'}}
+          </view>
+        </view>
+        <text class="detail-value">{{officialNameValue}}</text>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" bindtap="onEditItem" data-key="officialName">✏️ 修正</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <view class="confirm-section">
+      <view class="confirm-checkbox" bindtap="onToggleConfirm">
+        <view class="checkbox {{isConfirmed ? 'checked' : ''}}">
+          <text wx:if="{{isConfirmed}}">✓</text>
+        </view>
+        <text class="confirm-text">{{confirmText}}</text>
+      </view>
+      <button class="next-btn {{isConfirmed ? '' : 'disabled'}}" bindtap="onNext" disabled="{{!isConfirmed}}">
+        确认并继续 →
+      </button>
+    </view>
+  </view>
+</view>

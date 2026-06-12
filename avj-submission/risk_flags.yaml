@@ -1,0 +1,114 @@
+# risk_flags.yaml
+# 踏歌行智策通 —— 风险标记清单
+# 生成时间：2026-06-11
+# 来源：W6法规红线 + 项目高风险领域分析
+
+risk_version: "1.0"
+generated_at: "2026-06-11"
+
+# ======== 风险标记列表 ========
+risk_flags:
+  - id: RF001
+    category: "文旅安全"
+    level: "HIGH"
+    description: "户外活动涉及人身安全风险（营地建设、研学活动、徒步路线）"
+    trigger: "项目类型含'户外'/'营地'/'研学'"
+    mitigation: "必须人工制定安全预案，系统仅做初步风险提示"
+    evidence: "mock-data.js中未包含安全评估数据"
+    status: "open"
+
+  - id: RF002
+    category: "生态敏感区"
+    level: "CRITICAL"
+    description: "选址可能涉及生态保护红线、自然保护区、湿地公园"
+    trigger: "redline.eco不含'✅'"
+    mitigation: "一票否决，必须调整选址"
+    evidence: "engine.js中生态红线冲突-30分硬过滤"
+    status: "open"
+
+  - id: RF003
+    category: "基本农田"
+    level: "CRITICAL"
+    description: "占用永久基本农田属于严格禁止行为"
+    trigger: "redline.farm不含'✅'"
+    mitigation: "一票否决，或申请土地性质变更（程序复杂周期长）"
+    evidence: "engine.js中耕地保护冲突-20分硬过滤"
+    status: "open"
+
+  - id: RF004
+    category: "土地性质变更"
+    level: "HIGH"
+    description: "农用地转建设用地需办理农转用手续，涉及多部门审批"
+    trigger: "redline.build含'⚠️'"
+    mitigation: "建议采用设施农用地或存量建设用地盘活"
+    evidence: "mock-data.js中terrain标注'适宜低强度开发'"
+    status: "open"
+
+  - id: RF005
+    category: "文物保护"
+    level: "HIGH"
+    description: "选址临近文保单位可能影响建设控制地带"
+    trigger: "redline.culture含'⚠️'或'冲突'"
+    mitigation: "必须联系文旅局/文物局评估"
+    evidence: "mock-data.js中historicalSites标注'第三次全国文物普查'"
+    status: "open"
+
+  - id: RF006
+    category: "地质灾害"
+    level: "MEDIUM"
+    description: "岗丘地貌可能存在滑坡、崩塌风险"
+    trigger: "redline.geo含'⚠️'"
+    mitigation: "必须委托勘察单位出具专项评估"
+    evidence: "mock-data.js中geology标注'无活动断层'但需实地验证"
+    status: "open"
+
+  - id: RF007
+    category: "投资回报"
+    level: "MEDIUM"
+    description: "文旅项目投资回报周期长，模拟数据可能偏离实际"
+    trigger: "market.cycle含'5-6年'"
+    mitigation: "必须聘请财务顾问独立测算"
+    evidence: "mock-data.js中market数据均为模拟"
+    status: "open"
+
+  - id: RF008
+    category: "数据可信度"
+    level: "MEDIUM"
+    description: "AI聚合数据和模拟数据存在偏差风险"
+    trigger: "sourceType='ai_aggregation'或'manual'"
+    mitigation: "所有AI/人工数据需官方API复核"
+    evidence: "mock-data.js中大量数据标注'ai_aggregation'"
+    status: "open"
+
+  - id: RF009
+    category: "政策变动"
+    level: "MEDIUM"
+    description: "文旅/土地政策因地而异且更新频繁，系统无法实时同步"
+    trigger: "任何政策相关评估"
+    mitigation: "必须咨询当地主管部门获取最新政策"
+    evidence: "mock-data.js中政策数据为静态预埋"
+    status: "open"
+
+  - id: RF010
+    category: "API依赖"
+    level: "LOW"
+    description: "未来接入腾讯地图/混元API后，存在服务不可用风险"
+    trigger: "API调用失败"
+    mitigation: "已实现mock降级机制，API失败时自动切换到模拟数据"
+    evidence: "fetcher.js中searchPOI函数保留mock实现"
+    status: "open"
+
+# ======== 风险矩阵 ========
+risk_matrix:
+  critical_count: 2
+  high_count: 4
+  medium_count: 3
+  low_count: 1
+  total: 10
+
+# ======== 风险处置优先级 ========
+mitigation_priority:
+  - "立即处理：生态红线(RF002)、基本农田(RF003)"
+  - "优先处理：文旅安全(RF001)、土地性质(RF004)、文物保护(RF005)"
+  - "计划处理：地质灾害(RF006)、投资回报(RF007)、数据可信度(RF008)、政策变动(RF009)"
+  - "监控：API依赖(RF010)"

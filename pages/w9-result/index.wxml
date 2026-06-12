@@ -1,0 +1,203 @@
+<!--pages/w9-result/index.wxml-->
+<!--W9 三向成果 V2.8 全量预埋版-->
+<view class="result-page">
+
+  <!-- 步骤条 -->
+    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item active"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">📊 成果交付</view>
+    <view class="page-subtitle">基于全流程数据研判，输出三份核心报告</view>
+    <view class="data-source-badge">📋 定远村案例</view>
+  </view>
+
+  <view class="page-container">
+
+    <!-- 全流程汇总卡片 -->
+    <view class="section-card summary-card">
+      <view class="section-title">🗺️ 全流程数据汇总</view>
+      <view class="flow-summary">
+        <view class="flow-row">
+          <text class="flow-label">📍 地块</text>
+          <text class="flow-value">{{summary.land}}</text>
+        </view>
+        <view class="flow-row">
+          <text class="flow-label">🌿 资源</text>
+          <text class="flow-value">{{summary.resource}}</text>
+        </view>
+        <view class="flow-row">
+          <text class="flow-label">📋 政策</text>
+          <text class="flow-value">{{summary.policy}}</text>
+        </view>
+        <view class="flow-row">
+          <text class="flow-label">📈 市场</text>
+          <text class="flow-value">{{summary.market}}</text>
+        </view>
+        <view class="flow-row warning">
+          <text class="flow-label">🚨 合规</text>
+          <text class="flow-value">{{summary.regulation}}</text>
+        </view>
+        <view class="flow-row">
+          <text class="flow-label">🎯 诉求</text>
+          <text class="flow-value">{{summary.demand}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 最终推荐方案 -->
+    <view class="section-card final-card">
+      <view class="section-title">🏆 项目地块战略定位建议书</view>
+      <view class="final-content">
+        <view class="final-name">{{recommendation.name}}</view>
+        <view class="final-tag">{{recommendation.tag}}</view>
+        <view class="final-desc">{{recommendation.desc}}</view>
+        <view class="final-metrics">
+          <view class="metric-item">
+            <text class="metric-num">{{recommendation.roi}}</text>
+            <text class="metric-label">预计ROI</text>
+          </view>
+          <view class="metric-item">
+            <text class="metric-num">{{recommendation.payback}}</text>
+            <text class="metric-label">回本周期</text>
+          </view>
+          <view class="metric-item">
+            <text class="metric-num">{{recommendation.capacity}}</text>
+            <text class="metric-label">接待能力</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 决策历史 -->
+    <view class="section-card trace-section" wx:if="{{traceHistory.length > 0}}">
+      <view class="section-title">📊 决策历史（最近5次）</view>
+      <view class="trace-list">
+        <view class="trace-item" wx:for="{{traceHistory}}" wx:key="time">
+          <view class="trace-verdict verdict-{{item.verdict}}">{{item.verdict}}</view>
+          <view class="trace-score">{{item.score}}分</view>
+          <view class="trace-time">{{item.time}}</view>
+        </view>
+      </view>
+
+      <!-- 柱状图：最近5次评分趋势 -->
+      <view class="trace-chart" wx:if="{{traceChartData.length > 0}}">
+        <view class="chart-title">评分趋势</view>
+        <view class="chart-container">
+          <view class="chart-bar-wrapper" wx:for="{{traceChartData}}" wx:key="verdict">
+            <view class="chart-score">{{item.score}}分</view>
+            <view class="chart-bar verdict-{{item.verdict}}" style="height:{{item.height}}rpx;"></view>
+            <view class="chart-label">{{item.label}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-card trace-empty" wx:else>
+      <view class="section-title">📊 决策历史</view>
+      <view class="trace-empty-hint">暂无历史决策记录</view>
+    </view>
+
+    <!-- 安全提示 -->
+    <view class="safety-section" wx:if="{{safetyAlerts.length > 0}}">
+      <view class="section-title">⚠️ 安全提示</view>
+      <view class="safety-hint">基于当前数据研判，以下风险需重点关注</view>
+      <view class="alert-list">
+        <view class="alert-item alert-{{item.type}}" wx:for="{{safetyAlerts}}" wx:key="title">
+          <view class="alert-icon">{{item.icon}}</view>
+          <view class="alert-content">
+            <view class="alert-title">{{item.title}}</view>
+            <view class="alert-desc">{{item.desc}}</view>
+          </view>
+          <view class="alert-fatal" wx:if="{{item.fatal}}">一票否决</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-card trace-empty" wx:else>
+      <view class="section-title">⚠️ 安全提示</view>
+      <view class="trace-empty-hint">✅ 未检测到明显风险</view>
+    </view>
+
+    <!-- 三份报告卡片（三方角色） -->
+    <view class="section-title" style="margin-top:32rpx;">📑 三方角色报告</view>
+    <view class="role-report-hint">根据各角色需求，生成有侧重的参考建议案</view>
+
+    <!-- 报告1：投资方 -->
+    <view class="report-card" bindtap="onOpenRoleReport" data-role="investor">
+      <view class="report-icon" style="background:#E3F2FD;">💰</view>
+      <view class="report-info">
+        <view class="report-name">{{reports.investor.name}}</view>
+        <view class="report-desc">{{reports.investor.hint}}</view>
+        <view class="report-meta">
+          <text class="meta-item">📅 {{reports.investor.date}}</text>
+          <text class="meta-item">📄 {{reports.investor.pages}}页</text>
+        </view>
+      </view>
+      <view class="report-arrow">›</view>
+    </view>
+
+    <!-- 报告2：规划方 -->
+    <view class="report-card" bindtap="onOpenRoleReport" data-role="planner">
+      <view class="report-icon" style="background:#E8F5E9;">🏗️</view>
+      <view class="report-info">
+        <view class="report-name">{{reports.planner.name}}</view>
+        <view class="report-desc">{{reports.planner.hint}}</view>
+        <view class="report-meta">
+          <text class="meta-item">📅 {{reports.planner.date}}</text>
+          <text class="meta-item">📄 {{reports.planner.pages}}页</text>
+        </view>
+      </view>
+      <view class="report-arrow">›</view>
+    </view>
+
+    <!-- 报告3：招商方 -->
+    <view class="report-card" bindtap="onOpenRoleReport" data-role="promoter">
+      <view class="report-icon" style="background:#FFF3E0;">🤝</view>
+      <view class="report-info">
+        <view class="report-name">{{reports.promoter.name}}</view>
+        <view class="report-desc">{{reports.promoter.hint}}</view>
+        <view class="report-meta">
+          <text class="meta-item">📅 {{reports.promoter.date}}</text>
+          <text class="meta-item">📄 {{reports.promoter.pages}}页</text>
+        </view>
+      </view>
+      <view class="report-arrow">›</view>
+    </view>
+
+    <!-- 导出按钮 -->
+    <view class="export-section">
+      <button class="export-btn" bindtap="onExportAll">📦 一键导出全套报告（PDF）</button>
+      <button class="export-btn secondary" bindtap="onExportSingle" data-type="screening">导出机筛报告</button>
+      <button class="export-btn secondary" bindtap="onExportSingle" data-type="field">导出实调报告</button>
+      <button class="export-btn secondary" bindtap="onExportSingle" data-type="demand">导出需求确认书</button>
+    </view>
+
+    <!-- 重新开始 -->
+    <view class="restart-section">
+      <button class="restart-btn" bindtap="onRestart">🔄 新建项目（重新开始）</button>
+  </view>
+
+  </view>
+
+</view>

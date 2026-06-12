@@ -1,0 +1,449 @@
+/* app.wxss —— 全局样式（V2.0）*/
+
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Helvetica, 'Microsoft YaHei', Arial, sans-serif;
+  font-size: 30rpx;
+  color: #1A1A2E;
+  background-color: #F5F7FA;
+  box-sizing: border-box;
+}
+
+/* ==================== 全局工具类 ==================== */
+.flex-row { display: flex; flex-direction: row; align-items: center; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.flex-1 { flex: 1; }
+.text-center { text-align: center; }
+.text-ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mt-20 { margin-top: 20rpx; }
+.mt-40 { margin-top: 40rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.p-30 { padding: 30rpx; }
+
+/* ==================== 按钮规范 ==================== */
+.btn-next {
+  width: 85%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: linear-gradient(135deg, #1A6DFF 0%, #6C8DFF 100%);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  border: none;
+  letter-spacing: 2rpx;
+  box-shadow: 0 8rpx 24rpx rgba(26, 109, 255, 0.25);
+  margin-top: 40rpx;
+}
+.btn-next:active { opacity: 0.85; transform: scale(0.98); }
+.btn-next[disabled] { background: #C0C4CC; color: #FFFFFF; box-shadow: none; }
+
+.btn-secondary {
+  width: 85%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: #FFFFFF;
+  color: #1A6DFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  border: 2rpx solid #1A6DFF;
+  margin-top: 24rpx;
+}
+
+/* ==================== 卡片规范 ==================== */
+.card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin: 20rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1A1A2E;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.card-title::before {
+  content: '';
+  display: inline-block;
+  width: 8rpx;
+  height: 32rpx;
+  background: #1A6DFF;
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+}
+
+/* ==================== 水印（全局） ==================== */
+.watermark {
+  position: fixed;
+  bottom: 120rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 20rpx;
+  color: rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 999;
+  letter-spacing: 4rpx;
+}
+
+/* ==================== 步骤条 ==================== */
+.step-bar-scroll {
+  width: 100%;
+  height: 120rpx;
+  white-space: nowrap;
+  background: #fff;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+/* 步骤条内的返回按钮 */
+.step-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 20rpx 8rpx 12rpx;
+  margin-right: 16rpx;
+  font-size: 26rpx;
+  color: #1A6DFF;
+  background: #F0F5FF;
+  border-radius: 32rpx;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.step-back-btn:active {
+  opacity: 0.6;
+}
+
+.step-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 30rpx 16rpx;
+  background: #fff;
+  min-width: max-content;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rpx 16rpx;
+}
+
+.step-item.active .step-num {
+  background: #1A6DFF;
+  color: #fff;
+}
+
+.step-item.active .step-label {
+  color: #1A6DFF;
+  font-weight: 600;
+}
+
+.step-num {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #F0F0F0;
+  color: #999;
+  font-size: 24rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.step-label {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.step-arrow {
+  color: #C0C4CC;
+  font-size: 24rpx;
+  margin: 0 12rpx;
+  padding-bottom: 16rpx;
+}
+
+/* ==================== 页面通用容器 ==================== */
+.page-container {
+  min-height: 100vh;
+  padding: 40rpx 30rpx 60rpx;
+  box-sizing: border-box;
+}
+
+/* ==================== 数据源提示（坐标驱动） ==================== */
+.data-source-tip {
+  background: #F0F5FF;
+  border: 1rpx solid #D6E4FF;
+  border-radius: 12rpx;
+  padding: 16rpx 24rpx;
+  margin: 0 30rpx 28rpx;
+  font-size: 24rpx;
+  color: #1A6DFF;
+  display: flex;
+  align-items: center;
+}
+.data-source-tip .tip-icon {
+  width: 32rpx;
+  height: 32rpx;
+  background: #1A6DFF;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+/* ==================== 裁决结果色 ==================== */
+.verdict-GO { background: #E8F5EE; color: #00B365; }
+.verdict-PAUSE { background: #FFF3E0; color: #F5A623; }
+.verdict-CONDITIONAL { background: #F3E5F5; color: #8C6BFF; }
+.verdict-NO-GO { background: #FFEBEE; color: #E53935; }
+
+/* ==================== 全局 Loading ==================== */
+.loading-mask {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.loading-box {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 48rpx 64rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 12rpx 40rpx rgba(0,0,0,0.12);
+}
+.loading-text {
+  margin-top: 24rpx;
+  font-size: 28rpx;
+  color: #1A6DFF;
+  font-weight: 500;
+}
+
+/* ==================== 图标占位符规范 ==================== */
+.icon-placeholder {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+/* 各模块色 */
+.icon-placeholder.blue   { background: #1A6DFF; }
+.icon-placeholder.green  { background: #00B365; }
+.icon-placeholder.orange { background: #F5A623; }
+.icon-placeholder.purple { background: #8C6BFF; }
+.icon-placeholder.red    { background: #E53935; }
+.icon-placeholder.teal   { background: #00ACC1; }
+
+/* ==================== 政策等级标签（W4） ==================== */
+.policy-level {
+  display: inline-block;
+  font-size: 20rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 6rpx;
+  font-weight: 600;
+  margin-left: 12rpx;
+}
+.policy-level.core {
+  background: #FFEBEE;
+  color: #E53935;
+}
+.policy-level.important {
+  background: #FFF3E0;
+  color: #F5A623;
+}
+.policy-level.district {
+  background: #E8F5EE;
+  color: #00B365;
+}
+.policy-level.normal {
+  background: #F0F5FF;
+  color: #1A6DFF;
+}
+
+/* ==================== 雷达图容器 ==================== */
+.radar-canvas-box {
+  width: 100%;
+  height: 520rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx 0;
+}
+.radar-canvas-box canvas {
+  width: 520rpx;
+  height: 520rpx;
+}
+
+/* ==================== 表单元素（W8） ==================== */
+.form-group { margin-bottom: 36rpx; }
+.form-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1A1A2E;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+}
+.form-label .required {
+  color: #E53935;
+  margin-right: 6rpx;
+  font-weight: 700;
+}
+.form-radio-group { display: flex; flex-direction: column; gap: 20rpx; }
+.form-radio-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  background: #F5F7FA;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+.form-radio-item.active {
+  background: #F0F5FF;
+  border-color: #1A6DFF;
+}
+.form-radio-dot {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  border: 3rpx solid #C0C4CC;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s;
+}
+.form-radio-item.active .form-radio-dot {
+  border-color: #1A6DFF;
+  background: #1A6DFF;
+}
+.form-radio-item.active .form-radio-dot::after {
+  content: '';
+  position: absolute;
+  width: 14rpx;
+  height: 14rpx;
+  background: #fff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form-checkbox-group { display: flex; flex-direction: column; gap: 20rpx; }
+.form-checkbox-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  background: #F5F7FA;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+.form-checkbox-item.active {
+  background: #F0F5FF;
+  border-color: #1A6DFF;
+}
+.form-checkbox-box {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid #C0C4CC;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s;
+}
+.form-checkbox-item.active .form-checkbox-box {
+  background: #1A6DFF;
+  border-color: #1A6DFF;
+}
+.form-checkbox-item.active .form-checkbox-box::after {
+  content: '✓';
+  position: absolute;
+  color: #fff;
+  font-size: 24rpx;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ==================== 冲突提示（W8） ==================== */
+.conflict-tip {
+  background: #FFF3E0;
+  border: 1rpx solid #F5A623;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  margin: 24rpx 30rpx;
+  font-size: 24rpx;
+  color: #8C6BFF;
+  line-height: 1.7;
+}
+
+/* ==================== 结果卡片（W10） ==================== */
+.result-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin: 20rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
+  border-left: 8rpx solid #1A6DFF;
+}
+.result-card.A { border-left-color: #1A6DFF; }
+.result-card.B { border-left-color: #00B365; }
+.result-card.C { border-left-color: #F5A623; }
+.result-card .result-id {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #1A6DFF;
+  margin-bottom: 8rpx;
+}
+.result-card .result-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1A1A2E;
+  margin-bottom: 12rpx;
+}
+.result-card .result-desc {
+  font-size: 26rpx;
+  color: #5A5A6E;
+  line-height: 1.7;
+  margin-bottom: 20rpx;
+}
+.result-card .result-btn {
+  background: #F0F5FF;
+  color: #1A6DFF;
+  font-size: 26rpx;
+  font-weight: 600;
+  border-radius: 8rpx;
+  padding: 12rpx 28rpx;
+  border: none;
+  float: right;
+}
+.result-card .result-btn:active { opacity: 0.7; }
+
+/* ==================== 页面底部留白 ==================== */
+.page-bottom-space { height: 60rpx; }
+

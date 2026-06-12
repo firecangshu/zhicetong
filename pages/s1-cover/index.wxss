@@ -1,0 +1,160 @@
+/* pages/s1-cover/index.wxss */
+/* V2.9 - 移除 Canvas 粒子动画，改用 CSS 装饰点（兼容 APK） */
+
+page, .splash-container {
+  width: 100%;
+  height: 100vh;
+  background: #0A0E27;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CSS 渐变背景（替代 Canvas） */
+.bg-gradient {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #0A0E27 0%, #1A1A3E 40%, #0A0E27 100%);
+  z-index: 0;
+}
+
+/* CSS 装饰点 */
+.bg-dots {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 0 6rpx rgba(0, 212, 255, 0.4);
+}
+
+/* Gradient mask: protect text readability */
+/* Mini-program does NOT support radial-gradient, use semi-transparent solid color */
+.gradient-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Content container */
+.content-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Center text block */
+.center-text-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 48rpx;
+}
+
+/* Main title: tight letter-spacing */
+.h1 {
+  font-size: 88rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+  letter-spacing: -2rpx;
+  line-height: 1.1;
+  text-shadow: 0 0 30rpx rgba(0, 212, 255, 0.7);
+}
+
+/* Subtitle: relaxed letter-spacing */
+.subtitle {
+  margin-top: 32rpx;
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #8A8F9D;
+  text-align: center;
+  letter-spacing: 4rpx;
+}
+
+/* Version tag capsule */
+.version-tag {
+  margin-top: 40rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  background: rgba(0, 212, 255, 0.1);
+}
+.version-tag text {
+  font-size: 20rpx;
+  color: #00D4FF;
+  letter-spacing: 2rpx;
+}
+
+/* Feature tags */
+.feature-tags {
+  margin-top: 60rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.feature-tags text {
+  font-size: 22rpx;
+  color: #6B7280;
+  letter-spacing: 2rpx;
+}
+.tag-dot {
+  color: #4A4F5F;
+  font-size: 22rpx;
+}
+
+/* Footer action area */
+.footer-action {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40rpx;
+  z-index: 10;
+}
+
+/* Button: transparent background + blue border */
+.btn-enter {
+  width: 400rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: transparent;
+  border: 2px solid #00D4FF;
+  color: #00D4FF;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.btn-enter:active {
+  background: rgba(0, 212, 255, 0.2);
+  transform: scale(0.97);
+}
+
+.disclaimer {
+  margin-top: 24rpx;
+  font-size: 20rpx;
+  color: #4A4F5F;
+  opacity: 0.6;
+}

@@ -1,0 +1,616 @@
+<!--pages/w2-resource/index.wxml-->
+<!--W2 资源调查 V3.0 开源数据采集 + 溯源标注 + 展开折叠-->
+<view class="resource-page">
+  <!-- 步骤条 -->
+  <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="step-bar">
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item active"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+      <text class="step-arrow">→</text>
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+    </view>
+  </scroll-view>
+
+  <view class="page-header">
+    <text class="page-title">W2 资源调查</text>
+    <text class="page-subtitle" user-select="true">GB/T 18972-2017 全量分类 · 共20项</text>
+    <view class="data-source-badge">📦 开源数据采集 + 溯源标注</view>
+  </view>
+
+  <!-- 当前地块信息（从W1传入） -->
+  <view class="land-info-card" wx:if="{{hasLandInfo}}">
+    <view class="land-info-header">
+      <text class="land-info-title">📍 当前分析地块</text>
+      <text class="land-info-name">{{landInfo.name}}</text>
+    </view>
+    <view class="land-info-row">
+      <text class="land-info-label">行政区域</text>
+      <text class="land-info-value">{{landInfo.adminFullName || '未获取'}}</text>
+    </view>
+    <view class="land-info-row">
+      <text class="land-info-label">中心坐标</text>
+      <text class="land-info-value">{{landInfo.coord.lat}}, {{landInfo.coord.lng}}</text>
+    </view>
+    <view class="land-info-row" wx:if="{{landInfo.area}}">
+      <text class="land-info-label">地块面积</text>
+      <text class="land-info-value">{{landInfo.area}}</text>
+    </view>
+    <view class="land-info-row" wx:if="{{landInfo.terrain}}">
+      <text class="land-info-label">地形地貌</text>
+      <text class="land-info-value">{{landInfo.terrain}}</text>
+    </view>
+    <view class="land-info-row">
+      <text class="land-info-label">区划代码</text>
+      <text class="land-info-value">{{landInfo.adminCode}}</text>
+    </view>
+  </view>
+
+  <view class="land-info-card empty" wx:if="{{!hasLandInfo}}">
+    <text class="land-info-title">⚠️ 未获取地块信息</text>
+    <text class="land-info-value">请先完成 W1 地块框选，系统将基于地块坐标与行政区域生成资源调查框架。</text>
+  </view>
+
+  <!-- 资源多维度评分（CSS 条形图，兼容 APK） -->
+  <view class="chart-section">
+    <view class="chart-title">📊 资源禀赋评分（AI 评估）</view>
+    <view class="score-list">
+      <view class="score-row" wx:for="{{radarIndicators}}" wx:key="name">
+        <text class="score-name">{{item.name}}</text>
+        <view class="score-bar-wrap">
+          <view class="score-bar" style="width: {{item.value}}%;"></view>
+        </view>
+        <text class="score-value">{{item.value}}</text>
+      </view>
+    </view>
+    <view class="score-summary">
+      <text class="score-total">综合评分 {{radarTotalScore}} 分</text>
+    </view>
+  </view>
+
+  <view class="page-container">
+
+    <!-- ========== 1. 地文景观 ========== -->
+    <view class="category-title">🏔️ 地文景观</view>
+    <block wx:for="{{geomorphologyList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <!-- 折叠状态：显示摘要 -->
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <!-- 展开状态：显示完整内容 + 溯源 -->
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <!-- 溯源信息（可展开/折叠） -->
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 2. 地质构造 ========== -->
+    <view class="category-title">⚒️ 地质构造</view>
+    <block wx:for="{{geologyList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 3. 自然景观 ========== -->
+    <view class="category-title">🌿 自然景观</view>
+    <block wx:for="{{naturalLandscapeList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 4. 水域景观 ========== -->
+    <view class="category-title">💧 水域景观</view>
+    <block wx:for="{{waterList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 5. 生物景观 ========== -->
+    <view class="category-title">🦜 生物景观</view>
+    <block wx:for="{{biologyList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 6. 气候与天象 ========== -->
+    <view class="category-title">🌤️ 气候与天象</view>
+    <block wx:for="{{climateList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 7. 历史遗迹 ========== -->
+    <view class="category-title">🏛️ 历史遗迹</view>
+    <block wx:for="{{historyList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 8. 现代设施与特产 ========== -->
+    <view class="category-title">🏪 现代设施与特产</view>
+    <block wx:for="{{facilityList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 9. 人文活动 ========== -->
+    <view class="category-title">🎭 人文活动</view>
+    <block wx:for="{{cultureList}}" wx:key="key">
+      <view class="data-card">
+        <view class="card-header">
+          <text class="card-label" user-select="true">{{item.label}}</text>
+          <view class="source-tag {{item.sourceType === 'official_api' ? 'official' : (item.sourceType === 'manual' ? 'manual' : 'ai')}}">
+            {{item.sourceType === 'official_api' ? '官方API' : (item.sourceType === 'manual' ? '人工' : 'AI聚合')}}
+          </view>
+        </view>
+
+        <view wx:if="{{!expandedItems[item.key]}}">
+          <text class="data-value summary">{{item.value.split('\\n')[0]}}...</text>
+          <view class="expand-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>展开详情 ▼</text>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedItems[item.key]}}">
+          <text class="data-value" user-select="true">{{item.value}}</text>
+
+          <view class="source-trace" wx:if="{{item.sources && item.sources.length > 0}}">
+            <view class="trace-header" bindtap="onToggleExpand" data-key="{{item.key}}-trace">
+              <text class="trace-title">📊 数据溯源</text>
+              <text class="trace-toggle">{{expandedItems[item.key + '-trace'] ? '收起 ▲' : '展开 ▼'}}</text>
+            </view>
+            <view class="trace-content" wx:if="{{expandedItems[item.key + '-trace']}}">
+              <view class="trace-item" wx:for="{{item.sources}}" wx:key="type">
+                <view class="trace-type {{item.type === '官方API' ? 'official' : (item.type === '人工' ? 'manual' : 'ai')}}">
+                  {{item.type}}
+                </view>
+                <view class="trace-detail">
+                  <text class="trace-name">{{item.name}}</text>
+                  <text class="trace-confidence">置信度：{{item.confidence}}</text>
+                  <view class="trace-url" wx:if="{{item.url}}" bindtap="onCopyUrl" data-url="{{item.url}}">
+                    <text>🔗 {{item.url}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="collapse-btn" bindtap="onToggleExpand" data-key="{{item.key}}">
+            <text>收起 ▲</text>
+          </view>
+        </view>
+
+        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== 10. 资源综合评价 ========== -->
+    <view class="category-title">📊 资源综合评价</view>
+    <view class="data-card highlight">
+      <view class="card-header">
+        <text class="card-label" user-select="true">资源综合评价（人工汇总）</text>
+        <view class="source-tag manual">人工汇总</view>
+      </view>
+
+      <view wx:if="{{!expandedItems['resourceSummary']}}">
+        <text class="data-value summary">{{resourceSummaryValue.split('\\n')[0]}}...</text>
+        <view class="expand-btn" bindtap="onToggleExpand" data-key="resourceSummary">
+          <text>展开详情 ▼</text>
+        </view>
+      </view>
+
+      <view wx:if="{{expandedItems['resourceSummary']}}">
+        <text class="data-value" user-select="true">{{resourceSummaryValue}}</text>
+        <view class="collapse-btn" bindtap="onToggleExpand" data-key="resourceSummary">
+          <text>收起 ▲</text>
+        </view>
+      </view>
+
+      <view class="manual-note" wx:if="{{resourceSummaryManualNote}}">📝 备注：{{resourceSummaryManualNote}}</view>
+      <view class="edit-btn-wrap">
+        <button class="edit-btn" catchtap="onEditItem" data-key="resourceSummary">✏️ 修正/备注</button>
+      </view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <view class="confirm-section">
+      <view class="confirm-checkbox" bindtap="onToggleConfirm">
+        <view class="checkbox {{isConfirmed ? 'checked' : ''}}">
+          <text wx:if="{{isConfirmed}}">✓</text>
+        </view>
+        <text class="confirm-text" user-select="true">{{confirmText}}</text>
+      </view>
+      <button class="next-btn {{isConfirmed ? '' : 'disabled'}}" bindtap="onNext" disabled="{{!isConfirmed}}">
+        确认并继续 →
+      </button>
+    </view>
+
+  </view>
+</view>
