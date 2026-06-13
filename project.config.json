@@ -50,6 +50,7 @@
   "libVersion": "3.16.1",
   "appid": "wxeb055d83ce34e0d4",
   "projectname": "ml_demo_v2.0",
+  "cloudfunctionRoot": "cloudfunctions/",
   "condition": {},
   "simulatorPluginLibVersion": {
     "wxext14566970e7e9f62": "2.27.3"

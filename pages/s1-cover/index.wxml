@@ -1,14 +1,13 @@
 <!-- pages/s1-cover/index.wxml -->
 <!-- Final execution version - per task spec -->
-<view class="splash-container">
 
-  <!-- 1. CSS 渐变背景（替代 Canvas 粒子动画，兼容 APK） -->
-  <view class="bg-gradient"></view>
-  <view class="bg-dots">
-    <view class="dot" wx:for="{{decorDots}}" wx:key="idx"
-      style="left:{{item.x}}%; top:{{item.y}}%; opacity:{{item.o}}; width:{{item.s}}rpx; height:{{item.s}}rpx;">
-    </view>
-  </view>
+<view class="splash-container">
+  <!-- 1. Particle background (Canvas) -->
+  <canvas 
+    type="2d" 
+    id="particle-canvas" 
+    class="particle-canvas"
+  ></canvas>
 
   <!-- 2. Gradient mask (protect text readability) -->
   <view class="gradient-mask"></view>
@@ -26,7 +25,7 @@
       
       <!-- Version tag: independent, decorative -->
       <view class="version-tag">
-        <text>Model V2.0</text>
+        <text>Model V2.3</text>
       </view>
 
       <!-- Feature tags: scientific spacing -->

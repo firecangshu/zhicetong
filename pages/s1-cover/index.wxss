@@ -1,37 +1,22 @@
 /* pages/s1-cover/index.wxss */
-/* V2.9 - 移除 Canvas 粒子动画，改用 CSS 装饰点（兼容 APK） */
+/* Final execution version - per task spec + mini-program compatibility fixes */
 
 page, .splash-container {
   width: 100%;
   height: 100vh;
-  background: #0A0E27;
+  background: #000000;
   position: relative;
   overflow: hidden;
 }
 
-/* CSS 渐变背景（替代 Canvas） */
-.bg-gradient {
+/* Canvas background */
+.particle-canvas {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, #0A0E27 0%, #1A1A3E 40%, #0A0E27 100%);
-  z-index: 0;
-}
-
-/* CSS 装饰点 */
-.bg-dots {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
-  pointer-events: none;
-}
-
-.dot {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(0, 212, 255, 0.6);
-  box-shadow: 0 0 6rpx rgba(0, 212, 255, 0.4);
 }
 
 /* Gradient mask: protect text readability */
