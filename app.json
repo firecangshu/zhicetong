@@ -2,6 +2,7 @@
   "pages": [
     "pages/s1-cover/index",
     "pages/s2-identity/index",
+    "pages/s3-role/index",
     "pages/s3-intro/index",
     "pages/s4-guide/index",
     "pages/w1-land/index",

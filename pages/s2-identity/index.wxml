@@ -1,77 +1,76 @@
 <!--pages/s2-identity/index.wxml-->
-<!--S2 身份验证页-->
+<!--S1 登录页 - 与封面页统一风格-->
 <view class="identity-page">
-  <!-- 步骤条 -->
-  <view class="step-bar">
-    <view class="step-item active">
-      <view class="step-num">1</view>
-      <text class="step-label">登录</text>
-    </view>
-    <text class="step-arrow">→</text>
-    <view class="step-item">
-      <view class="step-num">2</view>
-      <text class="step-label">介绍</text>
-    </view>
-    <text class="step-arrow">→</text>
-    <view class="step-item">
-      <view class="step-num">3</view>
-      <text class="step-label">流程</text>
-    </view>
-  </view>
 
-  <scroll-view scroll-y class="page-container">
-    <!-- 标题区 -->
-    <view class="hero-card">
-      <view class="hero-icon">� herein</view>
-      <view class="hero-title">用户登录</view>
-      <view class="hero-subtitle">请确认您的操作身份，确保项目数据安全</view>
+  <!-- 主内容区：垂直居中，和封面一致 -->
+  <view class="main-content">
+
+    <!-- 标题区（和封面一致：大标题+副标题） -->
+    <view class="title-area">
+      <view class="app-name">欢迎使用</view>
+      <view class="app-title">踏歌行智策通</view>
+      <view class="app-subtitle">请选择登录方式</view>
     </view>
 
-    <!-- 身份选择 -->
-    <view class="card">
-      <view class="section-title">选择您的身份</view>
-      
-      <view class="identity-option {{selectedRole === 'investor' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="investor">
-        <view class="role-icon">💰</view>
-        <view class="role-info">
-          <view class="role-name">投资方</view>
-          <view class="role-desc">文旅项目投资人、投资机构代表</view>
-        </view>
-        <view class="role-check" wx:if="{{selectedRole === 'investor'}}">✓</view>
-      </view>
-
-      <view class="identity-option {{selectedRole === 'planner' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="planner">
-        <view class="role-icon">🏗️</view>
-        <view class="role-info">
-          <view class="role-name">规划方</view>
-          <view class="role-desc">规划设计院、建筑设计团队</view>
-        </view>
-        <view class="role-check" wx:if="{{selectedRole === 'planner'}}">✓</view>
-      </view>
-
-      <view class="identity-option {{selectedRole === 'promoter' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="promoter">
-        <view class="role-icon">🤝</view>
-        <view class="role-info">
-          <view class="role-name">招商方</view>
-          <view class="role-desc">文旅招商部门、运营机构</view>
-        </view>
-        <view class="role-check" wx:if="{{selectedRole === 'promoter'}}">✓</view>
-      </view>
-
-      <view class="identity-option {{selectedRole === 'other' ? 'selected' : ''}}" bindtap="onSelectRole" data-role="other">
-        <view class="role-icon">📋</view>
-        <view class="role-info">
-          <view class="role-name">其他角色</view>
-          <view class="role-desc">政府人员、咨询顾问、其他</view>
-        </view>
-        <view class="role-check" wx:if="{{selectedRole === 'other'}}">✓</view>
-      </view>
-    </view>
-
-    <!-- 确认按钮 -->
-    <button class="btn-next" bindtap="onConfirmAndNext" disabled="{{!selectedRole}}">
-      {{selectedRole ? '确认并继续' : '请先选择身份'}}
+    <!-- 微信一键登录（主操作，描边风格=和封面统一） -->
+    <button class="btn-wechat" open-type="getPhoneNumber" bindgetphonenumber="onWechatLogin">
+      <text class="wechat-icon">📱</text>
+      <text>微信一键登录</text>
     </button>
 
-  </scroll-view>
+    <!-- 分隔线 -->
+    <view class="divider">
+      <view class="divider-line"></view>
+      <text class="divider-text">其他方式</text>
+      <view class="divider-line"></view>
+    </view>
+
+    <!-- 手机号验证码登录（展开式） -->
+    <block wx:if="{{showPhoneLogin}}">
+      <view class="login-card">
+        <input class="login-input" type="number" maxlength="11" placeholder="手机号" value="{{phoneNumber}}" bindinput="onPhoneInput" />
+        <view class="input-row">
+          <input class="login-input code-input" type="number" maxlength="6" placeholder="验证码" value="{{smsCode}}" bindinput="onSmsCodeInput" />
+          <button class="btn-code" disabled="{{smsCountdown > 0}}" bindtap="onSendSmsCode">
+            {{smsCountdown > 0 ? smsCountdown + 's' : '获取'}}
+          </button>
+        </view>
+        <button class="btn-submit" disabled="{{!phoneNumber || !smsCode}}" bindtap="onPhoneLogin">登 录</button>
+      </view>
+    </block>
+    <button class="btn-alt" wx:if="{{!showPhoneLogin}}" bindtap="togglePhoneLogin">手机号验证码登录</button>
+
+    <!-- 用户名密码登录（展开式） -->
+    <block wx:if="{{showUsernameLogin}}">
+      <view class="login-card">
+        <input class="login-input" placeholder="用户名" value="{{username}}" bindinput="onUsernameInput" />
+        <input class="login-input" password placeholder="密码" value="{{password}}" bindinput="onPasswordInput" />
+        <button class="btn-submit" disabled="{{!username || !password}}" bindtap="onUsernameLogin">登 录</button>
+        <view class="reg-link-row">
+          <text class="reg-label">没有账号？</text>
+          <text class="reg-action" bindtap="toggleRegister">立即注册</text>
+        </view>
+      </view>
+    </block>
+    <button class="btn-alt" wx:if="{{!showUsernameLogin}}" bindtap="toggleUsernameLogin">用户名密码登录</button>
+
+    <!-- 注册表单（展开式） -->
+    <block wx:if="{{showRegister}}">
+      <view class="login-card reg-card">
+        <input class="login-input" placeholder="用户名" value="{{regUsername}}" bindinput="onRegUsernameInput" />
+        <input class="login-input" password placeholder="密码" value="{{regPassword}}" bindinput="onRegPasswordInput" />
+        <input class="login-input" type="number" maxlength="11" placeholder="手机号" value="{{regPhone}}" bindinput="onRegPhoneInput" />
+        <input class="login-input" placeholder="邮箱" value="{{regEmail}}" bindinput="onRegEmailInput" />
+        <button class="btn-submit" disabled="{{!regUsername || !regPassword || !regPhone || !regEmail}}" bindtap="onRegister">注 册</button>
+      </view>
+    </block>
+
+    <!-- 协议提示 -->
+    <view class="agreement">登录即表示同意《用户协议》和《隐私政策》</view>
+
+  </view>
+
+  <!-- 开发模式跳过按钮 -->
+  <button wx:if="{{isDevMode}}" class="btn-skip-login" bindtap="onSkipLogin">跳过 →</button>
+
 </view>

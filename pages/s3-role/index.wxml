@@ -1,0 +1,58 @@
+<!--pages/s3-role/index.wxml-->
+<!--S2 身份选择页 - 暗色科技风-->
+<view class="role-page">
+
+  <view class="main-content">
+
+    <!-- 标题区 -->
+    <view class="title-area">
+      <view class="app-name">选择您的</view>
+      <view class="app-title">身份角色</view>
+      <view class="app-subtitle">确认您的操作身份，确保数据安全</view>
+    </view>
+
+    <!-- 身份选项列表 -->
+    <view class="role-list">
+      <view class="role-item {{selectedRole === 'investor' ? 'active' : ''}}" bindtap="onSelectRole" data-role="investor">
+        <text class="role-emoji">💰</text>
+        <view class="role-info">
+          <text class="role-name">投资方</text>
+          <text class="role-desc">文旅项目投资人、投资机构代表</text>
+        </view>
+        <text class="role-check" wx:if="{{selectedRole === 'investor'}}">✓</text>
+      </view>
+
+      <view class="role-item {{selectedRole === 'planner' ? 'active' : ''}}" bindtap="onSelectRole" data-role="planner">
+        <text class="role-emoji">🏗️</text>
+        <view class="role-info">
+          <text class="role-name">规划方</text>
+          <text class="role-desc">规划设计院、建筑设计团队</text>
+        </view>
+        <text class="role-check" wx:if="{{selectedRole === 'planner'}}">✓</text>
+      </view>
+
+      <view class="role-item {{selectedRole === 'promoter' ? 'active' : ''}}" bindtap="onSelectRole" data-role="promoter">
+        <text class="role-emoji">🤝</text>
+        <view class="role-info">
+          <text class="role-name">招商方</text>
+          <text class="role-desc">文旅招商部门、运营机构</text>
+        </view>
+        <text class="role-check" wx:if="{{selectedRole === 'promoter'}}">✓</text>
+      </view>
+
+      <view class="role-item {{selectedRole === 'other' ? 'active' : ''}}" bindtap="onSelectRole" data-role="other">
+        <text class="role-emoji">📋</text>
+        <view class="role-info">
+          <text class="role-name">其他角色</text>
+          <text class="role-desc">政府人员、咨询顾问等</text>
+        </view>
+        <text class="role-check" wx:if="{{selectedRole === 'other'}}">✓</text>
+      </view>
+    </view>
+
+    <!-- 确认并继续按钮 -->
+    <button class="btn-confirm" bindtap="onConfirmAndNext" disabled="{{!selectedRole}}">{{selectedRole ? '确认并继续' : '请先选择身份'}}</button>
+
+  </view>
+
+</view>
