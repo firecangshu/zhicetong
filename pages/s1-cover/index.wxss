@@ -1,26 +1,126 @@
 /* pages/s1-cover/index.wxss */
-/* Final execution version - per task spec + mini-program compatibility fixes */
+/* CSS粒子流动背景 - APK兼容版 */
 
 page, .splash-container {
   width: 100%;
   height: 100vh;
-  background: #000000;
+  background: #0a0e1a;
   position: relative;
   overflow: hidden;
 }
 
-/* Canvas background */
-.particle-canvas {
+/* CSS粒子容器 */
+.particle-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
+  overflow: hidden;
 }
 
-/* Gradient mask: protect text readability */
-/* Mini-program does NOT support radial-gradient, use semi-transparent solid color */
+/* 单个粒子 */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #00D4FF;
+  opacity: 0;
+  animation: particleFlashMove linear infinite;
+  will-change: transform, opacity;
+  /* 触发硬件加速 */
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* 粒子闪烁 + 移动 + 闪现回原位 */
+@keyframes particleFlashMove {
+  /* 阶段1：在原位闪烁（暗→亮→暗）*/
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.3);
+    opacity: 0;
+  }
+  8% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.9;
+  }
+  16% {
+    transform: translate3d(0, 0, 0) scale(1.8);
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+
+  /* 阶段2：开始移动（连续流畅轨迹，每5%一帧）*/
+  30% {
+    transform: translate3d(5vw, 1vh, 0) scale(0.95);
+    opacity: 0.85;
+  }
+  35% {
+    transform: translate3d(15vw, 4vh, 0) scale(0.88);
+    opacity: 0.8;
+  }
+  40% {
+    transform: translate3d(25vw, 7vh, 0) scale(0.82);
+    opacity: 0.78;
+  }
+  45% {
+    transform: translate3d(36vw, 10vh, 0) scale(0.76);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(48vw, 14vh, 0) scale(0.7);
+    opacity: 0.72;
+  }
+  55% {
+    transform: translate3d(60vw, 18vh, 0) scale(0.64);
+    opacity: 0.68;
+  }
+  60% {
+    transform: translate3d(72vw, 22vh, 0) scale(0.58);
+    opacity: 0.64;
+  }
+  65% {
+    transform: translate3d(84vw, 26vh, 0) scale(0.52);
+    opacity: 0.6;
+  }
+  70% {
+    transform: translate3d(96vw, 30vh, 0) scale(0.46);
+    opacity: 0.55;
+  }
+  75% {
+    transform: translate3d(108vw, 35vh, 0) scale(0.4);
+    opacity: 0.5;
+  }
+  80% {
+    transform: translate3d(120vw, 40vh, 0) scale(0.34);
+    opacity: 0.4;
+  }
+  85% {
+    transform: translate3d(132vw, 45vh, 0) scale(0.28);
+    opacity: 0.3;
+  }
+  90% {
+    transform: translate3d(144vw, 50vh, 0) scale(0.22);
+    opacity: 0.2;
+  }
+
+  /* 阶段3：即将结束，闪现回原位 */
+  95% {
+    transform: translate3d(152vw, 55vh, 0) scale(0.15);
+    opacity: 0.05;
+  }
+
+  /* 100%：动画结束，loop回0% = 闪现回原位 */
+  100% {
+    transform: translate3d(160vw, 60vh, 0) scale(0.1);
+    opacity: 0;
+  }
+}
+
+/* 渐变遮罩：保护文字可读性 */
+/* 小程序不支持 radial-gradient，用半透明纯色 */
 .gradient-mask {
   position: absolute;
   top: 0;
@@ -28,7 +128,7 @@ page, .splash-container {
   width: 100%;
   height: 100%;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(10, 14, 26, 0.5);
   pointer-events: none;
 }
 

@@ -1,15 +1,18 @@
 <!-- pages/s1-cover/index.wxml -->
-<!-- Final execution version - per task spec -->
+<!-- CSS粒子流动背景 - APK兼容版 -->
 
 <view class="splash-container">
-  <!-- 1. Particle background (Canvas) -->
-  <canvas 
-    type="2d" 
-    id="particle-canvas" 
-    class="particle-canvas"
-  ></canvas>
+  <!-- 1. CSS粒子背景（APK兼容） -->
+  <view class="particle-container">
+    <view 
+      wx:for="{{particles}}" 
+      wx:key="id"
+      class="particle"
+      style="left:{{item.left}}%;top:{{item.top}}%;width:{{item.size}}px;height:{{item.size}}px;animation-delay:{{item.delay}}s;animation-duration:{{item.duration}}s;"
+    ></view>
+  </view>
 
-  <!-- 2. Gradient mask (protect text readability) -->
+  <!-- 2. 渐变遮罩（保护文字可读性） -->
   <view class="gradient-mask"></view>
 
   <!-- 3. Content layer (DOM layout, ensure clarity) -->

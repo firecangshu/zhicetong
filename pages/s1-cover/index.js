@@ -1,15 +1,16 @@
 // pages/s1-cover/index.js
-// 最终执行版 - 修复小程序兼容性问题
+// CSS粒子流动背景 - APK兼容版
 
 Page({
   data: {
     statusBarHeight: 44,   // 默认值
-    safeAreaBottom: 34     // 默认值
+    safeAreaBottom: 34,     // 默认值
+    particles: []            // CSS粒子数据
   },
 
   onLoad() {
     this.getSystemInfo();
-    this.initParticles();
+    this.generateParticles();
   },
 
   // 获取系统信息（安全区适配）
@@ -31,89 +32,39 @@ Page({
     }
   },
 
-  // 初始化粒子动画
-  initParticles() {
-    const query = this.createSelectorQuery();
-    query.select('#particle-canvas')
-      .fields({ node: true, size: true })
-      .exec((res) => {
-        if (!res || !res[0] || !res[0].node) {
-          console.log('[S1] Canvas 节点未找到');
-          return;
-        }
-        const canvas = res[0].node;
-        const ctx = canvas.getContext('2d');
-
-        // 设置画布尺寸（适配高清屏）
-        const dpr = wx.getSystemInfoSync().pixelRatio || 2;
-        canvas.width = res[0].width * dpr;
-        canvas.height = res[0].height * dpr;
-        ctx.scale(dpr, dpr);
-
-        const width = res[0].width;
-        const height = res[0].height;
-
-        // 粒子配置（左上 → 右下流动）
-        let particles = [];
-        const PARTICLE_COUNT = 800;
-
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-          particles.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: 0.3 + Math.random() * 0.4,
-            vy: 0.2 + Math.random() * 0.3,
-            size: Math.random() * 1.5 + 0.5,
-            opacity: Math.random() * 0.5 + 0.2,
-            twinkle: Math.random() * Math.PI * 2
-          });
-        }
-
-        // 用闭包变量保存 frameId，避免 this 丢失
-        let frameId = null;
-
-        // 动画循环
-        const animate = () => {
-          ctx.clearRect(0, 0, width, height);
-
-          // 绘制粒子
-          particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            p.twinkle += 0.02;
-
-            // 边界循环
-            if (p.x > width) p.x = 0;
-            if (p.y > height) p.y = 0;
-
-            // 闪烁效果
-            const alpha = p.opacity * (0.8 + 0.2 * Math.sin(p.twinkle));
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 212, 255, ${alpha})`;
-            ctx.fill();
-          });
-
-          frameId = canvas.requestAnimationFrame(animate);
-        };
-
-        animate();
-
-        // 保存 frameId 到 this，供 onUnload 销毁
-        this._frameId = frameId;
-        this._canvas = canvas;
-      });
-  },
-
-  // 页面卸载时销毁动画（重要！防止 GPU 占用）
-  onUnload() {
-    if (this._canvas && this._frameId) {
-      this._canvas.cancelAnimationFrame(this._frameId);
-      this._frameId = null;
-      this._canvas = null;
-      console.log('[S1] 粒子动画已销毁');
+  // 生成CSS粒子数据（替代Canvas）
+  generateParticles() {
+    // 根据设备性能动态调整粒子数量（低端设备自动降级）
+    let PARTICLE_COUNT = 60;  // 默认值
+    try {
+      const sysInfo = wx.getSystemInfoSync();
+      const benchmarkLevel = sysInfo.benchmarkLevel;  // Android 性能等级
+      if (benchmarkLevel && benchmarkLevel < 5) {
+        PARTICLE_COUNT = 30;  // 低端设备：减少粒子
+        console.log('[S1] 低端设备检测，粒子数降级为：', PARTICLE_COUNT);
+      } else if (benchmarkLevel && benchmarkLevel >= 10) {
+        PARTICLE_COUNT = 80;  // 高端设备：增加粒子
+        console.log('[S1] 高端设备检测，粒子数提升为：', PARTICLE_COUNT);
+      }
+    } catch (e) {
+      console.log('[S1] 设备性能检测失败，使用默认粒子数');
     }
+
+    let particles = [];
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        id: i,
+        left: Math.random() * 110 - 10,   // -10% 到 100%，让粒子从左侧外进入
+        top: Math.random() * 110 - 5,      // -5% 到 105%，覆盖全屏
+        size: Math.random() * 5 + 1,       // 1-6px，大小不一更自然
+        delay: Math.random() * 10,          // 0-10s 随机延迟，错开动画
+        duration: 1 + Math.random() * 1     // 1-2s，速度再加快一倍
+      });
+    }
+
+    this.setData({ particles });
+    console.log('[S1] CSS粒子已生成，数量：', PARTICLE_COUNT);
   },
 
   // 跳转进入小程序
@@ -121,5 +72,24 @@ Page({
     wx.navigateTo({
       url: '/pages/s2-identity/index'
     });
+  },
+
+  // 页面显示时重建粒子（从后台切回时恢复动画）
+  onShow() {
+    if (!this.data.particles || this.data.particles.length === 0) {
+      this.generateParticles();
+    }
+  },
+
+  // 页面隐藏时销毁粒子（切到后台/其他页面时释放内存）
+  onHide() {
+    this.setData({ particles: [] });
+    console.log('[S1] 粒子已销毁（页面隐藏）');
+  },
+
+  // 页面卸载时销毁粒子（防止内存泄漏）
+  onUnload() {
+    this.setData({ particles: [] });
+    console.log('[S1] 粒子已销毁（页面卸载）');
   }
 });
