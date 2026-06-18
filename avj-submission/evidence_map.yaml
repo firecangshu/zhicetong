@@ -22,7 +22,7 @@ evidence_items:
     evidence:
       - type: "可运行代码"
         location: "utils/engine.js"
-        description: "完整的4维度评分函数，含18条领域规则"
+        description: "完整的4维度评分函数，含16条领域规则+4条决策规则"
       - type: "测试数据"
         location: "utils/mock-data.js → w1_land / w3_resource / w4_policy / w5_market"
         description: "模拟输入数据可触发引擎完整评分流程"
@@ -49,21 +49,21 @@ evidence_items:
       note: "W3页面每个资源项显示来源类型标签和备注按钮"
     evidence_level: "E1"
 
-  # ======== Claim 3: SOP十步流程可执行 ========
+  # ======== Claim 3: SOP九步流程可执行 ========
   - id: C003
-    claim: "SOP十步选址流程从W1到W10可完整执行"
+    claim: "SOP九步选址流程从W1到W9可完整执行"
     dimension: "知识可执行化程度"
     evidence:
       - type: "页面路由"
         location: "app.json"
-        description: "12个页面完整配置（S1-S2 + W1-W10）"
+        description: "13个页面完整配置（S1-S4 + W1-W9）"
       - type: "流程验证"
         location: "pages/*/index.js"
         description: "每页有确认机制，未确认不可进入下一步"
     verification:
       method: "真机测试"
       result: "通过"
-      note: "在微信开发者工具中完成W1→W10全流程，每一步均有确认拦截"
+      note: "在微信开发者工具中完成W1→W9全流程，每一步均有确认拦截"
     evidence_level: "E1"
 
   # ======== Claim 4: GB/T 18972-2017 资源调查模板 ========

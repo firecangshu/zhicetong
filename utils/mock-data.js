@@ -122,7 +122,7 @@ const mockData = {
     ecosystem: {
       value: '亚热带常绿阔叶林生态系统，生物多样性中等；生态敏感性：塘堰湿地>油茶林>梯田>岗顶；无珍稀濒危植物分布；生态承载力评估：日均游客上限约2000人。',
       sourceType: 'official_api',
-      sourceName: '湖北省生态系统服务价值评估报报（2023）',
+      sourceName: '湖北省生态系统服务价值评估报告（2023）',
       manualNote: ''
     },
 
@@ -296,7 +296,7 @@ const mockData = {
       social: {
         value: '亲子研学市场规模超300亿元/年，年增长率超30%；"双减"政策后，中小学生课外活动时间增加，研学旅行需求井喷；城市居民对"乡愁记忆""田园体验"类产品需求旺盛；露营、围炉煮茶等新消费场景热度持续。',
         sourceType: 'ai_aggregation',
-        sourceName: '艾媒咨询·2023中国研学旅行行业发展报报 + 小红书/抖音关键词分析',
+        sourceName: '艾媒咨询·2023中国研学旅行行业发展报告 + 小红书/抖音关键词分析',
         manualNote: '亲子研学是定远村最具潜力的客群方向'
       },
       technological: {

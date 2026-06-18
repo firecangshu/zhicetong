@@ -38,7 +38,7 @@ solution_impact:
   - aspect: "合规引导"
     description: "帮助开发者了解合规要求，避免违规投资"
     beneficiaries: "文旅投资者、地方政府"
-    mechanism: "SOP十步流程中的W4政策引导和W6法规红线"
+    mechanism: "SOP流程中的W3政策引导和W5法规红线"
     evidence: "mock-data.js中包含真实政策文号和法规要求"
     evidence_level: "E1"
 
@@ -46,7 +46,7 @@ solution_impact:
     description: "将经验驱动的选址转化为数据驱动的决策"
     beneficiaries: "文旅开发者、投资机构"
     mechanism: "四维评分引擎量化评估项目可行性"
-    evidence: "engine.js中18条规则覆盖合规/空间/经济/市场"
+    evidence: "rules.js中16条领域规则+4条决策规则覆盖合规/空间/经济/市场"
     evidence_level: "E1"
 
   - aspect: "知识 democratization"

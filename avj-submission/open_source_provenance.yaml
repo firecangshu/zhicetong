@@ -45,17 +45,17 @@ team_increments:
   - id: INC001
     name: "四维决策引擎"
     description: "合规(35%)×空间(25%)×经济(20%)×市场(20%)加权评分体系"
-    innovation: "首次将文旅选址决策抽象为4维度18条规则的量化引擎"
+    innovation: "首次将文旅选址决策抽象为4维度16条领域规则+4条决策规则的量化引擎"
     source: "原创"
     evidence: "utils/engine.js"
     evidence_level: "E1"
 
   - id: INC002
-    name: "SOP十步选址流程"
-    description: "从身份认证到三向成果的标准化操作流程"
-    innovation: "将文旅项目选址经验固化为10步可执行协议"
+    name: "SOP九步选址流程"
+    description: "从地块框选到三向成果的标准化操作流程"
+    innovation: "将文旅项目选址经验固化为9步可执行协议"
     source: "原创"
-    evidence: "pages/w1-auth/ → pages/w10-result/"
+    evidence: "pages/w1-land/ → pages/w9-result/"
     evidence_level: "E1"
 
   - id: INC003

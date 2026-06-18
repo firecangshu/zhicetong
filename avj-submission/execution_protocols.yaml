@@ -1,8 +1,8 @@
 # execution_protocols.yaml
 # 踏歌行智策通 —— 任务协议与执行流程
 # 生成时间：2026-06-11
-# 来源：SOP十步流程 → 任务协议化
-# 说明：将S1→W10的用户操作流程转化为Agent可执行的任务协议
+# 来源：SOP九步流程 → 任务协议化
+# 说明：将引导页→工作流的用户操作流程转化为Agent可执行的任务协议
 
 protocol_version: "1.0"
 generated_at: "2026-06-11"
@@ -10,7 +10,7 @@ generated_at: "2026-06-11"
 # ======== 全局任务协议 ========
 global_protocol:
   name: "文旅项目选址决策SOP"
-  steps: 10
+  steps: 9
   input: "项目基本信息 + 地块坐标/描述"
   output: "四维评分报告 + 三向成果文档 + 决策建议"
   verification: "每步必须'我已核对'确认后方可进入下一步"
@@ -44,7 +44,7 @@ protocols:
         output: "🟦官方API > 🟩AI聚合 > 🟧人工修正"
       - action: "说明操作步骤"
         input: "none"
-        output: "W1→W10流程概览"
+        output: "W1→W9流程概览"
     verification:
       - "用户可下滑查看完整指南"
     error_handling: "none"
@@ -195,8 +195,8 @@ protocols:
       - "三级建议均有内容"
     error_handling: "数据不足时降级输出"
 
-  # -------- W10: 三向成果 --------
-  - id: W10
+  # -------- W9: 三向成果 --------
+  - id: W9
     name: "三向成果"
     type: "报告输出"
     agent_actions:
@@ -225,7 +225,7 @@ data_flow:
     to: "W7"
     data: "资源+政策+市场+红线 → SWOT输入"
   - from: "W1-W9"
-    to: "W10"
+    to: "W9"
     data: "全部数据 → 四维评分引擎输入"
 
 # ======== 异常处理协议 ========

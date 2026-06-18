@@ -43,7 +43,7 @@ negative_capabilities:
     scope: "用地审批、环评批复、施工许可"
     reason: "行政审批需人工材料准备和多部门协调"
     fallback: "系统仅输出材料清单和流程指引，人工执行"
-    evidence: "W10-result输出'三向成果文档'，不含自动申报功能"
+    evidence: "W9-result输出'三向成果文档'，不含自动申报功能"
 
 # ======== 高风险场景的人工复核触发条件 ========
 human_review_triggers:

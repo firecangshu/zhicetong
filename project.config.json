@@ -1,5 +1,5 @@
 {
-  "description": "踏歌行智策通 V2.0",
+  "description": "踏歌行智策通 V3.0 参赛版",
   "packOptions": {
     "ignore": [],
     "include": []
@@ -49,7 +49,7 @@
   "compileType": "miniprogram",
   "libVersion": "3.16.1",
   "appid": "wxeb055d83ce34e0d4",
-  "projectname": "ml_demo_v2.0",
+  "projectname": "zhicetong_v3.0",
   "cloudfunctionRoot": "cloudfunctions/",
   "condition": {},
   "simulatorPluginLibVersion": {

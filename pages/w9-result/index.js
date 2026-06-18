@@ -337,14 +337,20 @@ Page({
     }, 1000)
   },
 
-  // 打开三方角色报告页
+  // 打开三方角色报告页（MVP版改为弹窗展示，替代已移除的w11-reports页面）
   onOpenRoleReport(e) {
     const role = e.currentTarget.dataset.role
-    wx.navigateTo({
-      url: '/pages/w11-reports/index?role=' + role,
-      fail: () => {
-        wx.showToast({ title: '页面跳转失败', icon: 'none' })
-      }
+    const roleMap = {
+      investor: { title: '投资方战略分析建议书', content: '侧重：战略价值·投资回报·风险评估\n\n建议书内容基于W1-W9全流程数据汇总，包含：\n1. 地块条件与资源禀赋\n2. 四维引擎评分结果\n3. 投资回报预测\n4. 风险提示与建议\n\n（MVP演示版，完整PDF导出功能待实现）' },
+      planner: { title: '规划方设计素材汇总', content: '侧重：地块条件·资源禀赋·合规边界\n\n设计素材汇总基于W1-W9全流程数据，包含：\n1. 地块地形与生态基底\n2. 空间布局建议\n3. 合规边界（三区三线）\n4. 建设时序建议\n\n（MVP演示版，完整PDF导出功能待实现）' },
+      promoter: { title: '招商方招商评估建议书', content: '侧重：市场定位·客群分析·招商策略\n\n招商评估建议书基于W4-W5市场调研数据，包含：\n1. 市场定位与核心客群\n2. 竞合分析\n3. 政策红利清单\n4. 合作模式建议\n\n（MVP演示版，完整PDF导出功能待实现）' }
+    }
+    const info = roleMap[role] || { title: '报告', content: '报告内容生成中...' }
+    wx.showModal({
+      title: info.title,
+      content: info.content,
+      showCancel: false,
+      confirmText: '知道了'
     })
   },
 
