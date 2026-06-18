@@ -2,7 +2,7 @@
   "project_card": {
     "project_name": "踏歌行智策通",
     "project_type": "practice_transform",
-    "version": "V2.3",
+    "version": "V2.2.0",
     "repository": "https://gitee.com/funnyhouse/zhicetong",
     "summary": "将文旅规划专家10年选址经验转化为四维评分引擎和SOP九步流程，辅助文旅项目选址决策，降低违规投资风险。",
     "target_users": [

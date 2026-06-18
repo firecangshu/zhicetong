@@ -1,8 +1,8 @@
 {
   "miniVersion": "v2",
   "name": "智策通",
-  "version": "0.0.4",
-  "versionCode": 100,
+  "version": "2.2.0",
+  "versionCode": 220,
   "i18nFilePath": "i18n",
   "mini-ohos": {
     "sdkVersion": "0.5.1"
