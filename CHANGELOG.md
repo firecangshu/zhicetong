@@ -7,6 +7,26 @@
 
 ---
 
+## [2.2.0] - 2026-06-18 (AVJ最终修复版)
+
+### ✨ Added (新增功能)
+- **OPENSOURCE.md**：开源来源披露文件
+- **AVJ材料完整性检查**：submission.json
+
+### 🐛 Fixed (Bug修复)
+- **11个YAML文件**：AVJ格式修复（project_card/domain_prior_ledger/evidence_map/execution_protocols/expert_collaboration/feedback_loop/adaptation/safety_boundary/open_source_provenance/social_civilization/risk_flags）
+- **小程序导航**：S1-S4 redirectTo不压栈，S4→W1 reLaunch清空引导页栈
+- **W8页面标题**：修正为"W8 战略定位建议书"
+- **s4-guide语法错误**：修复Unexpected token
+- **s1-cover语法错误**：修复Unexpected token
+
+### 📝 Known Issues (已知问题)
+- `w4-market/index.js:186` `scopeMap` 值拼写（`district`）待修复
+- 无真实API接入（使用mock数据）
+- 证据等级E1
+
+---
+
 ## [2.1.0] - 2026-06-11 (AVJ对齐版)
 
 ### ✨ Added (新增功能)
@@ -96,5 +116,5 @@
 ---
 
 **仓库地址**：https://gitee.com/funnyhouse/zhicetong  
-**最新版本**：V2.1.0（AVJ对齐版）  
-**最后更新**：2026-06-11
+**最新版本**：V2.2.0（AVJ最终修复版）  
+**最后更新**：2026-06-18
