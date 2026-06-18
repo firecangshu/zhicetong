@@ -3,7 +3,7 @@
 
 .position-page {
   min-height: 100vh;
-  background: #F5F7FA;
+  background: #0a0e1a;
   padding-bottom: 180rpx;
 }
 
@@ -18,14 +18,14 @@
   display: block;
   font-size: 40rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 8rpx;
 }
 
 .page-subtitle {
   display: block;
   font-size: 26rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
 }
 
 .data-source-badge {
@@ -35,7 +35,7 @@
   background: #E8F4FD;
   border-radius: 20rpx;
   font-size: 22rpx;
-  color: #1A6DFF;
+  color: #00D4FF;
 }
 
 /* ========= 内容容器 ========= */
@@ -45,17 +45,17 @@
 
 /* ========= 区块卡片 ========= */
 .section-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 28rpx;
   margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .section-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 20rpx;
   padding-bottom: 12rpx;
   border-bottom: 2rpx solid #D6E4FF;
@@ -74,7 +74,7 @@
 .summary-label {
   font-size: 26rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
   white-space: nowrap;
   margin-right: 16rpx;
   flex-shrink: 0;
@@ -82,7 +82,7 @@
 
 .summary-value {
   font-size: 26rpx;
-  color: #555555;
+  color: #A0A8B8;
   line-height: 1.6;
   flex: 1;
 }
@@ -106,7 +106,7 @@
   display: block;
   font-size: 36rpx;
   font-weight: 700;
-  color: #1A6DFF;
+  color: #00D4FF;
   margin-bottom: 12rpx;
 }
 
@@ -121,18 +121,18 @@
 .naming-logic {
   display: block;
   font-size: 22rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   line-height: 1.6;
   margin-bottom: 8rpx;
 }
 
 /* ========= 三级建议方案 ========= */
 .rec-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 28rpx;
   margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
   border-left: 8rpx solid #C8C8CC;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .rec-mid {
-  border-left-color: #1A6DFF;
+  border-left-color: #00D4FF;
 }
 
 .rec-worst {
@@ -169,7 +169,7 @@
 
 .tag-blue {
   background: #E8F4FD;
-  color: #1A6DFF;
+  color: #00D4FF;
 }
 
 .tag-orange {
@@ -180,12 +180,12 @@
 .rec-level {
   font-size: 28rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .rec-strategy {
   font-size: 26rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   line-height: 1.8;
   margin-bottom: 16rpx;
 }
@@ -193,7 +193,7 @@
 .rec-sub-title {
   font-size: 26rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 8rpx;
   margin-top: 8rpx;
 }
@@ -232,8 +232,8 @@
 }
 
 .edit-btn {
-  background: #F0F4FF;
-  color: #1A6DFF;
+  background: #1e2335;
+  color: #00D4FF;
   font-size: 22rpx;
   padding: 4rpx 16rpx;
   border-radius: 8rpx;
@@ -248,24 +248,24 @@
 /* ========= 漏斗图区域（WXML 因果关系布局） ========= */
 .chart-section {
   margin: 24rpx 24rpx 0;
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .chart-title {
   display: block;
   font-size: 28rpx;
   font-weight: 700;
-  color: #1A6DFF;
+  color: #00D4FF;
   margin-bottom: 12rpx;
 }
 
 .filter-hint {
   display: block;
   font-size: 22rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   margin-bottom: 16rpx;
 }
 
@@ -282,7 +282,7 @@
 .filter-bar-bg {
   flex: 1;
   height: 56rpx;
-  background: #F5F7FA;
+  background: #0a0e1a;
   border-radius: 10rpx;
   overflow: hidden;
   margin-right: 16rpx;
@@ -321,8 +321,8 @@
 
 .conv-text {
   font-size: 22rpx;
-  color: #8C8C8C;
-  background: #F5F7FA;
+  color: #A0A8B8;
+  background: #0a0e1a;
   padding: 4rpx 16rpx;
   border-radius: 8rpx;
 }
@@ -337,12 +337,12 @@
   display: block;
   text-align: center;
   font-size: 22rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   margin-bottom: 16rpx;
 }
 
 .result-card {
-  background: linear-gradient(135deg, #1A6DFF 0%, #4A90D9 100%);
+  background: linear-gradient(135deg, #00D4FF 0%, #4A90D9 100%);
   border-radius: 16rpx;
   padding: 32rpx 28rpx;
   color: #FFFFFF;
@@ -384,7 +384,7 @@
   display: block;
   margin-top: 16rpx;
   font-size: 22rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   line-height: 1.6;
 }
 
@@ -392,9 +392,9 @@
 .confirm-section {
   margin-top: 40rpx;
   padding: 32rpx 24rpx;
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .confirm-checkbox {
@@ -419,13 +419,13 @@
 }
 
 .checkbox.checked {
-  background: #1A6DFF;
-  border-color: #1A6DFF;
+  background: #00D4FF;
+  border-color: #00D4FF;
 }
 
 .confirm-text {
   font-size: 26rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   line-height: 1.6;
 }
 
@@ -442,7 +442,7 @@
 }
 
 .next-btn:not(.disabled) {
-  background: #1A6DFF;
+  background: #00D4FF;
 }
 
 .next-btn.disabled {

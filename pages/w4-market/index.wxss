@@ -3,7 +3,7 @@
 
 .market-page {
   min-height: 100vh;
-  background: #F5F7FA;
+  background: #0a0e1a;
   padding-bottom: 180rpx;
 }
 
@@ -18,14 +18,14 @@
   display: block;
   font-size: 44rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 8rpx;
 }
 
 .page-subtitle {
   display: block;
   font-size: 28rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
 }
 
 .data-source-badge {
@@ -35,7 +35,7 @@
   background: #E8F4FD;
   border-radius: 20rpx;
   font-size: 24rpx;
-  color: #1A6DFF;
+  color: #00D4FF;
 }
 
 /* ========= 内容容器 ========= */
@@ -47,7 +47,7 @@
 .section-title {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A6DFF;
+  color: #00D4FF;
   margin: 32rpx 0 16rpx 0;
   padding-bottom: 8rpx;
   border-bottom: 2rpx solid #D6E4FF;
@@ -55,11 +55,11 @@
 
 /* ========= 数据卡片（通用） ========= */
 .data-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 24rpx 28rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .card-header {
@@ -74,14 +74,14 @@
 .card-label {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
   flex: 1;
 }
 
 .data-value {
   display: block;
   font-size: 30rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   line-height: 1.8;
   margin-top: 8rpx;
 }
@@ -96,7 +96,7 @@
 
 .source-tag.official {
   background: #E8F4FD;
-  color: #1A6DFF;
+  color: #00D4FF;
 }
 
 .source-tag.ai {
@@ -127,8 +127,8 @@
 .modify-btn {
   flex: 1;
   margin-right: 8rpx;
-  background: #F0F4FF;
-  color: #1A6DFF;
+  background: #1e2335;
+  color: #00D4FF;
   font-size: 24rpx;
   padding: 6rpx 18rpx;
   border-radius: 8rpx;
@@ -156,23 +156,23 @@
 
 /* ========= 商圈卡片特殊样式 ========= */
 .business-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 24rpx 28rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .business-label {
   font-size: 30rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 12rpx;
 }
 
 .business-info {
   font-size: 28rpx;
-  color: #555555;
+  color: #A0A8B8;
   line-height: 1.8;
   margin-bottom: 8rpx;
 }
@@ -189,17 +189,17 @@
 /* ========= 图表区域 ========= */
 .chart-section {
   margin: 24rpx 24rpx 0;
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .chart-title {
   display: block;
   font-size: 28rpx;
   font-weight: 700;
-  color: #1A6DFF;
+  color: #00D4FF;
   margin-bottom: 16rpx;
 }
 
@@ -269,7 +269,7 @@
 .label-name {
   font-size: 24rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
   line-height: 1.4;
 }
 
@@ -281,7 +281,7 @@
 
 .ring-label.right .label-value { color: #F5A623; }
 .ring-label.left  .label-value { color: #00B365; }
-.ring-label.center .label-value { color: #1A6DFF; }
+.ring-label.center .label-value { color: #00D4FF; }
 
 /* 图例 */
 .ring-legend {
@@ -306,7 +306,7 @@
 
 .legend-text {
   font-size: 26rpx;
-  color: #555555;
+  color: #A0A8B8;
   line-height: 1.5;
 }
 
@@ -338,7 +338,7 @@
 
 .bar-name {
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -366,7 +366,7 @@
 }
 
 .bar-blue {
-  background: linear-gradient(90deg, #1A6DFF, #5B9AFF);
+  background: linear-gradient(90deg, #00D4FF, #5B9AFF);
 }
 
 .bar-green {
@@ -381,7 +381,7 @@
   position: relative;
   z-index: 2;
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   font-weight: 700;
   white-space: nowrap;
   margin-left: auto;
@@ -412,7 +412,7 @@
 .chart-desc {
   display: block;
   font-size: 24rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   line-height: 1.6;
   margin-bottom: 8rpx;
 }
@@ -422,10 +422,10 @@
   display: block;
   margin-top: 16rpx;
   padding: 14rpx 18rpx;
-  background: #F0F4FF;
+  background: #1e2335;
   border-radius: 8rpx;
   font-size: 24rpx;
-  color: #1A6DFF;
+  color: #00D4FF;
   line-height: 1.6;
 }
 
@@ -446,7 +446,7 @@
 
 .competitor-level-tag.district {
   background: #E8F4FD;
-  color: #1A6DFF;
+  color: #00D4FF;
 }
 
 .competitor-level-tag.city {
@@ -460,11 +460,11 @@
 }
 
 .competitor-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   padding: 24rpx 28rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .competitor-header {
@@ -477,7 +477,7 @@
 .competitor-name {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .competitor-type-tag {
@@ -503,7 +503,7 @@
 
 .competitor-role {
   font-size: 26rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   margin-bottom: 8rpx;
 }
 
@@ -530,9 +530,9 @@
 .confirm-section {
   margin-top: 40rpx;
   padding: 32rpx 24rpx;
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .confirm-checkbox {
@@ -557,13 +557,13 @@
 }
 
 .checkbox.checked {
-  background: #1A6DFF;
-  border-color: #1A6DFF;
+  background: #00D4FF;
+  border-color: #00D4FF;
 }
 
 .confirm-text {
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   line-height: 1.6;
 }
 
@@ -580,7 +580,7 @@
 }
 
 .next-btn:not(.disabled) {
-  background: #1A6DFF;
+  background: #00D4FF;
 }
 
 .next-btn.disabled {

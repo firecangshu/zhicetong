@@ -4,7 +4,7 @@
 /* ========= 页面基础 ========= */
 .land-page {
   min-height: 100vh;
-  background: #F5F7FA;
+  background: #0a0e1a;
 }
 
 .page-header {
@@ -14,13 +14,13 @@
 .page-title {
   font-size: 40rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
 }
 
 .page-subtitle {
   font-size: 26rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   margin-top: 8rpx;
   display: block;
 }
@@ -29,8 +29,8 @@
   display: inline-block;
   margin-top: 12rpx;
   font-size: 22rpx;
-  color: #1A6DFF;
-  background: #F0F4FF;
+  color: #00D4FF;
+  background: #1e2335;
   padding: 8rpx 20rpx;
   border-radius: 8rpx;
 }
@@ -40,14 +40,14 @@
 }
 
 /* ========= 步骤条（已验证通过，禁止修改） ========= */
-.step-bar-scroll { white-space: nowrap; padding: 16rpx 24rpx; background: #FFFFFF; }
+.step-bar-scroll { white-space: nowrap; padding: 16rpx 24rpx; background: #14182b; }
 .step-bar { display: inline-flex; align-items: center; }
 .step-item { display: flex; flex-direction: column; align-items: center; margin: 0 8rpx; }
-.step-item.active .step-num { background: #1A6DFF; color: #FFFFFF; }
-.step-item.active .step-label { color: #1A6DFF; font-weight: 700; }
-.step-num { width: 56rpx; height: 56rpx; border-radius: 50%; background: #E8ECF0; color: #8C8C8C; font-size: 22rpx; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-.step-label { font-size: 20rpx; color: #8C8C8C; margin-top: 6rpx; }
-.step-arrow { color: #D1D5DB; font-size: 24rpx; margin: 0 4rpx; }
+.step-item.active .step-num { background: #00D4FF; color: #FFFFFF; }
+.step-item.active .step-label { color: #00D4FF; font-weight: 700; }
+.step-num { width: 56rpx; height: 56rpx; border-radius: 50%; background: #1e2335; color: #A0A8B8; font-size: 22rpx; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.step-label { font-size: 20rpx; color: #A0A8B8; margin-top: 6rpx; }
+.step-arrow { color: #3a4160; font-size: 24rpx; margin: 0 4rpx; }
 
 /* ========= 地图组件 ========= */
 .map-section {
@@ -55,8 +55,8 @@
   margin-bottom: 20rpx;
   border-radius: 16rpx;
   overflow: hidden;
-  background: #FFFFFF;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  background: #14182b;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .real-map {
@@ -69,7 +69,7 @@
   justify-content: center;
   gap: 12rpx;
   padding: 16rpx 20rpx;
-  background: #FFFFFF;
+  background: #14182b;
   border-top: 1rpx solid #E8ECF0;
 }
 
@@ -78,15 +78,15 @@
   height: 64rpx;
   line-height: 64rpx;
   font-size: 24rpx;
-  color: #1A6DFF;
-  background: #F0F4FF;
+  color: #00D4FF;
+  background: #1e2335;
   border: none;
   border-radius: 8rpx;
   padding: 0 8rpx;
 }
 
 .map-btn.primary {
-  background: #1A6DFF;
+  background: #00D4FF;
   color: #FFFFFF;
 }
 
@@ -96,18 +96,18 @@
 
 .map-info {
   font-size: 22rpx;
-  color: #1A6DFF;
+  color: #00D4FF;
   text-align: center;
   padding: 8rpx 0 16rpx;
-  background: #F0F4FF;
+  background: #1e2335;
 }
 
 /* ========= 折叠式坐标列表 ========= */
 .coord-section {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -116,7 +116,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 24rpx 28rpx;
-  background: linear-gradient(135deg, #1A6DFF 0%, #4A8CFF 100%);
+  background: linear-gradient(135deg, #00D4FF 0%, #0088cc 100%);
 }
 
 .coord-section-title {
@@ -146,7 +146,7 @@
 }
 
 .coord-list {
-  background: #FFFFFF;
+  background: #14182b;
   transition: max-height 0.3s ease;
 }
 
@@ -174,7 +174,7 @@
   width: 52rpx;
   height: 52rpx;
   border-radius: 50%;
-  background: #1A6DFF;
+  background: #00D4FF;
   color: #FFFFFF;
   font-size: 22rpx;
   font-weight: 700;
@@ -195,13 +195,13 @@
 }
 
 .coord-detail:active {
-  background: #F0F4FF;
+  background: #1e2335;
 }
 
 .coord-lat, .coord-lng {
   font-size: 22rpx;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .coord-delete {
@@ -218,10 +218,10 @@
 
 /* ========= 地块信息汇总卡片 ========= */
 .summary-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -272,7 +272,7 @@
   gap: 8rpx;
   font-size: 26rpx;
   font-weight: 600;
-  color: #555555;
+  color: #A0A8B8;
 }
 
 .summary-label-icon {
@@ -289,13 +289,13 @@
 .summary-main {
   font-size: 28rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
   line-height: 1.4;
 }
 
 .summary-sub {
   font-size: 22rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   line-height: 1.4;
 }
 
@@ -305,11 +305,11 @@
 }
 
 .detail-card {
-  background: #FFFFFF;
+  background: #14182b;
   border-radius: 16rpx;
   margin-bottom: 16rpx;
   padding: 24rpx 28rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
 }
 
 .detail-header {
@@ -322,7 +322,7 @@
 .detail-title {
   font-size: 28rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .source-tag {
@@ -333,8 +333,8 @@
 }
 
 .source-tag.official {
-  color: #1A6DFF;
-  background: #F0F4FF;
+  color: #00D4FF;
+  background: #1e2335;
 }
 
 .source-tag.ai {
@@ -344,7 +344,7 @@
 
 .detail-value {
   font-size: 26rpx;
-  color: #555555;
+  color: #A0A8B8;
   line-height: 1.5;
   display: block;
 }
@@ -356,9 +356,9 @@
 .edit-btn {
   display: inline-block;
   font-size: 22rpx;
-  color: #8C8C8C;
+  color: #A0A8B8;
   background: transparent;
-  border: 1rpx solid #D1D5DB;
+  border: 1rpx solid #3a4160;
   border-radius: 8rpx;
   padding: 8rpx 20rpx;
   line-height: 1.4;
@@ -382,7 +382,7 @@
 .checkbox {
   width: 40rpx;
   height: 40rpx;
-  border: 2rpx solid #D1D5DB;
+  border: 2rpx solid #3a4160;
   border-radius: 8rpx;
   margin-right: 12rpx;
   display: flex;
@@ -394,20 +394,20 @@
 }
 
 .checkbox.checked {
-  background: #1A6DFF;
-  border-color: #1A6DFF;
+  background: #00D4FF;
+  border-color: #00D4FF;
 }
 
 .confirm-text {
   font-size: 26rpx;
-  color: #555555;
+  color: #A0A8B8;
 }
 
 .next-btn {
   width: 100%;
   height: 96rpx;
   line-height: 96rpx;
-  background: #1A6DFF;
+  background: #00D4FF;
   color: #FFFFFF;
   font-size: 32rpx;
   font-weight: 700;
