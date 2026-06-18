@@ -1,152 +1,106 @@
 # evidence_map.yaml
 # 踏歌行智策通 —— Claim-Evidence-Verification 映射
-# 生成时间：2026-06-11
-# 说明：每个功能声明(Claim)绑定证据(Evidence)和验证方法(Verification)
+# 生成时间：2026-06-18
+# 格式：AVJ引擎evidence+claims分离标准格式（evidence_item.schema.json）
 
-map_version: "1.0"
-generated_at: "2026-06-11"
+evidence:
+  - id: E001
+    title: 四维决策引擎可运行demo
+    type: demo
+    level: E1
+    path: utils/engine.js
+    verified_by: project_team
+    sensitive: false
+    notes: 16条领域规则+4条决策规则，微信开发者工具中可运行
 
-# 证据等级定义
-# E0: 口头声明/想法
-# E1: 有可运行demo/原型
-# E2: 有内部测试数据/模拟验证
-# E3: 有真实用户反馈/外部测试
-# E4: 有专家复核/第三方审计
-# E5: 有生产环境运行数据/长期追踪
+  - id: E002
+    title: SOP九步选址流程完整可执行
+    type: demo
+    level: E1
+    path: pages/w1-land/ → pages/w9-result/
+    verified_by: project_team
+    sensitive: false
+    notes: 13个页面完整配置（S1-S4+W1-W9），每步有确认拦截
 
-evidence_items:
-  # ======== Claim 1: 四维决策引擎可执行 ========
+  - id: E003
+    title: 三层数据溯源体系
+    type: demo
+    level: E1
+    path: utils/mock-data.js
+    verified_by: project_team
+    sensitive: false
+    notes: 所有数据项统一{value, sourceType, sourceName, manualNote}结构，W2页面渲染来源标签
+
+  - id: E004
+    title: GB/T 18972-2017资源调查模板
+    type: literature
+    level: E1
+    path: pages/w2-resource/
+    verified_by: project_team
+    sensitive: false
+    notes: 对照国标附录A，8主类23亚类基本覆盖（W2为资源调查页面）
+
+  - id: E005
+    title: 法规红线硬过滤机制
+    type: demo
+    level: E1
+    path: utils/engine.js → evaluateCompliance()
+    verified_by: project_team
+    sensitive: false
+    notes: 红线冲突-30分硬过滤，模拟输入验证输出NO-GO
+
+claims:
   - id: C001
-    claim: "四维决策引擎（合规×空间×经济×市场）可运行并输出评分"
-    dimension: "领域先验沉淀度"
-    evidence:
-      - type: "可运行代码"
-        location: "utils/engine.js"
-        description: "完整的4维度评分函数，含16条领域规则+4条决策规则"
-      - type: "测试数据"
-        location: "utils/mock-data.js → w1_land / w3_resource / w4_policy / w5_market"
-        description: "模拟输入数据可触发引擎完整评分流程"
+    claim: 四维决策引擎可运行并输出结构化评分（合规×空间×经济×市场加权）
+    evidence: [E001]
     verification:
-      method: "代码审查 + 运行验证"
-      result: "通过"
-      note: "在微信开发者工具中编译运行，输入模拟数据后输出verdict和四维度评分"
-    evidence_level: "E1"
+      - 在微信开发者工具中运行，输入模拟数据后输出verdict和四维度评分
+      - 检查engine.js中evaluateCompliance/evaluateSpatial/evaluateEconomic/evaluateMarket四个函数是否存在
+    limitations:
+      - 评分基于模拟数据，未接入真实API
+      - 权重参数待真实案例校准
 
-  # ======== Claim 2: 三层数据溯源体系 ========
   - id: C002
-    claim: "每个数据项均有溯源标注（官方API/AI聚合/人工）"
-    dimension: "知识可执行化程度"
-    evidence:
-      - type: "数据结构定义"
-        location: "utils/mock-data.js"
-        description: "所有数据项统一结构：{value, sourceType, sourceName, manualNote}"
-      - type: "UI渲染"
-        location: "pages/w3-resource/index.wxml"
-        description: "来源标签渲染（🟦官方/🟩AI/🟧人工）"
+    claim: 每个数据项均有溯源标注（官方API/AI聚合/人工三级）
+    evidence: [E003]
     verification:
-      method: "UI截图 + 代码审查"
-      result: "通过"
-      note: "W3页面每个资源项显示来源类型标签和备注按钮"
-    evidence_level: "E1"
+      - 检查mock-data.js中所有数据项是否包含sourceType字段
+      - 检查W3页面是否渲染🟦官方/🟩AI/🟧人工来源标签
+    limitations:
+      - sourceType='official_api'的数据实际为模拟，非真实API返回
 
-  # ======== Claim 3: SOP九步流程可执行 ========
   - id: C003
-    claim: "SOP九步选址流程从W1到W9可完整执行"
-    dimension: "知识可执行化程度"
-    evidence:
-      - type: "页面路由"
-        location: "app.json"
-        description: "13个页面完整配置（S1-S4 + W1-W9）"
-      - type: "流程验证"
-        location: "pages/*/index.js"
-        description: "每页有确认机制，未确认不可进入下一步"
+    claim: SOP九步选址流程从W1到W9可完整执行
+    evidence: [E002]
     verification:
-      method: "真机测试"
-      result: "通过"
-      note: "在微信开发者工具中完成W1→W9全流程，每一步均有确认拦截"
-    evidence_level: "E1"
+      - 完成W1→W9全流程，每一步均有确认拦截
+      - 检查app.json中13个页面路由配置是否完整
+    limitations:
+      - 流程中部分页面使用模拟数据占位
 
-  # ======== Claim 4: GB/T 18972-2017 资源调查模板 ========
   - id: C004
-    claim: "资源调查覆盖GB/T 18972-2017国标20项旅游资源分类"
-    dimension: "领域先验沉淀度"
-    evidence:
-      - type: "标准引用"
-        location: "utils/mock-data.js → w3_resource"
-        description: "20项资源调查项，覆盖地文、水域、生物、气候、历史遗迹等8大类"
-      - type: "标准来源"
-        location: "mock-data.js注释"
-        description: "明确标注'GB/T 18972-2017 旅游资源分类、调查与评价'"
+    claim: 资源调查覆盖GB/T 18972-2017国标20项旅游资源分类
+    evidence: [E004]
     verification:
-      method: "对照国标"
-      result: "通过"
-      note: "对照GB/T 18972-2017附录A，8主类23亚类基本覆盖"
-    evidence_level: "E1"
+      - 对照国标附录A检查8主类23亚类覆盖度
+      - 检查w2-resource页面是否展示20项调查项
+    limitations:
+      - 部分亚类为简化处理
 
-  # ======== Claim 5: 法规红线检查 ========
   - id: C005
-    claim: "法规红线页面可检查三区三线冲突"
-    dimension: "安全与边界治理"
-    evidence:
-      - type: "检查项清单"
-        location: "pages/w6-redline/"
-        description: "生态保护红线、永久基本农田、城镇开发边界、地质灾害、文保单位5大检查项"
-      - type: "规则绑定"
-        location: "utils/engine.js → evaluateCompliance()"
-        description: "红线冲突直接触发-30分硬过滤"
+    claim: 法规红线冲突时引擎自动否决（一票否决机制）
+    evidence: [E005]
     verification:
-      method: "功能测试"
-      result: "通过"
-      note: "模拟红线冲突输入，引擎输出NO-GO verdict"
-    evidence_level: "E1"
+      - 模拟红线冲突输入，引擎输出NO-GO verdict
+      - 检查evaluateCompliance()中红线冲突扣分逻辑
+    limitations:
+      - 红线检查项为预埋数据，非实时API查询
 
-  # ======== Claim 6: 关键词映射体系 ========
   - id: C006
-    claim: "关键词映射体系可将文旅关键词转换为搜索策略"
-    dimension: "领域先验沉淀度"
-    evidence:
-      - type: "映射表"
-        location: "utils/keyword-mapping.js"
-        description: "20+关键词映射规则，含通配符、历史人文、野生动植物等分类"
-      - type: "降级策略"
-        location: "keyword-mapping.js → expandKeywords()"
-        description: "层级降级（区→市→省）+ 关键词扩大策略"
+    claim: 地理降级搜索策略可逐级扩大搜索范围
+    evidence: [E001, E003]
     verification:
-      method: "代码审查"
-      result: "通过"
-      note: "输入'研学基地'可映射到'营地教育+自然教育+研学旅行'"
-    evidence_level: "E1"
-
-  # ======== Claim 7: 腾讯地图API接口预留 ========
-  - id: C007
-    claim: "W2地块框选已预留腾讯地图API接口"
-    dimension: "真实世界验证强度"
-    evidence:
-      - type: "接口预留"
-        location: "utils/fetcher.js → searchPOI()"
-        description: "函数已定义，注释标注'腾讯地图WebService API接入点'"
-      - type: "配置预留"
-        location: "utils/config.js"
-        description: "API Key配置模板已创建，填入真实Key即可激活"
-    verification:
-      method: "代码审查"
-      result: "通过（接口已预留，受赛事时间限制未激活真实API）"
-      note: "fetcher.js中searchPOI()函数已实现mock返回，config.js提供配置入口"
-    evidence_level: "E1"
-
-  # ======== Claim 8: 腾讯混元LLM接口预留 ========
-  - id: C008
-    claim: "已设计云函数调用腾讯混元大模型的方案"
-    dimension: "真实世界验证强度"
-    evidence:
-      - type: "架构设计"
-        location: "plan文档 / 代码注释"
-        description: "云函数llmQuery设计：接收prompt→调用混元API→返回结构化JSON"
-      - type: "Prompt设计"
-        location: "（待实现）"
-        description: "针对W3资源描述生成、W5市场分析等场景设计Prompt模板"
-    verification:
-      method: "设计审查"
-      result: "待验证"
-      note: "架构已设计，受赛事时间限制未实现完整调用链"
-    evidence_level: "E0"
+      - 检查搜索结果不足时是否触发降级策略
+      - 检查关键词是否按村→街道→区县→城市逐级扩展
+    limitations:
+      - 降级策略为协议设计，MVP阶段使用模拟数据验证

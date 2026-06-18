@@ -16,7 +16,7 @@ Page({
 
   // 确认并继续 - 跳转到S4使用引导页
   onConfirmAndNext() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/s4-guide/index',
       fail: () => {
         // 如果S4不存在，跳转到W1地块选择

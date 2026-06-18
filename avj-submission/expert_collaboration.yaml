@@ -1,110 +1,17 @@
 # expert_collaboration.yaml
 # 踏歌行智策通 —— 专家协作与知识转移机制
-# 生成时间：2026-06-11
-# 状态：设计阶段，尚未建立真实专家网络
+# 生成时间：2026-06-18
+# 格式：AVJ引擎标准格式（expert_roles字符串数组+expert_review_process+knowledge_transfer_mechanism）
 
-collaboration_version: "1.0"
-generated_at: "2026-06-11"
-status: "designed"  # designed / recruiting / active
-
-# ======== 专家角色定义 ========
 expert_roles:
-  - id: EXP001
-    role: "文旅规划专家"
-    domain: "旅游规划、项目可行性研究"
-    responsibilities:
-      - "审核项目定位与市场分析结论"
-      - "评估资源调查数据的完整性和准确性"
-      - "提供行业标准投资参数"
-    collaboration_mode: "异步审核（提交报告→专家批注→反馈修正）"
-    required_count: "1-2人"
-    current_status: "待招募"
+  - 文旅规划专家
+  - 户外营地/研学专家
+  - 土地/规划法律顾问
+  - 生态/环境专家
+  - 财务投资顾问
 
-  - id: EXP002
-    role: "户外营地/研学专家"
-    domain: "营地运营、研学课程设计、安全管理"
-    responsibilities:
-      - "评估营地建设条件和安全风险"
-      - "审核研学市场需求分析"
-      - "提供运营经验和失败案例"
-    collaboration_mode: "案例库共建（专家提交案例→系统结构化→共享）"
-    required_count: "1-2人"
-    current_status: "待招募"
+expert_review_process: 每个项目评分完成后，由文旅规划专家审核定位结论和法律顾问审核合规评估，必要时调整评分规则和权重。审核结果沉淀为规则修正建议，经确认后更新engine.js。
 
-  - id: EXP003
-    role: "土地/规划法律顾问"
-    domain: "土地管理、城乡规划、环保法规"
-    responsibilities:
-      - "审核合规评估结论的法律准确性"
-      - "更新法规红线检查项"
-      - "提供地方政策解读"
-    collaboration_mode: "规则审核（定期审查rules.json→提出修正→更新）"
-    required_count: "1人"
-    current_status: "待招募"
+knowledge_transfer_mechanism: 将专家审核后的规则修正沉淀到engine.js评分规则和rules.json参数，案例脱敏后纳入mock-data.js作为参考基准，使1位专家的经验可放大给所有用户。
 
-  - id: EXP004
-    role: "生态/环境专家"
-    domain: "生态评估、环境影响评价、生物多样性"
-    responsibilities:
-      - "审核生态敏感性评估"
-      - "提供生物多样性基线数据"
-      - "评估项目生态承载力"
-    collaboration_mode: "数据审核（审核AI聚合的生态数据→标注可信度）"
-    required_count: "1人"
-    current_status: "待招募"
-
-  - id: EXP005
-    role: "财务投资顾问"
-    domain: "文旅项目投资分析、财务模型"
-    responsibilities:
-      - "审核经济维度评分参数"
-      - "提供真实项目投资案例数据"
-      - "校准投资回报周期基准"
-    collaboration_mode: "参数校准（提供基准数据→更新mock-data.js→验证）"
-    required_count: "1人"
-    current_status: "待招募"
-
-# ======== 知识转移机制 ========
-knowledge_transfer:
-  - mechanism: "案例库共建"
-    description: "专家提交真实项目案例，系统结构化后纳入mock-data.js"
-    input: "专家提供的项目文档、数据、经验"
-    process: "人工整理 → 结构化 → 质量审核 → 入库"
-    output: "更新的mock-data.js + 新增规则"
-    frequency: "按需，预计每季度1-2个案例"
-
-  - mechanism: "规则审核"
-    description: "专家定期审核engine.js评分规则的合理性"
-    input: "当前rules.json + 运行trace"
-    process: "专家审查 → 提出修正建议 → 开发更新 → 回归测试"
-    output: "更新后的rules.json"
-    frequency: "每半年一次"
-
-  - mechanism: "反馈标注"
-    description: "专家对系统输出结果进行质量标注"
-    input: "系统生成的评分报告"
-    process: "专家阅读 → 标注准确性 → 记录偏差 → 反馈修正"
-    output: "质量标注数据集"
-    frequency: "每个新项目"
-
-# ======== 专家放大效应 ========
-expert_amplification:
-  current_state: "设计中，尚未落地"
-  goal: "1个专家的经验可通过系统放大给100+用户"
-  mechanisms:
-    - "专家审核后的规则自动应用于所有新项目"
-    - "专家案例入库后成为系统默认参考"
-    - "专家标注的失败样本用于优化引擎"
-  barriers:
-    - "缺乏专家网络"
-    - "缺乏激励机制"
-    - "案例脱敏和隐私保护"
-
-# ======== 协作平台（预留） ========
-collaboration_platform:
-  current: "无，依赖人工沟通"
-  planned: "集成到小程序的'专家咨询'入口（预留）"
-  features:
-    - "专家在线审核报告"
-    - "专家批注可视化"
-    - "案例提交接口"
+evidence: [E001]

@@ -1,197 +1,106 @@
 # domain_prior_ledger.yaml
 # 踏歌行智策通 —— 领域先验沉淀清单
-# 生成时间：2026-06-11
-# 来源：utils/engine.js + utils/mock-data.js 抽取
-# 说明：以下规则来自文旅规划、土地管理、生态保护的实践知识
+# 生成时间：2026-06-18
+# 格式：AVJ引擎priors标准格式（domain_prior.schema.json）
+# 来源：10年文旅规划实践经验 → 四维引擎规则系统化沉淀
 
-ledger_version: "1.0"
-generated_at: "2026-06-11"
-source_files:
-  - utils/engine.js
-  - utils/mock-data.js
-  - utils/keyword-mapping.js
+priors:
+  - id: P001
+    statement: 生态红线冲突的文旅项目必须一票否决，不可通过降分处理。生态保护红线区域内禁止任何与保护功能无关的建设活动。
+    source_type: literature
+    rarity: 4
+    practicality: 5
+    actionability: 5
+    reusability: 5
+    how_it_changes_agent_behavior: 引擎在evaluateCompliance()中对红线冲突项目直接扣30分并输出NO-GO，不提供"低分通过"选项，确保合规底线不可逾越。
+    evidence: [E001, E005]
 
-# 领域规则分类
-categories:
-  - id: compliance
-    name: 合规维度
-    color: "#1A6DFF"
-    weight: 0.35
-    description: 基于生态保护红线、耕地保护、城镇开发边界叠加分析
+  - id: P002
+    statement: 永久基本农田不可用于文旅开发，农用地转用审批周期长（通常2-3年）、成功率低，应在选址初期即排除。
+    source_type: literature
+    rarity: 3
+    practicality: 5
+    actionability: 5
+    reusability: 5
+    how_it_changes_agent_behavior: 引擎对基本农田冲突项目扣20分，合规分降至50以下，输出PAUSE或NO-GO，并建议调整选址或申请土地性质变更（标注程序复杂）。
+    evidence: [E001, E005]
 
-  - id: spatial
-    name: 空间维度
-    color: "#00B365"
-    weight: 0.25
-    description: 基于地形地貌、土地利用类型、景观肌理综合评估
+  - id: P003
+    statement: 文旅项目选址应优先评估合规维度（权重35%），其次空间（25%）、经济（20%）、市场（20%）。合规维度的否决权高于其他维度的加分。
+    source_type: expert_practice
+    rarity: 5
+    practicality: 5
+    actionability: 5
+    reusability: 5
+    how_it_changes_agent_behavior: 引擎按合规35/空间25/经济20/市场20的固定权重计算综合评分，合规维度得分低于30分时直接输出NO-GO，其他维度无法通过加分弥补。
+    evidence: [E001]
 
-  - id: economic
-    name: 经济维度
-    color: "#F5A623"
-    weight: 0.20
-    description: 基于投资回报周期、客流规模、收入结构综合评估
+  - id: P004
+    statement: 岗丘-林-田-塘复合景观肌理具备内容差异化优势，适合低冲击文旅开发。单一地貌类型的文旅项目缺乏体验层次感。
+    source_type: expert_practice
+    rarity: 5
+    practicality: 4
+    actionability: 4
+    reusability: 3
+    how_it_changes_agent_behavior: 引擎对复合景观类型地块的空间维度评分+10分，在战略建议中提示"复合景观具备内容差异化优势，建议低冲击开发"。
+    evidence: [E001]
 
-  - id: market
-    name: 市场维度
-    color: "#8C6BFF"
-    weight: 0.20
-    description: 基于客群画像、市场份额预估、竞争格局综合评估
+  - id: P005
+    statement: 近郊1-2小时车程圈内的文旅项目具备客流稳定性优势，投资回报周期通常比远郊项目短2-3年。
+    source_type: expert_practice
+    rarity: 3
+    practicality: 5
+    actionability: 5
+    reusability: 4
+    how_it_changes_agent_behavior: 引擎对近郊区位项目经济维度+15分，并在战略建议中提示"近郊高频消费圈具备客流稳定性"，同时提示市场竞争风险需同步评估。
+    evidence: [E001]
 
-# 领域规则清单（16条领域规则 + 4条决策规则，共20条）
-rules:
-  # ======== 合规维度规则 ========
-  - id: R001
-    category: compliance
-    name: 生态红线硬过滤
-    priority: P0
-    condition: "redline.eco 不含 '✅'（即存在冲突）"
-    action: "score -= 30"
-    effect: "合规分上限70，冲突后直接降至40以下，触发NO-GO"
-    domain_source: "《生态保护红线划定指南》+ 国土空间规划'三区三线'"
-    evidence_level: "E1"
+  - id: P006
+    statement: 研学旅行需求持续增长且受政策支持，B2B渠道优先布局可降低获客成本。但研学基地需满足教育部安全标准。
+    source_type: literature
+    rarity: 3
+    practicality: 4
+    actionability: 4
+    reusability: 4
+    how_it_changes_agent_behavior: 引擎对研学需求项目市场维度+10分，并在战略建议中提示"B2B渠道策略优先"，同时在安全维度标注研学安全标准要求。
+    evidence: [E001, E005]
 
-  - id: R002
-    category: compliance
-    name: 耕地保护硬过滤
-    priority: P0
-    condition: "redline.farm 不含 '✅'（即存在冲突）"
-    action: "score -= 20"
-    effect: "合规分降至50以下，基本无法通过"
-    domain_source: "《土地管理法》+ 永久基本农田保护条例"
-    evidence_level: "E1"
+  - id: P007
+    statement: 文旅项目投资回报周期超过6年时，现金流风险显著增加，需引入财务顾问重新测算。行业标准健康回报周期为4-5年。
+    source_type: expert_practice
+    rarity: 3
+    practicality: 5
+    actionability: 5
+    reusability: 5
+    how_it_changes_agent_behavior: 引擎对回报周期5-6年项目经济维度扣10分，超过6年时在安全边界中触发"需财务顾问介入"的人工复核条件。
+    evidence: [E001]
 
-  - id: R003
-    category: compliance
-    name: 建设用地限制
-    priority: P1
-    condition: "redline.build 含 '⚠️'"
-    action: "score -= 15"
-    effect: "建议采用设施农用地或存量盘活方式"
-    domain_source: "自然资源部关于保障农村一二三产业融合发展用地的通知"
-    evidence_level: "E1"
+  - id: P008
+    statement: 文旅选址涉及的数据来源可信度差异巨大：官方API数据>AI聚合数据>人工输入数据。任何数据项都必须标注来源类型，否则用户无法判断决策依据的可靠性。
+    source_type: expert_practice
+    rarity: 5
+    practicality: 5
+    actionability: 5
+    reusability: 4
+    how_it_changes_agent_behavior: 引擎强制所有数据项遵循{value, sourceType, sourceName, manualNote}统一结构，UI层按sourceType渲染不同颜色标签（🟦官方/🟩AI/🟧人工），未标注来源的数据项不可参与评分。
+    evidence: [E003]
 
-  - id: R004
-    category: compliance
-    name: 政策利好加分
-    priority: P2
-    condition: "policy.policies 中存在 direction='利好' 的条目"
-    action: "每条 +5分"
-    effect: "政策红利可提升合规评分"
-    domain_source: "各地方文旅产业扶持政策"
-    evidence_level: "E1"
+  - id: P009
+    statement: 政策数据应按级别分类（国家级/部委级/省级/市级/区县级），不同级别政策的约束力和适用范围不同。国家级和部委级政策具有普遍约束力，地方政策仅适用于特定行政区域。
+    source_type: literature
+    rarity: 4
+    practicality: 4
+    actionability: 4
+    reusability: 4
+    how_it_changes_agent_behavior: 引擎在政策维度评估中按政策级别赋予不同权重（国家级>部委级>省级>市级），地方政策仅在对应行政区域内生效，搜索关键词不包含地名以避免双重地名错误。
+    evidence: [E001]
 
-  - id: R005
-    category: compliance
-    name: 政策约束减分
-    priority: P2
-    condition: "policy.policies 中存在 direction='约束' 的条目"
-    action: "每条 -10分"
-    effect: "政策约束显著降低评分权重"
-    domain_source: "各地方环保、限建等政策文件"
-    evidence_level: "E1"
-
-  # ======== 空间维度规则 ========
-  - id: R006
-    category: spatial
-    name: 林地适宜性加分
-    priority: P1
-    condition: "resource.landType 含 '林地'"
-    action: "score += 10"
-    effect: "林地/园地肌理适合低冲击开发"
-    domain_source: "《林地保护利用规划》+ 低影响开发(LID)实践"
-    evidence_level: "E1"
-
-  - id: R007
-    category: spatial
-    name: 复合景观加分
-    priority: P1
-    condition: "resource.landscape 含 '复合'"
-    action: "score += 10"
-    effect: "岗丘—林—田—塘复合肌理具备内容差异化优势"
-    domain_source: "景观生态学'斑块-廊道-基质'理论"
-    evidence_level: "E1"
-
-  - id: R008
-    category: spatial
-    name: 规模效应加分
-    priority: P2
-    condition: "land.area 含 '2000'（约2000亩）"
-    action: "score += 5"
-    effect: "2000亩尺度具备规模效应，可分摊基础设施成本"
-    domain_source: "文旅项目经济规模效应经验值"
-    evidence_level: "E1"
-
-  # ======== 经济维度规则 ========
-  - id: R009
-    category: economic
-    name: 回报周期惩罚
-    priority: P1
-    condition: "market.cycle 含 '5-6'（5-6年回报周期）"
-    action: "score -= 10"
-    effect: "基准回报周期较长，需优化收入结构"
-    domain_source: "文旅行业投资回报基准（行业标准4-5年）"
-    evidence_level: "E1"
-
-  - id: R010
-    category: economic
-    name: 近郊区位加分
-    priority: P1
-    condition: "market.position 含 '近郊'"
-    action: "score += 15"
-    effect: "近郊高频消费圈具备客流稳定性优势"
-    domain_source: "城市旅游圈层理论（1-2小时车程圈）"
-    evidence_level: "E1"
-
-  # ======== 市场维度规则 ========
-  - id: R011
-    category: market
-    name: 研学需求加分
-    priority: P1
-    condition: "market.demand 含 '研学'"
-    action: "score += 10"
-    effect: "研学旅行需求旺盛，建议B2B渠道优先布局"
-    domain_source: "教育部研学旅行政策 + OTA预订数据趋势"
-    evidence_level: "E1"
-
-  - id: R012
-    category: market
-    name: 市场份额加分
-    priority: P2
-    condition: "market.chartData.series[0].data 总和 >= 20"
-    action: "score += 5"
-    effect: "市场份额预估较高，具备区域竞争力"
-    domain_source: "市场集中度分析（CR4/CR8指标）"
-    evidence_level: "E1"
-
-# ======== 加权决策规则 ========
-decision_rules:
-  - id: D001
-    name: 合规硬过滤
-    condition: "compliance.score <= 30"
-    result: "NO-GO"
-    reason: "合规风险过高，一票否决"
-
-  - id: D002
-    name: 综合通过
-    condition: "totalScore >= 75 AND compliance.score >= 60"
-    result: "GO"
-    reason: "综合条件良好，建议推进"
-
-  - id: D003
-    name: 有条件通过
-    condition: "totalScore >= 55"
-    result: "CONDITIONAL"
-    reason: "有条件通过，需在前置条件满足后推进"
-
-  - id: D004
-    name: 暂停建议
-    condition: "totalScore < 55"
-    result: "PAUSE"
-    reason: "建议暂停，补充调研或调整定位"
-
-# 维度权重配置
-weights:
-  compliance: 0.35
-  spatial: 0.25
-  economic: 0.20
-  market: 0.20
+  - id: P010
+    statement: 地理搜索结果不足时（<3条），应逐级扩大搜索范围：村→街道→区县→城市，而非直接跳到全国范围。直接跳级会导致搜索结果与地块关联性过低。
+    source_type: expert_practice
+    rarity: 5
+    practicality: 4
+    actionability: 4
+    reusability: 4
+    how_it_changes_agent_behavior: 引擎在数据搜索时自动执行地理降级策略，搜索结果<3条时从当前行政级别逐级向上扩展，而非直接使用全国范围关键词，确保搜索结果与地块保持地理关联性。
+    evidence: [E001, E003]

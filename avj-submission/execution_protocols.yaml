@@ -1,246 +1,168 @@
 # execution_protocols.yaml
 # 踏歌行智策通 —— 任务协议与执行流程
-# 生成时间：2026-06-11
-# 来源：SOP九步流程 → 任务协议化
-# 说明：将引导页→工作流的用户操作流程转化为Agent可执行的任务协议
+# 生成时间：2026-06-18
+# 格式：AVJ引擎protocols标准格式，每条含title/goal/agent_actions/parameters/verification/evidence
 
-protocol_version: "1.0"
-generated_at: "2026-06-11"
-
-# ======== 全局任务协议 ========
-global_protocol:
-  name: "文旅项目选址决策SOP"
-  steps: 9
-  input: "项目基本信息 + 地块坐标/描述"
-  output: "四维评分报告 + 三向成果文档 + 决策建议"
-  verification: "每步必须'我已核对'确认后方可进入下一步"
-  rollback: "支持返回上一步修改数据"
-
-# ======== 分步任务协议 ========
 protocols:
-  # -------- S1: 启动封面 --------
   - id: S1
-    name: "系统启动"
-    type: "封面展示"
+    title: 系统启动封面
+    goal: 展示项目名称与定位，渲染动态封面
     agent_actions:
-      - action: "展示项目名称与定位"
-        input: "none"
-        output: "s1_cover.title + s1_cover.subtitle"
-      - action: "渲染动态封面"
-        input: "none"
-        output: "CSS粒子动画/渐变背景"
+      - 展示项目名称"踏歌行智策通"与副标题
+      - 渲染CSS粒子动画/渐变背景
+    parameters:
+      - cover_style
     verification:
-      - "页面加载成功"
-      - "标题正确渲染"
-    error_handling: "加载失败时显示静态备用封面"
+      - 页面加载成功
+      - 标题正确渲染
+    evidence: [E002]
 
-  # -------- S2: 使用指南 --------
   - id: S2
-    name: "使用指南"
-    type: "说明页"
+    title: 使用指南
+    goal: 展示数据优先级规则和操作步骤概览
     agent_actions:
-      - action: "展示数据优先级规则"
-        input: "s2_guide.dataRule"
-        output: "🟦官方API > 🟩AI聚合 > 🟧人工修正"
-      - action: "说明操作步骤"
-        input: "none"
-        output: "W1→W9流程概览"
+      - 展示数据优先级规则（🟦官方API > 🟩AI聚合 > 🟧人工修正）
+      - 说明W1→W9流程概览
+    parameters:
+      - guide_language
     verification:
-      - "用户可下滑查看完整指南"
-    error_handling: "none"
+      - 用户可下滑查看完整指南
+    evidence: [E002]
 
-  # -------- W1: 身份认证 --------
   - id: W1
-    name: "身份认证"
-    type: "数据录入"
+    title: 身份认证
+    goal: 收集项目ID，生成项目身份卡
     agent_actions:
-      - action: "收集项目ID"
-        input: "用户输入的项目编号"
-        output: "w1_auth.projectId"
-      - action: "生成项目身份卡"
-        input: "projectId + 当前时间"
-        output: "身份认证页面渲染"
+      - 收集用户输入的项目编号
+      - 生成项目身份卡（含项目ID和创建时间）
+    parameters:
+      - project_id_format
+      - auth_timestamp
     verification:
-      - "项目ID非空"
-      - "ID格式符合规范（PROJ-YYYY-XX-NNN）"
-    error_handling: "ID为空时阻止进入下一步"
+      - 项目ID非空
+      - ID格式符合规范（PROJ-YYYY-XX-NNN）
+    evidence: [E002]
 
-  # -------- W2: 地块框选 --------
   - id: W2
-    name: "地块框选"
-    type: "地理信息录入"
+    title: 地块框选
+    goal: 获取地块地理坐标和行政区划信息
     agent_actions:
-      - action: "获取地理坐标"
-        input: "用户点击地图或手动输入"
-        output: "w1_land.geoCoord {lat, lng}"
-      - action: "查询行政区划"
-        input: "geoCoord"
-        output: "w1_land.adminCode + w1_land.officialName"
-        api: "腾讯地图API（预留）"
-      - action: "获取地形描述"
-        input: "geoCoord"
-        output: "w1_land.terrain"
-        api: "DEM数据（预留）"
+      - 获取地理坐标（用户点击地图或手动输入）
+      - 查询行政区划代码和官方名称
+      - 获取地形描述
+    parameters:
+      - geo_coord_lat
+      - geo_coord_lng
+      - admin_code
+      - terrain_type
     verification:
-      - "坐标在有效范围（中国境内）"
-      - "行政区划代码可解析"
-    error_handling: "坐标无效时提示重新输入"
+      - 坐标在有效范围（中国境内）
+      - 行政区划代码可解析
+    evidence: [E002]
 
-  # -------- W3: 资源调查 --------
   - id: W3
-    name: "资源调查"
-    type: "多维度数据录入"
+    title: 资源调查
+    goal: 按GB/T 18972-2017标准完成20项旅游资源调查
     agent_actions:
-      - action: "展示GB/T 18972-2017调查模板"
-        input: "w3_resource（20项）"
-        output: "分类展示8大类旅游资源"
-      - action: "渲染来源标签"
-        input: "每个数据项的sourceType"
-        output: "🟦官方/🟩AI/🟧人工标签"
-      - action: "提供修正入口"
-        input: "用户点击'修正/备注'"
-        output: "wx.showModal编辑弹窗"
+      - 展示8大类20项调查模板
+      - 渲染数据来源标签（🟦官方/🟩AI/🟧人工）
+      - 提供修正入口（用户点击修正/备注）
+    parameters:
+      - resource_category
+      - source_type
+      - manual_note
     verification:
-      - "所有20项资源数据已加载"
-      - "来源标签正确渲染"
-    error_handling: "数据加载失败时显示'数据待补充'占位"
+      - 所有20项资源数据已加载
+      - 来源标签正确渲染
+      - 修正备注可保存
+    evidence: [E003, E004]
 
-  # -------- W4: 政策引导 --------
   - id: W4
-    name: "政策引导"
-    type: "政策数据展示"
+    title: 政策引导
+    goal: 展示四级政策体系（国家/省/市/区），标注利好/约束方向
     agent_actions:
-      - action: "展示四级政策体系"
-        input: "w4_policy（国家/省/市/区）"
-        output: "政策卡片列表，含利好/约束标签"
-      - action: "标注政策方向"
-        input: "policy.direction"
-        output: "绿色↑利好 / 红色↓约束"
+      - 展示四级政策卡片列表
+      - 标注政策方向（绿色↑利好 / 红色↓约束）
+    parameters:
+      - policy_level
+      - policy_direction
+      - policy_keyword
     verification:
-      - "四级政策均有数据"
-      - "方向标签正确"
-    error_handling: "某级政策缺失时显示'暂无数据'"
+      - 四级政策均有数据
+      - 方向标签正确
+    evidence: [E002]
 
-  # -------- W5: 市场调研 --------
   - id: W5
-    name: "市场调研"
-    type: "市场数据分析"
+    title: 市场调研
+    goal: 展示PEST分析、竞品分析和市场份额图表
     agent_actions:
-      - action: "PEST分析展示"
-        input: "w5_market.pest"
-        output: "政治/经济/社会/技术四维度雷达图"
-      - action: "竞品分析"
-        input: "w5_market.competitors"
-        output: "竞品对比表格"
-      - action: "市场份额图表"
-        input: "w5_market.chartData"
-        output: "条形图/饼图"
+      - PEST分析展示（政治/经济/社会/技术四维度）
+      - 竞品对比表格
+      - 市场份额图表渲染
+    parameters:
+      - pest_dimension
+      - competitor_name
+      - market_share_data
     verification:
-      - "PEST四维度均有数据"
-      - "图表正确渲染"
-    error_handling: "图表渲染失败时显示表格形式"
+      - PEST四维度均有数据
+      - 图表正确渲染
+    evidence: [E002]
 
-  # -------- W6: 法规红线 --------
   - id: W6
-    name: "法规红线"
-    type: "合规检查"
+    title: 法规红线
+    goal: 展示三区三线检查项，硬过滤冲突项目
     agent_actions:
-      - action: "展示三区三线检查项"
-        input: "w6_redline（5大检查项）"
-        output: "检查清单，含✅/⚠️/❌状态"
-      - action: "硬过滤提示"
-        input: "redline状态"
-        output: "冲突项高亮+NO-GO警告"
+      - 展示5大检查项（生态红线/基本农田/城镇开发边界/地质灾害/文保单位）
+      - 硬过滤提示（冲突项高亮+NO-GO警告）
+    parameters:
+      - redline_category
+      - conflict_status
+      - severity_level
     verification:
-      - "5项检查全部完成"
-      - "冲突项明确标注"
-    error_handling: "检查项缺失时显示'待核实'"
+      - 5项检查全部完成
+      - 冲突项明确标注
+    evidence: [E005]
 
-  # -------- W7: SWOT分析 --------
   - id: W7
-    name: "SWOT分析"
-    type: "战略分析"
+    title: SWOT分析
+    goal: 基于前6步数据生成SWOT矩阵和战略建议
     agent_actions:
-      - action: "生成SWOT矩阵"
-        input: "前6步收集的所有数据"
-        output: "优势/劣势/机会/威胁四象限"
-      - action: "智能建议"
-        input: "SWOT分析结果"
-        output: "战略建议文本"
+      - 生成SWOT四象限（优势/劣势/机会/威胁）
+      - 生成智能战略建议文本
+    parameters:
+      - swot_quadrant
+      - strategy_type
     verification:
-      - "四象限均有内容"
-    error_handling: "数据不足时显示'需补充调研'"
+      - 四象限均有内容
+    evidence: [E001, E002]
 
-  # -------- W8: 需求澄清 --------
   - id: W8
-    name: "需求澄清"
-    type: "主观输入"
+    title: 需求澄清
+    goal: 收集用户主观需求和补充信息
     agent_actions:
-      - action: "收集主观需求"
-        input: "用户填写的文本"
-        output: "w8_demand文本"
+      - 收集用户填写的需求文本
+      - 标注为用户主观输入（sourceType='manual'）
+    parameters:
+      - demand_text
+      - priority_level
     verification:
-      - "文本非空（可选）"
-    error_handling: "空文本允许跳过"
+      - 文本非空（可选）
+    evidence: [E002]
 
-  # -------- W9: 战略定位 --------
   - id: W9
-    name: "战略定位"
-    type: "策略建议"
+    title: 战略定位与三向成果
+    goal: 汇总全流程数据执行四维评分并输出决策建议
     agent_actions:
-      - action: "生成三级建议"
-        input: "前8步所有数据 + 四维评分"
-        output: "一级宏观/二级中观/三级微观建议"
+      - 执行四维评分引擎（合规35/空间25/经济20/市场20）
+      - 生成三级建议（一级宏观/二级中观/三级微观）
+      - 输出结构化决策报告
+    parameters:
+      - compliance_weight
+      - spatial_weight
+      - economic_weight
+      - market_weight
     verification:
-      - "三级建议均有内容"
-    error_handling: "数据不足时降级输出"
-
-  # -------- W9: 三向成果 --------
-  - id: W9
-    name: "三向成果"
-    type: "报告输出"
-    agent_actions:
-      - action: "执行四维评分引擎"
-        input: "{land, resource, policy, market, redline}"
-        output: "{verdict, confidence, totalScore, dimensions, suggestion}"
-        engine: "utils/engine.js"
-      - action: "生成决策报告"
-        input: "评分结果 + 所有原始数据"
-        output: "结构化报告页面"
-      - action: "导出建议"
-        input: "报告内容"
-        output: "可分享的文本/图片（预留）"
-    verification:
-      - "评分引擎输出有效（verdict ∈ {GO, PAUSE, CONDITIONAL, NO-GO}）"
-      - "四个维度评分均在0-100范围"
-      - "置信度在0-100范围"
-    error_handling: "引擎异常时返回默认PAUSE+提示重试"
-
-# ======== 跨步骤数据流 ========
-data_flow:
-  - from: "W2"
-    to: "W3"
-    data: "地块坐标 → 资源调查定位"
-  - from: "W3, W4, W5, W6"
-    to: "W7"
-    data: "资源+政策+市场+红线 → SWOT输入"
-  - from: "W1-W9"
-    to: "W9"
-    data: "全部数据 → 四维评分引擎输入"
-
-# ======== 异常处理协议 ========
-error_protocols:
-  - id: ERR001
-    name: "数据缺失"
-    condition: "某步骤关键数据为空"
-    action: "显示'数据待补充'占位，允许继续但标注风险"
-
-  - id: ERR002
-    name: "评分异常"
-    condition: "engine.js返回非预期结果"
-    action: "返回默认PAUSE verdict，记录错误日志"
-
-  - id: ERR003
-    name: "API调用失败"
-    condition: "腾讯地图/混元API调用失败"
-    action: "降级到mock数据，显示'离线模式'提示"
+      - 评分引擎输出有效（verdict ∈ {GO, PAUSE, CONDITIONAL, NO-GO}）
+      - 四个维度评分均在0-100范围
+      - 置信度在0-100范围
+    evidence: [E001, E005]

@@ -69,16 +69,9 @@ Page({
 
   // 跳转进入小程序
   onEnterTap() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/s2-identity/index'
     });
-  },
-
-  // 页面显示时重建粒子（从后台切回时恢复动画）
-  onShow() {
-    if (!this.data.particles || this.data.particles.length === 0) {
-      this.generateParticles();
-    }
   },
 
   // 页面隐藏时销毁粒子（切到后台/其他页面时释放内存）

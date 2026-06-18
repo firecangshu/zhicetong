@@ -1,0 +1,700 @@
+{
+  "project_card": {
+    "project_name": "踏歌行智策通",
+    "project_type": "practice_transform",
+    "version": "V2.3",
+    "repository": "https://gitee.com/funnyhouse/zhicetong",
+    "summary": "将文旅规划专家10年选址经验转化为四维评分引擎和SOP九步流程，辅助文旅项目选址决策，降低违规投资风险。",
+    "target_users": [
+      "文旅项目开发者",
+      "户外营地/研学基地运营者",
+      "地方政府文旅部门"
+    ],
+    "high_risk_domains": [
+      "文旅安全",
+      "生态红线",
+      "土地性质",
+      "金融投资"
+    ],
+    "current_assets": [
+      "四维决策引擎（16条领域规则+4条决策规则）",
+      "SOP九步选址流程（W1-W9完整可运行）",
+      "三层数据溯源体系（官方/AI聚合/人工）",
+      "GB/T 18972-2017资源调查模板",
+      "法规红线硬过滤机制"
+    ],
+    "not_yet_done": [
+      "未接入真实API（腾讯地图/混元大模型）",
+      "未积累真实用户使用数据",
+      "未建立专家复核网络"
+    ]
+  },
+  "domain_prior_ledger": {
+    "priors": [
+      {
+        "id": "P001",
+        "statement": "生态红线冲突的文旅项目必须一票否决，不可通过降分处理。生态保护红线区域内禁止任何与保护功能无关的建设活动。",
+        "source_type": "literature",
+        "rarity": 4,
+        "practicality": 5,
+        "actionability": 5,
+        "reusability": 5,
+        "how_it_changes_agent_behavior": "引擎在evaluateCompliance()中对红线冲突项目直接扣30分并输出NO-GO，不提供\"低分通过\"选项，确保合规底线不可逾越。",
+        "evidence": [
+          "E001",
+          "E005"
+        ]
+      },
+      {
+        "id": "P002",
+        "statement": "永久基本农田不可用于文旅开发，农用地转用审批周期长（通常2-3年）、成功率低，应在选址初期即排除。",
+        "source_type": "literature",
+        "rarity": 3,
+        "practicality": 5,
+        "actionability": 5,
+        "reusability": 5,
+        "how_it_changes_agent_behavior": "引擎对基本农田冲突项目扣20分，合规分降至50以下，输出PAUSE或NO-GO，并建议调整选址或申请土地性质变更（标注程序复杂）。",
+        "evidence": [
+          "E001",
+          "E005"
+        ]
+      },
+      {
+        "id": "P003",
+        "statement": "文旅项目选址应优先评估合规维度（权重35%），其次空间（25%）、经济（20%）、市场（20%）。合规维度的否决权高于其他维度的加分。",
+        "source_type": "expert_practice",
+        "rarity": 5,
+        "practicality": 5,
+        "actionability": 5,
+        "reusability": 5,
+        "how_it_changes_agent_behavior": "引擎按合规35/空间25/经济20/市场20的固定权重计算综合评分，合规维度得分低于30分时直接输出NO-GO，其他维度无法通过加分弥补。",
+        "evidence": [
+          "E001"
+        ]
+      },
+      {
+        "id": "P004",
+        "statement": "岗丘-林-田-塘复合景观肌理具备内容差异化优势，适合低冲击文旅开发。单一地貌类型的文旅项目缺乏体验层次感。",
+        "source_type": "expert_practice",
+        "rarity": 5,
+        "practicality": 4,
+        "actionability": 4,
+        "reusability": 3,
+        "how_it_changes_agent_behavior": "引擎对复合景观类型地块的空间维度评分+10分，在战略建议中提示\"复合景观具备内容差异化优势，建议低冲击开发\"。",
+        "evidence": [
+          "E001"
+        ]
+      },
+      {
+        "id": "P005",
+        "statement": "近郊1-2小时车程圈内的文旅项目具备客流稳定性优势，投资回报周期通常比远郊项目短2-3年。",
+        "source_type": "expert_practice",
+        "rarity": 3,
+        "practicality": 5,
+        "actionability": 5,
+        "reusability": 4,
+        "how_it_changes_agent_behavior": "引擎对近郊区位项目经济维度+15分，并在战略建议中提示\"近郊高频消费圈具备客流稳定性\"，同时提示市场竞争风险需同步评估。",
+        "evidence": [
+          "E001"
+        ]
+      },
+      {
+        "id": "P006",
+        "statement": "研学旅行需求持续增长且受政策支持，B2B渠道优先布局可降低获客成本。但研学基地需满足教育部安全标准。",
+        "source_type": "literature",
+        "rarity": 3,
+        "practicality": 4,
+        "actionability": 4,
+        "reusability": 4,
+        "how_it_changes_agent_behavior": "引擎对研学需求项目市场维度+10分，并在战略建议中提示\"B2B渠道策略优先\"，同时在安全维度标注研学安全标准要求。",
+        "evidence": [
+          "E001",
+          "E005"
+        ]
+      },
+      {
+        "id": "P007",
+        "statement": "文旅项目投资回报周期超过6年时，现金流风险显著增加，需引入财务顾问重新测算。行业标准健康回报周期为4-5年。",
+        "source_type": "expert_practice",
+        "rarity": 3,
+        "practicality": 5,
+        "actionability": 5,
+        "reusability": 5,
+        "how_it_changes_agent_behavior": "引擎对回报周期5-6年项目经济维度扣10分，超过6年时在安全边界中触发\"需财务顾问介入\"的人工复核条件。",
+        "evidence": [
+          "E001"
+        ]
+      },
+      {
+        "id": "P008",
+        "statement": "文旅选址涉及的数据来源可信度差异巨大：官方API数据>AI聚合数据>人工输入数据。任何数据项都必须标注来源类型，否则用户无法判断决策依据的可靠性。",
+        "source_type": "expert_practice",
+        "rarity": 5,
+        "practicality": 5,
+        "actionability": 5,
+        "reusability": 4,
+        "how_it_changes_agent_behavior": "引擎强制所有数据项遵循{value, sourceType, sourceName, manualNote}统一结构，UI层按sourceType渲染不同颜色标签（🟦官方/🟩AI/🟧人工），未标注来源的数据项不可参与评分。",
+        "evidence": [
+          "E003"
+        ]
+      },
+      {
+        "id": "P009",
+        "statement": "政策数据应按级别分类（国家级/部委级/省级/市级/区县级），不同级别政策的约束力和适用范围不同。国家级和部委级政策具有普遍约束力，地方政策仅适用于特定行政区域。",
+        "source_type": "literature",
+        "rarity": 4,
+        "practicality": 4,
+        "actionability": 4,
+        "reusability": 4,
+        "how_it_changes_agent_behavior": "引擎在政策维度评估中按政策级别赋予不同权重（国家级>部委级>省级>市级），地方政策仅在对应行政区域内生效，搜索关键词不包含地名以避免双重地名错误。",
+        "evidence": [
+          "E001"
+        ]
+      },
+      {
+        "id": "P010",
+        "statement": "地理搜索结果不足时（<3条），应逐级扩大搜索范围：村→街道→区县→城市，而非直接跳到全国范围。直接跳级会导致搜索结果与地块关联性过低。",
+        "source_type": "expert_practice",
+        "rarity": 5,
+        "practicality": 4,
+        "actionability": 4,
+        "reusability": 4,
+        "how_it_changes_agent_behavior": "引擎在数据搜索时自动执行地理降级策略，搜索结果<3条时从当前行政级别逐级向上扩展，而非直接使用全国范围关键词，确保搜索结果与地块保持地理关联性。",
+        "evidence": [
+          "E001",
+          "E003"
+        ]
+      }
+    ]
+  },
+  "evidence_map": {
+    "evidence": [
+      {
+        "id": "E001",
+        "title": "四维决策引擎可运行demo",
+        "type": "demo",
+        "level": "E1",
+        "path": "utils/engine.js",
+        "verified_by": "project_team",
+        "sensitive": false,
+        "notes": "16条领域规则+4条决策规则，微信开发者工具中可运行"
+      },
+      {
+        "id": "E002",
+        "title": "SOP九步选址流程完整可执行",
+        "type": "demo",
+        "level": "E1",
+        "path": "pages/w1-land/ → pages/w9-result/",
+        "verified_by": "project_team",
+        "sensitive": false,
+        "notes": "13个页面完整配置（S1-S4+W1-W9），每步有确认拦截"
+      },
+      {
+        "id": "E003",
+        "title": "三层数据溯源体系",
+        "type": "demo",
+        "level": "E1",
+        "path": "utils/mock-data.js",
+        "verified_by": "project_team",
+        "sensitive": false,
+        "notes": "所有数据项统一{value, sourceType, sourceName, manualNote}结构，W3页面渲染来源标签"
+      },
+      {
+        "id": "E004",
+        "title": "GB/T 18972-2017资源调查模板",
+        "type": "literature",
+        "level": "E1",
+        "path": "pages/w3-resource/",
+        "verified_by": "project_team",
+        "sensitive": false,
+        "notes": "对照国标附录A，8主类23亚类基本覆盖"
+      },
+      {
+        "id": "E005",
+        "title": "法规红线硬过滤机制",
+        "type": "demo",
+        "level": "E1",
+        "path": "utils/engine.js → evaluateCompliance()",
+        "verified_by": "project_team",
+        "sensitive": false,
+        "notes": "红线冲突-30分硬过滤，模拟输入验证输出NO-GO"
+      }
+    ],
+    "claims": [
+      {
+        "id": "C001",
+        "claim": "四维决策引擎可运行并输出结构化评分（合规×空间×经济×市场加权）",
+        "evidence": [
+          "E001"
+        ],
+        "verification": [
+          "在微信开发者工具中运行，输入模拟数据后输出verdict和四维度评分",
+          "检查engine.js中evaluateCompliance/evaluateSpatial/evaluateEconomic/evaluateMarket四个函数是否存在"
+        ],
+        "limitations": [
+          "评分基于模拟数据，未接入真实API",
+          "权重参数待真实案例校准"
+        ]
+      },
+      {
+        "id": "C002",
+        "claim": "每个数据项均有溯源标注（官方API/AI聚合/人工三级）",
+        "evidence": [
+          "E003"
+        ],
+        "verification": [
+          "检查mock-data.js中所有数据项是否包含sourceType字段",
+          "检查W3页面是否渲染🟦官方/🟩AI/🟧人工来源标签"
+        ],
+        "limitations": [
+          "sourceType='official_api'的数据实际为模拟，非真实API返回"
+        ]
+      },
+      {
+        "id": "C003",
+        "claim": "SOP九步选址流程从W1到W9可完整执行",
+        "evidence": [
+          "E002"
+        ],
+        "verification": [
+          "完成W1→W9全流程，每一步均有确认拦截",
+          "检查app.json中13个页面路由配置是否完整"
+        ],
+        "limitations": [
+          "流程中部分页面使用模拟数据占位"
+        ]
+      },
+      {
+        "id": "C004",
+        "claim": "资源调查覆盖GB/T 18972-2017国标20项旅游资源分类",
+        "evidence": [
+          "E004"
+        ],
+        "verification": [
+          "对照国标附录A检查8主类23亚类覆盖度",
+          "检查w3-resource页面是否展示20项调查项"
+        ],
+        "limitations": [
+          "部分亚类为简化处理"
+        ]
+      },
+      {
+        "id": "C005",
+        "claim": "法规红线冲突时引擎自动否决（一票否决机制）",
+        "evidence": [
+          "E005"
+        ],
+        "verification": [
+          "模拟红线冲突输入，引擎输出NO-GO verdict",
+          "检查evaluateCompliance()中红线冲突扣分逻辑"
+        ],
+        "limitations": [
+          "红线检查项为预埋数据，非实时API查询"
+        ]
+      },
+      {
+        "id": "C006",
+        "claim": "地理降级搜索策略可逐级扩大搜索范围",
+        "evidence": [
+          "E001",
+          "E003"
+        ],
+        "verification": [
+          "检查搜索结果不足时是否触发降级策略",
+          "检查关键词是否按村→街道→区县→城市逐级扩展"
+        ],
+        "limitations": [
+          "降级策略为协议设计，MVP阶段使用模拟数据验证"
+        ]
+      }
+    ]
+  },
+  "execution_protocols": {
+    "protocols": [
+      {
+        "id": "S1",
+        "title": "系统启动封面",
+        "goal": "展示项目名称与定位，渲染动态封面",
+        "agent_actions": [
+          "展示项目名称\"踏歌行智策通\"与副标题",
+          "渲染CSS粒子动画/渐变背景"
+        ],
+        "parameters": [
+          "cover_style"
+        ],
+        "verification": [
+          "页面加载成功",
+          "标题正确渲染"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "S2",
+        "title": "使用指南",
+        "goal": "展示数据优先级规则和操作步骤概览",
+        "agent_actions": [
+          "展示数据优先级规则（🟦官方API > 🟩AI聚合 > 🟧人工修正）",
+          "说明W1→W9流程概览"
+        ],
+        "parameters": [
+          "guide_language"
+        ],
+        "verification": [
+          "用户可下滑查看完整指南"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "W1",
+        "title": "身份认证",
+        "goal": "收集项目ID，生成项目身份卡",
+        "agent_actions": [
+          "收集用户输入的项目编号",
+          "生成项目身份卡（含项目ID和创建时间）"
+        ],
+        "parameters": [
+          "project_id_format",
+          "auth_timestamp"
+        ],
+        "verification": [
+          "项目ID非空",
+          "ID格式符合规范（PROJ-YYYY-XX-NNN）"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "W2",
+        "title": "地块框选",
+        "goal": "获取地块地理坐标和行政区划信息",
+        "agent_actions": [
+          "获取地理坐标（用户点击地图或手动输入）",
+          "查询行政区划代码和官方名称",
+          "获取地形描述"
+        ],
+        "parameters": [
+          "geo_coord_lat",
+          "geo_coord_lng",
+          "admin_code",
+          "terrain_type"
+        ],
+        "verification": [
+          "坐标在有效范围（中国境内）",
+          "行政区划代码可解析"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "W3",
+        "title": "资源调查",
+        "goal": "按GB/T 18972-2017标准完成20项旅游资源调查",
+        "agent_actions": [
+          "展示8大类20项调查模板",
+          "渲染数据来源标签（🟦官方/🟩AI/🟧人工）",
+          "提供修正入口（用户点击修正/备注）"
+        ],
+        "parameters": [
+          "resource_category",
+          "source_type",
+          "manual_note"
+        ],
+        "verification": [
+          "所有20项资源数据已加载",
+          "来源标签正确渲染",
+          "修正备注可保存"
+        ],
+        "evidence": [
+          "E003",
+          "E004"
+        ]
+      },
+      {
+        "id": "W4",
+        "title": "政策引导",
+        "goal": "展示四级政策体系（国家/省/市/区），标注利好/约束方向",
+        "agent_actions": [
+          "展示四级政策卡片列表",
+          "标注政策方向（绿色↑利好 / 红色↓约束）"
+        ],
+        "parameters": [
+          "policy_level",
+          "policy_direction",
+          "policy_keyword"
+        ],
+        "verification": [
+          "四级政策均有数据",
+          "方向标签正确"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "W5",
+        "title": "市场调研",
+        "goal": "展示PEST分析、竞品分析和市场份额图表",
+        "agent_actions": [
+          "PEST分析展示（政治/经济/社会/技术四维度）",
+          "竞品对比表格",
+          "市场份额图表渲染"
+        ],
+        "parameters": [
+          "pest_dimension",
+          "competitor_name",
+          "market_share_data"
+        ],
+        "verification": [
+          "PEST四维度均有数据",
+          "图表正确渲染"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "W6",
+        "title": "法规红线",
+        "goal": "展示三区三线检查项，硬过滤冲突项目",
+        "agent_actions": [
+          "展示5大检查项（生态红线/基本农田/城镇开发边界/地质灾害/文保单位）",
+          "硬过滤提示（冲突项高亮+NO-GO警告）"
+        ],
+        "parameters": [
+          "redline_category",
+          "conflict_status",
+          "severity_level"
+        ],
+        "verification": [
+          "5项检查全部完成",
+          "冲突项明确标注"
+        ],
+        "evidence": [
+          "E005"
+        ]
+      },
+      {
+        "id": "W7",
+        "title": "SWOT分析",
+        "goal": "基于前6步数据生成SWOT矩阵和战略建议",
+        "agent_actions": [
+          "生成SWOT四象限（优势/劣势/机会/威胁）",
+          "生成智能战略建议文本"
+        ],
+        "parameters": [
+          "swot_quadrant",
+          "strategy_type"
+        ],
+        "verification": [
+          "四象限均有内容"
+        ],
+        "evidence": [
+          "E001",
+          "E002"
+        ]
+      },
+      {
+        "id": "W8",
+        "title": "需求澄清",
+        "goal": "收集用户主观需求和补充信息",
+        "agent_actions": [
+          "收集用户填写的需求文本",
+          "标注为用户主观输入（sourceType='manual'）"
+        ],
+        "parameters": [
+          "demand_text",
+          "priority_level"
+        ],
+        "verification": [
+          "文本非空（可选）"
+        ],
+        "evidence": [
+          "E002"
+        ]
+      },
+      {
+        "id": "W9",
+        "title": "战略定位与三向成果",
+        "goal": "汇总全流程数据执行四维评分并输出决策建议",
+        "agent_actions": [
+          "执行四维评分引擎（合规35/空间25/经济20/市场20）",
+          "生成三级建议（一级宏观/二级中观/三级微观）",
+          "输出结构化决策报告"
+        ],
+        "parameters": [
+          "compliance_weight",
+          "spatial_weight",
+          "economic_weight",
+          "market_weight"
+        ],
+        "verification": [
+          "评分引擎输出有效（verdict ∈ {GO, PAUSE, CONDITIONAL, NO-GO}）",
+          "四个维度评分均在0-100范围",
+          "置信度在0-100范围"
+        ],
+        "evidence": [
+          "E001",
+          "E005"
+        ]
+      }
+    ]
+  },
+  "expert_collaboration": {
+    "expert_roles": [
+      "文旅规划专家",
+      "户外营地/研学专家",
+      "土地/规划法律顾问",
+      "生态/环境专家",
+      "财务投资顾问"
+    ],
+    "expert_review_process": "每个项目评分完成后，由文旅规划专家审核定位结论和法律顾问审核合规评估，必要时调整评分规则和权重。审核结果沉淀为规则修正建议，经确认后更新engine.js。",
+    "knowledge_transfer_mechanism": "将专家审核后的规则修正沉淀到engine.js评分规则和rules.json参数，案例脱敏后纳入mock-data.js作为参考基准，使1位专家的经验可放大给所有用户。",
+    "evidence": [
+      "E001"
+    ]
+  },
+  "feedback_loop": {
+    "captures_trace": true,
+    "failure_taxonomy": true,
+    "repair_samples": false,
+    "benchmark_update": false,
+    "domain_pack_update": true,
+    "longitudinal_profiles": false,
+    "expert_reviewer_loop": false,
+    "evidence": [
+      "E001",
+      "E005"
+    ]
+  },
+  "open_source_provenance": {
+    "upstreams": [
+      {
+        "name": "微信小程序原生框架",
+        "type": "平台SDK",
+        "license": "微信开放平台服务协议",
+        "usage": "小程序页面渲染、组件系统、生命周期管理"
+      },
+      {
+        "name": "微信内置Map组件",
+        "type": "平台组件",
+        "license": "微信开放平台服务协议",
+        "usage": "W2页面地图展示（当前为虚拟占位）"
+      },
+      {
+        "name": "GB/T 18972-2017",
+        "type": "国家标准",
+        "license": "公开标准",
+        "usage": "W3资源调查的分类框架（8主类23亚类）"
+      }
+    ],
+    "team_delta": {
+      "code": [
+        "四维决策引擎（utils/engine.js，16条领域规则+4条决策规则）",
+        "SOP九步选址流程（pages/w1-land/ → pages/w9-result/，13个页面）",
+        "三层数据溯源体系（utils/mock-data.js，{value,sourceType,sourceName,manualNote}结构）",
+        "关键词映射体系（utils/keyword-mapping.js，20+关键词映射规则）"
+      ],
+      "domain_rules": [
+        "生态红线硬过滤规则（-30分一票否决）",
+        "基本农田冲突否决规则（-20分硬过滤）",
+        "四维权重评分规则（合规35/空间25/经济20/市场20）",
+        "地理降级搜索策略（村→街道→区县→城市逐级扩展）"
+      ],
+      "validation": [
+        "微信开发者工具运行验证",
+        "模拟数据全流程测试"
+      ],
+      "data": [
+        "模拟地块数据（含溯源标注，3级来源分类）",
+        "GB/T 18972-2017资源调查模板（20项可勾选调查清单）"
+      ],
+      "workflow": [
+        "W1-W9九步标准化选址流程（含S1-S4引导页）"
+      ],
+      "safety": [
+        "红线一票否决机制",
+        "不替代法律意见、金融决策的边界声明",
+        "用户修正备注机制（manualNote）"
+      ]
+    },
+    "originality_statement": "本项目基于微信小程序原生框架开发，核心算法（四维评分引擎）、\n业务流程（SOP九步选址）、数据架构（三层数据溯源）均为团队自主研发。\n上游依赖仅限于平台SDK和国标引用，不存在大量复用开源项目代码的情况。\n所有业务逻辑和领域规则源于10年文旅规划实践经验的系统化沉淀。\n"
+  },
+  "adaptation": {
+    "user_or_project_profiles": true,
+    "parameterized_tasks": true,
+    "history_based_adaptation": false,
+    "environment_adaptation": true,
+    "human_override": true,
+    "evidence": [
+      "E001",
+      "E003",
+      "E005"
+    ]
+  },
+  "risk_flags": {
+    "flags": []
+  },
+  "safety_boundary": {
+    "not_do": [
+      "不替代法律意见、合规判断（土地性质判定、合规手续办理、法律风险评估）",
+      "不做金融投资决策（投资回报预估仅供参考，不可作为投资决策唯一依据）",
+      "不处理敏感个人信息（不收集个人身份信息、精确位置轨迹、通讯录）",
+      "不替代工程勘察（地质灾害评估、水文地质调查、工程可行性）",
+      "不自动触发行政审批（用地审批、环评批复、施工许可）"
+    ],
+    "human_review_required": [
+      "生态保护红线冲突时必须人工联系当地自然资源局核实",
+      "永久基本农田占用时禁止开发，建议调整选址",
+      "文保单位影响范围需联系文旅局/文物局评估建设控制地带",
+      "地质灾害风险需委托具备资质的勘察单位出具专项评估报告",
+      "投资回报周期超过6年需财务顾问介入重新测算"
+    ],
+    "data_handling": [
+      "仅收集项目ID（用户输入）、地块坐标（用户框选）、用户修正备注（用户主动填写）",
+      "不收集个人身份信息和精确位置轨迹",
+      "数据本地存储（wx.setStorageSync），不上传服务器",
+      "未来接入腾讯地图API时坐标数据发送至腾讯位置服务，需单独获取用户明示同意"
+    ],
+    "consent_or_authorization": [
+      "用户主动输入项目ID和地块信息视为授权使用",
+      "修正备注由用户主动填写并确认后保存",
+      "未来接入真实API时需单独获取用户明示同意"
+    ],
+    "risk_scenarios": [
+      "生态红线冲突→项目被叫停→投资损失",
+      "基本农田占用→违法用地→行政处罚",
+      "AI聚合数据偏差→选址评估失准→投资误判",
+      "政策变动→合规评估过时→风险遗漏",
+      "地质灾害未识别→安全事故→人身财产损失"
+    ],
+    "audit_logs": false,
+    "fallback_plan": "评分引擎异常时返回默认PAUSE结论并提示用户人工复核；API不可用时降级到mock数据并标注\"离线模式\"提示。",
+    "evidence": [
+      "E001",
+      "E005"
+    ]
+  },
+  "social_civilization": {
+    "claimed_level": 3,
+    "beneficiaries": [
+      "文旅项目投资者和开发者",
+      "地方政府文旅部门",
+      "乡村社区和生态保护区",
+      "户外营地和研学基地运营者"
+    ],
+    "unmet_need_severity": "文旅项目因选址不当导致约30%项目被叫停或亏损，生态红线冲突频发，地方政府缺乏标准化筛选工具，中小投资者无力承担高昂咨询费用。",
+    "long_term_capability_impact": "将专家选址经验固化为可执行引擎，降低违规投资风险，保护生态红线区域，促进文旅产业与生态保护协调发展。",
+    "externalities": "减少违规投资造成的社会资源浪费，降低生态破坏风险，提高土地利用效率，辅助地方政府科学招商。",
+    "ability_propagation": "将1位文旅规划专家的选址经验通过系统放大给100+用户，降低专业门槛，让中小投资者也能做初步选址评估。",
+    "evidence": [
+      "E001",
+      "E005"
+    ]
+  }
+}

@@ -76,7 +76,7 @@ Page({
     }
 
     // 跳转到 S3 产品介绍
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/s3-intro/index',
       fail: () => {
         wx.redirectTo({

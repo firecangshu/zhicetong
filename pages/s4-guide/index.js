@@ -90,7 +90,7 @@ Page({
 
   // 确认并继续 - 跳转到W1地块选择
   onConfirmAndNext() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/w1-land/index',
       fail: () => {
         wx.showToast({

@@ -26,8 +26,8 @@
 
   <!-- 页面头部 -->
   <view class="page-header">
-    <view class="page-title">W9 战略定位建议书</view>
-    <view class="page-subtitle">基于 W2-W8 数据盘存的综合建议</view>
+    <view class="page-title">W8 战略定位建议书</view>
+    <view class="page-subtitle">基于 W2-W7 数据盘存的综合定位建议</view>
   </view>
 
   <view class="page-container">

@@ -85,7 +85,7 @@ Page({
         
         // ✅ 跳转到S2身份选择页
         setTimeout(() => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/s3-role/index',
             fail: () => {
               wx.redirectTo({
@@ -114,7 +114,7 @@ Page({
         
         // ✅ 跳转到S2身份选择页
         setTimeout(() => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/s3-role/index',
             fail: () => {
               wx.redirectTo({
@@ -219,7 +219,7 @@ Page({
         
         // ✅ 跳转到S2身份选择页
         setTimeout(() => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/s3-role/index',
             fail: () => {
               wx.redirectTo({
@@ -249,7 +249,7 @@ Page({
         
         // ✅ 跳转到S2身份选择页
         setTimeout(() => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/s3-role/index',
             fail: () => {
               wx.redirectTo({
@@ -303,7 +303,7 @@ Page({
         
         // ✅ 跳转到S2身份选择页
         setTimeout(() => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/s3-role/index',
             fail: () => {
               wx.redirectTo({
@@ -440,7 +440,7 @@ Page({
     
     // ✅ 跳转到S2身份选择页
     setTimeout(() => {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/s3-role/index',
         fail: () => {
           wx.redirectTo({

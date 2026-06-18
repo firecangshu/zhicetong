@@ -1,103 +1,48 @@
 # open_source_provenance.yaml
 # 踏歌行智策通 —— 开源来源与团队增量声明
-# 生成时间：2026-06-11
-# 说明：明确区分上游开源基础与团队自主研发增量
+# 生成时间：2026-06-18
+# 格式：AVJ引擎标准格式（upstreams/team_delta/originality_statement）
 
-provenance_version: "1.0"
-generated_at: "2026-06-11"
-
-# ======== 上游开源/平台依赖 ========
-upstream:
+upstreams:
   - name: "微信小程序原生框架"
     type: "平台SDK"
-    provider: "腾讯微信"
     license: "微信开放平台服务协议"
     usage: "小程序页面渲染、组件系统、生命周期管理"
-    version: "基础库 3.16.1"
-    team_modification: "none"
-
   - name: "微信内置Map组件"
     type: "平台组件"
-    provider: "腾讯微信"
     license: "微信开放平台服务协议"
     usage: "W2页面地图展示（当前为虚拟占位）"
-    version: "内置"
-    team_modification: "none"
-
-  - name: "腾讯位置服务API"
-    type: "API服务"
-    provider: "腾讯"
-    license: "腾讯云服务协议"
-    usage: "预留接口：地理编码、POI搜索、行政区划查询"
-    version: "WebService API v2"
-    team_modification: "仅预留调用接口，未实际接入"
-
   - name: "GB/T 18972-2017"
     type: "国家标准"
-    provider: "国家市场监督管理总局/国家标准化管理委员会"
     license: "公开标准"
     usage: "W3资源调查的分类框架（8主类23亚类）"
-    version: "2017版"
-    team_modification: "将标准转化为可执行的20项调查模板"
 
-# ======== 团队自主研发增量 ========
-team_increments:
-  - id: INC001
-    name: "四维决策引擎"
-    description: "合规(35%)×空间(25%)×经济(20%)×市场(20%)加权评分体系"
-    innovation: "首次将文旅选址决策抽象为4维度16条领域规则+4条决策规则的量化引擎"
-    source: "原创"
-    evidence: "utils/engine.js"
-    evidence_level: "E1"
+team_delta:
+  code:
+    - 四维决策引擎（utils/engine.js，16条领域规则+4条决策规则）
+    - SOP九步选址流程（pages/w1-land/ → pages/w9-result/，13个页面）
+    - 三层数据溯源体系（utils/mock-data.js，{value,sourceType,sourceName,manualNote}结构）
+    - 关键词映射体系（utils/keyword-mapping.js，20+关键词映射规则）
+  domain_rules:
+    - 生态红线硬过滤规则（-30分一票否决）
+    - 基本农田冲突否决规则（-20分硬过滤）
+    - 四维权重评分规则（合规35/空间25/经济20/市场20）
+    - 地理降级搜索策略（村→街道→区县→城市逐级扩展）
+  validation:
+    - 微信开发者工具运行验证
+    - 模拟数据全流程测试
+  data:
+    - 模拟地块数据（含溯源标注，3级来源分类）
+    - GB/T 18972-2017资源调查模板（20项可勾选调查清单）
+  workflow:
+    - W1-W9九步标准化选址流程（含S1-S4引导页）
+  safety:
+    - 红线一票否决机制
+    - 不替代法律意见、金融决策的边界声明
+    - 用户修正备注机制（manualNote）
 
-  - id: INC002
-    name: "SOP九步选址流程"
-    description: "从地块框选到三向成果的标准化操作流程"
-    innovation: "将文旅项目选址经验固化为9步可执行协议"
-    source: "原创"
-    evidence: "pages/w1-land/ → pages/w9-result/"
-    evidence_level: "E1"
-
-  - id: INC003
-    name: "三层数据溯源体系"
-    description: "official_api > ai_aggregation > manual 数据优先级与溯源标注"
-    innovation: "首创文旅领域数据可信度分级标注机制"
-    source: "原创"
-    evidence: "utils/mock-data.js 中 {value, sourceType, sourceName, manualNote} 结构"
-    evidence_level: "E1"
-
-  - id: INC004
-    name: "关键词映射体系"
-    description: "文旅关键词→搜索策略→数据源的映射规则"
-    innovation: "针对文旅领域设计的关键词语义扩展和降级策略"
-    source: "原创"
-    evidence: "utils/keyword-mapping.js"
-    evidence_level: "E1"
-
-  - id: INC005
-    name: "法规红线硬过滤机制"
-    description: "生态红线/基本农田冲突时一票否决"
-    innovation: "将合规要求转化为可执行的引擎规则"
-    source: "原创（基于法规要求）"
-    evidence: "utils/engine.js → evaluateCompliance()"
-    evidence_level: "E1"
-
-  - id: INC006
-    name: "GB/T 18972-2017 可执行模板"
-    description: "将国标转化为20项可勾选、可修正的调查清单"
-    innovation: "国家标准→前端可交互表单的转化"
-    source: "原创（基于国标）"
-    evidence: "pages/w3-resource/ + utils/mock-data.js"
-    evidence_level: "E1"
-
-# ======== 增量占比分析 ========
-increment_ratio:
-  upstream_code: "5%"      # 微信小程序框架等基础依赖
-  upstream_data: "10%"     # GB/T标准、政策文号等公开数据
-  team_increments: "85%"   # 引擎、流程、溯源体系、映射规则等
-
-# ======== 声明 ========
-declaration: |
-  本项目基于微信小程序原生框架开发，核心算法、业务流程、
-  数据架构均为团队自主研发。上游依赖仅限于平台SDK和标准引用，
-  不存在大量复用开源项目代码的情况。
+originality_statement: |
+  本项目基于微信小程序原生框架开发，核心算法（四维评分引擎）、
+  业务流程（SOP九步选址）、数据架构（三层数据溯源）均为团队自主研发。
+  上游依赖仅限于平台SDK和国标引用，不存在大量复用开源项目代码的情况。
+  所有业务逻辑和领域规则源于10年文旅规划实践经验的系统化沉淀。

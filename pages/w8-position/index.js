@@ -1,4 +1,4 @@
-// pages/w9-position/index.js
+// pages/w8-position/index.js
 const { mockData } = require('../../utils/mock-data.js')
 
 Page({
