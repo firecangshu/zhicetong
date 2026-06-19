@@ -247,7 +247,8 @@
 .summary-badge {
   font-size: 20rpx;
   color: #00B365;
-  background: #FFFFFF;
+  background: rgba(0, 179, 101, 0.12);
+  border: 1rpx solid rgba(0, 179, 101, 0.25);
   padding: 4rpx 14rpx;
   border-radius: 20rpx;
   font-weight: 600;

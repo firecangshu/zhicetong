@@ -122,17 +122,20 @@
 
 .zone-card.zone-danger {
   border-left-color: #E53935;
-  background: linear-gradient(135deg, #FFF8F0 0%, #FFFFFF 100%);
+  background: rgba(229, 57, 53, 0.08);
+  border: 1rpx solid rgba(229, 57, 53, 0.15);
 }
 
 .zone-card.zone-warning {
   border-left-color: #F5A623;
-  background: linear-gradient(135deg, #FFF8F0 0%, #FFFFFF 100%);
+  background: rgba(245, 166, 35, 0.08);
+  border: 1rpx solid rgba(245, 166, 35, 0.15);
 }
 
 .zone-card.zone-safe {
   border-left-color: #00B365;
-  background: linear-gradient(135deg, #F0FFF4 0%, #FFFFFF 100%);
+  background: rgba(0, 179, 101, 0.08);
+  border: 1rpx solid rgba(0, 179, 101, 0.15);
 }
 
 .zone-icon {

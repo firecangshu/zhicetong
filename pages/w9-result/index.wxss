@@ -351,12 +351,14 @@
 }
 
 .verdict-GO {
-  background: #E8F5E9;
+  background: rgba(0, 179, 101, 0.12);
+  border: 1rpx solid rgba(0, 179, 101, 0.25);
   color: #00B365;
 }
 
 .verdict-CONDITIONAL {
-  background: #FFF8E1;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
   color: #F5A623;
 }
 
@@ -367,7 +369,8 @@
 }
 
 .verdict-NO-GO {
-  background: #FFEBEE;
+  background: rgba(229, 57, 53, 0.12);
+  border: 1rpx solid rgba(229, 57, 53, 0.25);
   color: #E53935;
 }
 
@@ -533,19 +536,22 @@
 
 /* 警告类型 */
 .alert-warning {
-  background: #FFF8E1;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
   border-left: 6rpx solid #F5A623;
 }
 
 /* 信息类型 */
 .alert-info {
-  background: #E3F2FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   border-left: 6rpx solid #00D4FF;
 }
 
 /* 危险类型 */
 .alert-danger {
-  background: #FFEBEE;
+  background: rgba(229, 57, 53, 0.12);
+  border: 1rpx solid rgba(229, 57, 53, 0.25);
   border-left: 6rpx solid #E53935;
 }
 
