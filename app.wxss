@@ -98,8 +98,8 @@ page {
   width: 100%;
   height: 120rpx;
   white-space: nowrap;
-  background: #fff;
-  border-bottom: 1rpx solid #F0F0F0;
+  background: #0a0e1a;
+  border-bottom: 1rpx solid #1e2335;
 }
 
 /* 步骤条内的返回按钮 */
@@ -110,8 +110,8 @@ page {
   padding: 8rpx 20rpx 8rpx 12rpx;
   margin-right: 16rpx;
   font-size: 26rpx;
-  color: #1A6DFF;
-  background: #F0F5FF;
+  color: #00D4FF;
+  background: #1e2335;
   border-radius: 32rpx;
   flex-shrink: 0;
   vertical-align: middle;
@@ -125,7 +125,7 @@ page {
   align-items: center;
   justify-content: center;
   padding: 20rpx 30rpx 16rpx;
-  background: #fff;
+  background: #0a0e1a;
   min-width: max-content;
 }
 
@@ -137,13 +137,13 @@ page {
 }
 
 .step-item.active .step-num {
-  background: #1A6DFF;
-  color: #fff;
+  background: #FFFFFF;
+  color: #0a0e1a;
 }
 
 .step-item.active .step-label {
-  color: #1A6DFF;
-  font-weight: 600;
+  color: #FFFFFF;
+  font-weight: 700;
 }
 
 .step-num {
@@ -152,8 +152,8 @@ page {
   line-height: 48rpx;
   text-align: center;
   border-radius: 50%;
-  background: #F0F0F0;
-  color: #999;
+  background: #1e2335;
+  color: #A0A8B8;
   font-size: 24rpx;
   font-weight: 600;
   margin-bottom: 8rpx;
@@ -161,7 +161,7 @@ page {
 
 .step-label {
   font-size: 22rpx;
-  color: #999;
+  color: #A0A8B8;
 }
 
 .step-arrow {

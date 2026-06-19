@@ -28,6 +28,5 @@
     }
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json",
-  "version": "V2.2.0"
+  "sitemapLocation": "sitemap.json"
 }
