@@ -581,3 +581,14 @@
   margin-left: 12rpx;
   flex-shrink: 0;
 }
+
+/* ========= V2.2.0 精修覆盖层（发光+玻璃态+胶囊按钮+白色步骤） ========= */
+.step-bar-scroll { background: #0a0e1a !important; }
+.step-item.active .step-num { background: #FFFFFF !important; color: #0a0e1a !important; }
+.step-item.active .step-label { color: #FFFFFF !important; font-weight: 700 !important; }
+.page-title { text-shadow: 0 0 10px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.1) !important; }
+.card, .map-section, .coord-section, .summary-card, .info-card, .swot-card, .demand-card, .position-card, .result-card, .report-card, .resource-card, .policy-card, .market-card, .redline-card { background: rgba(20, 24, 43, 0.6) !important; border: 1px solid rgba(0, 212, 255, 0.15) !important; box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3), inset 0 1rpx 0 rgba(255, 255, 255, 0.05) !important; }
+.card-title, .summary-title, .coord-section-title { text-shadow: 0 0 8px rgba(0, 212, 255, 0.2) !important; }
+.data-source-badge, .summary-badge, .badge { background: rgba(0, 212, 255, 0.1) !important; border: 1px solid rgba(0, 212, 255, 0.2) !important; }
+.btn-next { border-radius: 48rpx !important; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 136, 204, 0.15) 100%) !important; color: #00D4FF !important; border: 1px solid rgba(0, 212, 255, 0.3) !important; box-shadow: 0 0 15px rgba(0, 212, 255, 0.15) !important; }
+.map-toolbar { background: rgba(20, 24, 43, 0.6) !important; border-top: 1px solid rgba(0, 212, 255, 0.1) !important; }
