@@ -7,21 +7,22 @@
 
 ---
 
-## [2.2.0] - 2026-06-18 (AVJ最终修复版)
-
-### ✨ Added (新增功能)
-- **OPENSOURCE.md**：开源来源披露文件
-- **AVJ材料完整性检查**：submission.json
+## [2.2.0] - 2026-06-19 (AVJ最终修复版·UI精修V2.2.0)
 
 ### 🐛 Fixed (Bug修复)
-- **11个YAML文件**：AVJ格式修复（project_card/domain_prior_ledger/evidence_map/execution_protocols/expert_collaboration/feedback_loop/adaptation/safety_boundary/open_source_provenance/social_civilization/risk_flags）
-- **小程序导航**：S1-S4 redirectTo不压栈，S4→W1 reLaunch清空引导页栈
-- **W8页面标题**：修正为"W8 战略定位建议书"
+- **W6编译错误**：src-official/src-ai/src-manual标签border语法错误（1rpx裸行）
 - **s4-guide语法错误**：修复Unexpected token
 - **s1-cover语法错误**：修复Unexpected token
+- **W8页面标题**：修正为"W8 战略定位建议书"
+
+### 🎨 UI精修 (全局暗色科技风统一)
+- **备注区域弱化融入**：W2/W3/W4/W5/W7的亮米色备注块(`#FFF8F0`) → 半透明暖色底(`rgba(245,166,35,0.08)`) + 细边框，取消喧宾夺主
+- **全局标签暗色融入**：7个页面46处亮色标签(`#E8F7ED/#E8F4FD/#FFF3E0`) → 半透明+同色边框，消除白底突兀感
+- **白底卡片暗色融入**：W1/W2/W5/W8/W9的`#F8F9FA/#FFFBF5`白底卡片 → `#14182b`深色底+细边框
+- **W6按钮统一**：`.btn-primary`(紫色渐变) → `.next-btn`胶囊按钮，与全局风格一致
+- **进度条背景修复**：W2/W4的`#F0F0F0`进度条底色 → `#1e2335`深色
 
 ### 📝 Known Issues (已知问题)
-- `w4-market/index.js:186` `scopeMap` 值拼写（`district`）待修复
 - 无真实API接入（使用mock数据）
 - 证据等级E1
 
