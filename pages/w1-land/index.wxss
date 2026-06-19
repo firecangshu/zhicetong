@@ -340,7 +340,7 @@
 
 .source-tag.ai {
   color: #8C6BFF;
-  background: #F3F0FF;
+  background: #14182b;
 }
 
 .detail-value {

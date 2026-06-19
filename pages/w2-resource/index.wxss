@@ -143,7 +143,7 @@
 
 .data-card.highlight {
   border-left: 8rpx solid #00D4FF;
-  background: #F0F5FF;
+  background: #14182b;
 }
 
 .card-header {
@@ -469,7 +469,7 @@
 .source-trace {
   margin-top: 16rpx;
   padding: 20rpx;
-  background: #F8FAFB;
+  background: #14182b;
   border-radius: 12rpx;
   border-left: 6rpx solid #00D4FF;
 }

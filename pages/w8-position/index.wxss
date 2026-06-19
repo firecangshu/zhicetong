@@ -68,7 +68,7 @@
   align-items: flex-start;
   padding: 16rpx 12rpx;
   margin-bottom: 12rpx;
-  background: #F8F9FA;
+  background: #14182b;
   border-radius: 10rpx;
 }
 

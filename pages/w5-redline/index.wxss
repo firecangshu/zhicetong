@@ -199,7 +199,7 @@
 .redline-item {
   padding: 20rpx 16rpx;
   margin-bottom: 16rpx;
-  background: #F8F9FA;
+  background: #14182b;
   border-radius: 12rpx;
   position: relative;
 }
@@ -234,7 +234,7 @@
 .reg-item {
   padding: 20rpx 16rpx;
   margin-bottom: 16rpx;
-  background: #F8F9FA;
+  background: #14182b;
   border-radius: 12rpx;
   position: relative;
 }
