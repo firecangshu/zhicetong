@@ -2,26 +2,46 @@
 <!--W7 需求澄清 V2.8 全量预埋版-->
 <view class="demand-page">
   <!-- 步骤条 -->
-    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
-    <view class="step-bar">
-      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item active"><view class="step-num">W7</view><text class="step-label">需求</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
-      <text class="step-arrow">→</text>
-      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
-    </view>
+    <scroll-view scroll-x class="step-bar-scroll" enhanced show-scrollbar="{{false}}">
+
+    <view class="step-bar">
+
+      <view class="step-item"><view class="step-num">W1</view><text class="step-label">地块</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W2</view><text class="step-label">资源</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W3</view><text class="step-label">政策</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W4</view><text class="step-label">市场</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W5</view><text class="step-label">法规</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W6</view><text class="step-label">SWOT</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item active"><view class="step-num">W7</view><text class="step-label">需求</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W8</view><text class="step-label">定位</text></view>
+
+      <text class="step-arrow">→</text>
+
+      <view class="step-item"><view class="step-num">W9</view><text class="step-label">成果</text></view>
+
+    </view>
+
   </scroll-view>
 
   <view class="page-header">
@@ -50,9 +70,10 @@
             <text>{{option}}</text>
           </view>
         </view>
-        <view class="manual-note" wx:if="{{demand.manualNote}}">📝 备注：{{demand.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" bindtap="onEditNote" data-key="{{demand.key}}">✏️ 添加备注</button>
+        <view class="manual-note" wx:if="{{demand.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{demand.manualNote}}</text>
+          <text class="note-edit" bindtap="onEditNote" data-key="{{demand.key}}">✏️</text>
         </view>
       </view>
     </view>
@@ -71,7 +92,10 @@
               {{item.sourceType === 'official_api' ? '官方API' : item.sourceType === 'ai_aggregation' ? 'AI聚合' : '人工'}}
             </view>
           </view>
-          <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
+          <view class="manual-note" wx:if="{{item.manualNote}}">
+            <text class="note-icon">📝</text>
+            <text class="note-text">{{item.manualNote}}</text>
+          </view>
         </view>
       </view>
     </view>

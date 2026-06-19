@@ -194,15 +194,34 @@
 
 /* ========= 人工备注 ========= */
 .manual-note {
-  display: block;
-  margin-top: 12rpx;
-  padding: 14rpx 18rpx;
-  background: #FFF8F0;
-  border-left: 6rpx solid #F5A623;
-  border-radius: 0 8rpx 8rpx 0;
-  font-size: 24rpx;
-  color: #8C6900;
-  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10rpx;
+  padding: 8rpx 12rpx;
+  background: rgba(245, 166, 35, 0.08);
+  border: 1rpx solid rgba(245, 166, 35, 0.15);
+  border-radius: 8rpx;
+  gap: 6rpx;
+}
+
+.manual-note .note-icon {
+  font-size: 22rpx;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.manual-note .note-text {
+  flex: 1;
+  font-size: 22rpx;
+  color: #D4A853;
+  line-height: 1.5;
+}
+
+.manual-note .note-edit {
+  font-size: 20rpx;
+  color: rgba(0, 212, 255, 0.5);
+  flex-shrink: 0;
+  padding: 2rpx 8rpx;
 }
 
 /* ========= 编辑按钮 ========= */

@@ -65,10 +65,11 @@
         </view>
         <view wx:if="{{item.expanded}}">
           <text class="policy-clause">{{item.clause}}</text>
-          <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        </view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditPolicy" data-idx="{{item.globalIdx}}">✏️ 修正/备注</button>
+          <view class="manual-note" wx:if="{{item.manualNote}}">
+            <text class="note-icon">📝</text>
+            <text class="note-text">{{item.manualNote}}</text>
+            <text class="note-edit" catchtap="onEditPolicy" data-idx="{{item.globalIdx}}">✏️</text>
+          </view>
         </view>
       </view>
     </view>

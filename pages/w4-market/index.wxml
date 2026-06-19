@@ -42,11 +42,14 @@
         </view>
       </view>
       <text class="data-value">{{pestPoliticalValue}}</text>
-      <view class="manual-note" wx:if="{{pestPoliticalManualNote}}">📝 备注：{{pestPoliticalManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestPolitical" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestPolitical">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{pestPoliticalManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{pestPoliticalManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="pestPolitical">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestPolitical" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="pestEconomic">
@@ -57,11 +60,14 @@
         </view>
       </view>
       <text class="data-value">{{pestEconomicValue}}</text>
-      <view class="manual-note" wx:if="{{pestEconomicManualNote}}">📝 备注：{{pestEconomicManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestEconomic" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestEconomic">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{pestEconomicManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{pestEconomicManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="pestEconomic">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestEconomic" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="pestSocial">
@@ -72,11 +78,14 @@
         </view>
       </view>
       <text class="data-value">{{pestSocialValue}}</text>
-      <view class="manual-note" wx:if="{{pestSocialManualNote}}">📝 备注：{{pestSocialManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestSocial" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestSocial">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{pestSocialManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{pestSocialManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="pestSocial">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestSocial" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="pestTechnological">
@@ -87,11 +96,14 @@
         </view>
       </view>
       <text class="data-value">{{pestTechnologicalValue}}</text>
-      <view class="manual-note" wx:if="{{pestTechnologicalManualNote}}">📝 备注：{{pestTechnologicalManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestTechnological" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="pestTechnological">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{pestTechnologicalManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{pestTechnologicalManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="pestTechnological">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="pestTechnological" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <!-- 客源市场 -->
@@ -105,11 +117,14 @@
         </view>
       </view>
       <text class="data-value">{{touristSourceCoreValue}}</text>
-      <view class="manual-note" wx:if="{{touristSourceCoreManualNote}}">📝 备注：{{touristSourceCoreManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourceCore" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="touristSourceCore">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{touristSourceCoreManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{touristSourceCoreManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="touristSourceCore">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourceCore" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="touristSourceSecondary">
@@ -120,11 +135,14 @@
         </view>
       </view>
       <text class="data-value">{{touristSourceSecondaryValue}}</text>
-      <view class="manual-note" wx:if="{{touristSourceSecondaryManualNote}}">📝 备注：{{touristSourceSecondaryManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourceSecondary" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="touristSourceSecondary">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{touristSourceSecondaryManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{touristSourceSecondaryManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="touristSourceSecondary">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourceSecondary" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="touristSourcePotential">
@@ -135,11 +153,14 @@
         </view>
       </view>
       <text class="data-value">{{touristSourcePotentialValue}}</text>
-      <view class="manual-note" wx:if="{{touristSourcePotentialManualNote}}">📝 备注：{{touristSourcePotentialManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourcePotential" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="touristSourcePotential">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{touristSourcePotentialManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{touristSourcePotentialManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="touristSourcePotential">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="touristSourcePotential" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <!-- 商圈分布 -->
@@ -155,11 +176,14 @@
       <text class="data-value">人口：{{businessCorePopulation}}</text>
       <text class="data-value">供给：{{businessCoreSupply}}</text>
       <text class="data-value">缺口：{{businessCoreGap}}</text>
-      <view class="manual-note" wx:if="{{businessCoreNote}}">📝 补充：{{businessCoreNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessCore" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddBusinessNote" data-key="businessCore">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{businessCoreNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{businessCoreNote}}</text>
+          <text class="note-edit" catchtap="onAddBusinessNote" data-key="businessCore">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessCore" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="businessSecondary">
@@ -172,11 +196,14 @@
       <text class="data-value">人口：{{businessSecondaryPopulation}}</text>
       <text class="data-value">供给：{{businessSecondarySupply}}</text>
       <text class="data-value">缺口：{{businessSecondaryGap}}</text>
-      <view class="manual-note" wx:if="{{businessSecondaryNote}}">📝 补充：{{businessSecondaryNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessSecondary" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddBusinessNote" data-key="businessSecondary">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{businessSecondaryNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{businessSecondaryNote}}</text>
+          <text class="note-edit" catchtap="onAddBusinessNote" data-key="businessSecondary">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessSecondary" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="businessTertiary">
@@ -189,11 +216,14 @@
       <text class="data-value">人口：{{businessTertiaryPopulation}}</text>
       <text class="data-value">供给：{{businessTertiarySupply}}</text>
       <text class="data-value">缺口：{{businessTertiaryGap}}</text>
-      <view class="manual-note" wx:if="{{businessTertiaryNote}}">📝 补充：{{businessTertiaryNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessTertiary" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddBusinessNote" data-key="businessTertiary">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{businessTertiaryNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{businessTertiaryNote}}</text>
+          <text class="note-edit" catchtap="onAddBusinessNote" data-key="businessTertiary">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="businessTertiary" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <!-- 商圈覆盖人口对比（横向条形图） -->
@@ -259,11 +289,14 @@
         </view>
       </view>
       <text class="data-value">{{accessibilitySelfValue}}</text>
-      <view class="manual-note" wx:if="{{accessibilitySelfManualNote}}">📝 备注：{{accessibilitySelfManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="accessibilitySelf" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="accessibilitySelf">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{accessibilitySelfManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{accessibilitySelfManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="accessibilitySelf">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="accessibilitySelf" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <view class="data-card" bindtap="onEditItem" data-key="accessibilityPublic">
@@ -274,11 +307,14 @@
         </view>
       </view>
       <text class="data-value">{{accessibilityPublicValue}}</text>
-      <view class="manual-note" wx:if="{{accessibilityPublicManualNote}}">📝 备注：{{accessibilityPublicManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="accessibilityPublic" data-action="modify">✏️ 修改</button>
-        <button class="edit-btn note-btn" catchtap="onAddNote" data-key="accessibilityPublic">📝 补充</button>
-      </view>
+      <view class="manual-note" wx:if="{{accessibilityPublicManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{accessibilityPublicManualNote}}</text>
+          <text class="note-edit" catchtap="onAddNote" data-key="accessibilityPublic">✏️</text>
+        </view>
+        <view class="edit-btn-wrap">
+          <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="accessibilityPublic" data-action="modify">✏️ 修改</button>
+        </view>
     </view>
 
     <!-- 竞合分析 -->
@@ -301,10 +337,13 @@
           <view class="comp-tag advantage">✅ {{compItem.advantage}}</view>
           <view class="comp-tag disadvantage">⚠️ {{compItem.disadvantage}}</view>
         </view>
-        <view class="manual-note" wx:if="{{compItem.manualNote}}">📝 备注：{{compItem.manualNote}}</view>
+        <view class="manual-note" wx:if="{{compItem.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{compItem.manualNote}}</text>
+          <text class="note-edit" catchtap="onAddCompetitorNote" data-scope="{{levelItem.level === '区级' ? 'district' : levelItem.level === '市级' ? 'city' : 'province'}}" data-idx="{{index}}">✏️</text>
+        </view>
         <view class="edit-btn-wrap">
           <button class="edit-btn modify-btn" catchtap="onEditItem" data-key="{{levelItem.level === '区级' ? 'competitorDistrict' : levelItem.level === '市级' ? 'competitorCity' : 'competitorProvince'}}" data-idx="{{index}}" data-action="modify">✏️ 修改</button>
-          <button class="edit-btn note-btn" catchtap="onAddCompetitorNote" data-scope="{{levelItem.level === '区级' ? 'district' : levelItem.level === '市级' ? 'city' : 'province'}}" data-idx="{{index}}">📝 补充</button>
         </view>
       </view>
     </view>

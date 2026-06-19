@@ -132,9 +132,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -186,9 +187,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -240,9 +242,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -294,9 +297,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -348,9 +352,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -402,9 +407,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -456,9 +462,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -510,9 +517,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -564,9 +572,10 @@
           </view>
         </view>
 
-        <view class="manual-note" wx:if="{{item.manualNote}}">📝 备注：{{item.manualNote}}</view>
-        <view class="edit-btn-wrap">
-          <button class="edit-btn" catchtap="onEditItem" data-key="{{item.key}}">✏️ 修正/备注</button>
+        <view class="manual-note" wx:if="{{item.manualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{item.manualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="{{item.key}}">✏️</text>
         </view>
       </view>
     </block>
@@ -593,10 +602,11 @@
         </view>
       </view>
 
-      <view class="manual-note" wx:if="{{resourceSummaryManualNote}}">📝 备注：{{resourceSummaryManualNote}}</view>
-      <view class="edit-btn-wrap">
-        <button class="edit-btn" catchtap="onEditItem" data-key="resourceSummary">✏️ 修正/备注</button>
-      </view>
+      <view class="manual-note" wx:if="{{resourceSummaryManualNote}}">
+          <text class="note-icon">📝</text>
+          <text class="note-text">{{resourceSummaryManualNote}}</text>
+          <text class="note-edit" catchtap="onEditItem" data-key="resourceSummary">✏️</text>
+        </view>
     </view>
 
     <!-- 确认按钮 -->
