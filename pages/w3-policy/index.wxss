@@ -85,7 +85,8 @@
   display: inline-block;
   margin-top: 12rpx;
   padding: 8rpx 18rpx;
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   border-radius: 20rpx;
   font-size: 24rpx;
   color: #00D4FF;
@@ -211,22 +212,26 @@
 }
 
 .level-tag.national {
-  background: #FFE8E8;
+  background: rgba(229, 57, 53, 0.12);
+  border: 1rpx solid rgba(229, 57, 53, 0.25);
   color: #E53935;
 }
 
 .level-tag.provincial {
-  background: #FFF3E0;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
   color: #F5A623;
 }
 
 .level-tag.city {
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   color: #00D4FF;
 }
 
 .level-tag.district {
-  background: #E8F7ED;
+  background: rgba(0, 179, 101, 0.12);
+  border: 1rpx solid rgba(0, 179, 101, 0.25);
   color: #00B365;
 }
 
@@ -276,12 +281,14 @@
 }
 
 .source-tag.official {
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   color: #00D4FF;
 }
 
 .source-tag.ai {
-  background: #E8F7ED;
+  background: rgba(0, 179, 101, 0.12);
+  border: 1rpx solid rgba(0, 179, 101, 0.25);
   color: #00B365;
 }
 

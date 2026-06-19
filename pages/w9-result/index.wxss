@@ -106,7 +106,8 @@
   display: inline-block;
   margin-top: 12rpx;
   padding: 6rpx 16rpx;
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   border-radius: 20rpx;
   font-size: 22rpx;
   color: #00D4FF;
@@ -150,7 +151,8 @@
 }
 
 .flow-row.warning {
-  background: #FFF8F0;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
 }
 
 .flow-label {
@@ -359,7 +361,8 @@
 }
 
 .verdict-PAUSE {
-  background: #FFF3E0;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
   color: #8C6BFF;
 }
 

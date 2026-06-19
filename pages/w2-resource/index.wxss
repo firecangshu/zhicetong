@@ -110,7 +110,8 @@
   display: inline-block;
   margin-top: 12rpx;
   padding: 8rpx 18rpx;
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   border-radius: 20rpx;
   font-size: 24rpx;
   color: #00D4FF;
@@ -178,17 +179,20 @@
 }
 
 .source-tag.official {
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   color: #00D4FF;
 }
 
 .source-tag.ai {
-  background: #E8F7ED;
+  background: rgba(0, 179, 101, 0.12);
+  border: 1rpx solid rgba(0, 179, 101, 0.25);
   color: #00B365;
 }
 
 .source-tag.manual {
-  background: #FFF8F0;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
   color: #F5A623;
 }
 
@@ -516,17 +520,20 @@
 }
 
 .trace-type.official {
-  background: #E8F4FD;
+  background: rgba(0, 212, 255, 0.12);
+  border: 1rpx solid rgba(0, 212, 255, 0.25);
   color: #00D4FF;
 }
 
 .trace-type.ai {
-  background: #E8F7ED;
+  background: rgba(0, 179, 101, 0.12);
+  border: 1rpx solid rgba(0, 179, 101, 0.25);
   color: #00B365;
 }
 
 .trace-type.manual {
-  background: #FFF8F0;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1rpx solid rgba(245, 166, 35, 0.25);
   color: #F5A623;
 }
 
