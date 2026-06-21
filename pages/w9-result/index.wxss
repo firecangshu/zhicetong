@@ -41,7 +41,7 @@
   justify-content: center;
   padding: 20rpx 32rpx;
   background: #14182b;
-  border-bottom: 1rpx solid #E8E8E8;
+  border-bottom: 1rpx solid #3a4160;
 }
 
 .step-item {
@@ -54,8 +54,8 @@
   width: 40rpx;
   height: 40rpx;
   border-radius: 50%;
-  background: #E0E0E0;
-  color: #FFFFFF;
+  background: #3a4160;
+  color: #A0A8B8;
   font-size: 22rpx;
   font-weight: 700;
   display: flex;
@@ -79,7 +79,7 @@
 
 .step-arrow {
   margin: 0 12rpx;
-  color: #C8C8CC;
+  color: #3a4160;
   font-size: 28rpx;
 }
 

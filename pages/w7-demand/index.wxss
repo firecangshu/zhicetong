@@ -97,6 +97,7 @@
   border-radius: 10rpx;
   border: 2rpx solid transparent;
   transition: all 0.2s;
+  color: #FFFFFF;
 }
 
 .radio-option.selected {

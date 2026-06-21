@@ -13,7 +13,7 @@
 | **版本代号** | AVJ最终修复版 | 本版本核心目标 |
 | **发布日期** | 2026-06-18 | 参赛截止日 |
 | **Git分支** | dev-v2.3 | 开发分支 |
-| **Git提交** | `1b26520` | 最终提交哈希 |
+| **Git提交** | `6912790` | 最终提交哈希 |
 | **提交时间** | 2026-06-19 15:11 | 最后推送时间 |
 
 ---
@@ -24,10 +24,11 @@
 |------|------|--------|----------|
 | CHANGELOG.md | `/CHANGELOG.md` | [2.2.0] | ✅ 已同步 |
 | VERSION.md | `/VERSION.md` | V2.2.0 | ✅ 本文档 |
-| submission.json | `/avj-submission/submission.json` | V2.2.0 | ✅ 已同步 |
+| project_card.yaml | `/avj-submission/project_card.yaml` | V2.2.0 | ✅ 已同步 |
 | project.config.json | `/project.config.json` | V2.2.0 | ✅ 已同步 |
 | project.miniapp.json | `/project.miniapp.json` | 2.2.0 | ✅ 已同步 |
-| app.json | `/app.json` | V2.2.0 | ✅ 已同步 |
+
+> 注：`submission.json` 已按 AVJ GitCode 标准删除（引擎直接读 YAML）；`app.json` 已移除 `version` 字段（微信小程序不支持自定义）。
 
 ---
 

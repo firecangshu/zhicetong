@@ -1,6 +1,7 @@
 // pages/w1-land/index.js
 // W1 地块框选 V3.2 信息汇总版（折叠坐标栏 + 完整行政区划 + 面积双单位）
 const { mockData } = require('../../utils/mock-data.js')
+const { throttle } = require('../../utils/debounce.js')
 
 Page({
   data: {
@@ -204,8 +205,8 @@ Page({
     })
   },
 
-  // ========= 地图：点击添加顶点 =========
-  onMapTap(e) {
+  // ========= 地图：点击添加顶点（节流：300ms内只响应一次，防止快速连点）=========
+  onMapTap: throttle(function(e) {
     const { latitude, longitude } = e.detail
     const points = this.data.polygonPoints.concat({ latitude, longitude })
     const coordList = points.map(p => ({
@@ -230,7 +231,7 @@ Page({
     } else {
       this.setData({ polygons: [] })
     }
-  },
+  }, 300),
 
   // ========= 完成框选：闭合多边形并刷新所有数据 =========
   finishPolygon(points) {

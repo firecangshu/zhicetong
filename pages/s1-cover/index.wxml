@@ -28,7 +28,7 @@
       
       <!-- Version tag: independent, decorative -->
       <view class="version-tag">
-        <text>Model V2.3</text>
+        <text>Model V2.2.0</text>
       </view>
 
       <!-- Feature tags: scientific spacing -->

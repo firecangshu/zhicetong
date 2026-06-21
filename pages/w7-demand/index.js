@@ -1,6 +1,7 @@
 // pages/w8-demand/index.js
 // W8 需求澄清页面 V2.8 全量版
 const { mockData } = require('../../utils/mock-data.js')
+const { debounce } = require('../../utils/debounce.js')
 
 Page({
   data: {
@@ -81,12 +82,27 @@ Page({
     this.setData({ budgetRange: 'other' })
   },
 
+  // ========= 防抖输入提交（300ms延迟，减少setData频率）=========
+  _commitInput: debounce(function(key, value) {
+    this.setData({ [key]: value })
+  }, 300),
+
   onBudgetOtherInput(e) {
-    this.setData({ budgetOtherValue: e.detail.value })
+    this._commitInput('budgetOtherValue', e.detail.value)
   },
 
   onBudgetRemarkInput(e) {
-    this.setData({ budgetRemark: e.detail.value })
+    this._commitInput('budgetRemark', e.detail.value)
+  },
+
+  onAdvantageInput(e) {
+    const idx = e.currentTarget.dataset.idx
+    this._commitInput(`advantageItems[${idx}].content`, e.detail.value)
+  },
+
+  onAdvantageRemarkInput(e) {
+    const idx = e.currentTarget.dataset.idx
+    this._commitInput(`advantageItems[${idx}].remark`, e.detail.value)
   },
 
   // ========= 其他优势条件补充 =========
@@ -105,16 +121,9 @@ Page({
     this.setData({ advantageItems: list })
   },
 
-  onAdvantageInput(e) {
-    const idx = e.currentTarget.dataset.idx
-    const key = `advantageItems[${idx}].content`
-    this.setData({ [key]: e.detail.value })
-  },
-
   onAdvantageRemarkInput(e) {
     const idx = e.currentTarget.dataset.idx
-    const key = `advantageItems[${idx}].remark`
-    this.setData({ [key]: e.detail.value })
+    this._commitInput(`advantageItems[${idx}].remark`, e.detail.value)
   },
 
   // ========= 确认 =========
